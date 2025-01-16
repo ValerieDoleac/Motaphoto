@@ -1,3 +1,9 @@
 <?php
-echo "Bienvenue dans le thème Motaphoto !";
+get_header(); // Inclure le header
+?>
+
+
+
+<?php
+get_footer(); // Inclure le footer
 ?>

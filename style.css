@@ -9,3 +9,235 @@ License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: nathalie-mota
 */
+
+/* Pour tout le site*/
+
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Navbar */
+
+/* Styles par défaut (Desktop) */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    height: 80px;
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+    width: 1440px;
+    margin: 0 auto; /* Centrer la navbar */
+    box-sizing: border-box;
+}
+
+.header .logo img {
+    height: 20px; /* Taille du logo pour desktop */
+    width: auto;
+    margin-left: 30px;
+}
+
+.menu {
+    display: flex; /* Afficher le menu horizontalement */
+    align-items: center;
+    margin-right: 30px;
+}
+
+.nav_menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 30px;
+}
+
+.nav_menu li a {
+    text-decoration: none;
+    color: black;
+    font-family: 'Space Mono', sans-serif;
+    text-transform: uppercase;font-size: 16px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.nav_menu li a:hover {
+    color: red;
+}
+
+.hamburger {
+    display: none; /* Caché sur desktop */
+}
+
+
+
+/* Footer - Ordinateur */
+.footer {
+    width: 1440px;
+    height: 40px;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto; /* Centre le footer horizontalement */
+    padding: 0 20px; /* Espacement interne */
+    box-sizing: border-box;
+    border-top: 1px solid #ddd; /* Ligne discrète en haut */
+}
+
+.footer_content {
+    display: flex;
+    gap: 20px; /* Espacement entre les liens */
+}
+
+.footer_link {
+    text-decoration: none;
+    color: black;
+    font-family: 'Space Mono', sans-serif;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.footer_link:hover {
+    color: red; /* Effet hover */
+}
+
+
+
+
+@media (max-width: 640px) {
+
+    /* Styles pour la navbar sur mobile */
+    .header {
+        height: 72px; /* Hauteur réduite pour mobile */
+        width: 100%; /* Occupe toute la largeur */
+        padding: 0 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: white; /* Fond blanc pour la navbar */
+        position: relative;
+        z-index: 10; /* Toujours au-dessus du menu mobile */
+    }
+
+    /* Logo pour mobile */
+    .header .logo img {
+        height: 20px; /* Taille du logo réduite pour mobile */
+        width: auto;
+    }
+
+    /* Bouton Hamburger (visible uniquement sur mobile) */
+    .hamburger {
+        display: flex; /* Visible uniquement en mobile */
+        flex-direction: column;
+        justify-content: space-between;
+        width: 40px; /* Largeur des lignes */
+        height: 24px; /* Hauteur du bouton */
+        background: none;
+        border: none;
+        cursor: pointer;
+        z-index: 15; /* Toujours visible au-dessus du menu mobile */
+    }
+
+    .hamburger span {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background: black;
+        transition: all 0.3s ease;
+    }
+
+    /* Transformation en croix lorsque le menu est actif */
+    .hamburger.open span:nth-child(1) {
+        transform: rotate(45deg) translate(4px, 4px);
+    }
+
+    .hamburger.open span:nth-child(2) {
+        opacity: 0; /* Cache le trait du milieu */
+    }
+
+    .hamburger.open span:nth-child(3) {
+        transform: rotate(-45deg) translate(4px, -4px);
+    }
+
+    .menu {
+        position: fixed;
+        top: 72px; /* Juste en dessous de la navbar */
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 72px); /* Hauteur totale moins la hauteur de la navbar */
+        background-color: red;
+        flex-direction: column;
+        justify-content: center; /* Centrer les liens verticalement */
+        align-items: center; /* Centrer les liens horizontalement */
+        z-index: 5; /* Sous la navbar */
+        opacity: 0; /* Masqué par défaut */
+        visibility: hidden; /* Masqué par défaut */
+        transform: translateY(-100%); /* Hors de la vue */
+        transition: all 0.3s ease-in-out;
+    }
+
+    .menu.active {
+        opacity: 1; /* Visible */
+        visibility: visible;
+        transform: translateY(0); /* Descend dans la vue */
+    }
+
+    /* Liens dans le menu mobile */
+    .nav_mobile {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        text-align: center;
+    }
+
+    .nav_mobile li {
+        margin: 20px 0; /* Espacement vertical entre les liens */
+    }
+
+    .nav_mobile li a {
+        text-decoration: none;
+        color: white; /* Texte en blanc */
+        font-family: 'Space Mono', sans-serif;
+        font-size: 44px; /* Taille du texte */
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    
+
+    /* Footer - Mobile */
+    .footer {
+        width: 375px;
+        height: 208px;
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column; /* Les éléments en colonne */
+        margin: 0 auto;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .footer_content {
+        display: flex;
+        flex-direction: column; /* Les liens en colonne */
+        gap:80px;
+    }
+
+    .footer_link {
+        text-decoration: none;
+        color: black;
+        font-family: 'Space Mono', sans-serif;
+        text-transform: uppercase;
+        font-size: 16px; /* Taille légèrement plus grande pour mobile */
+        font-weight: bold;
+        text-align: center;
+    }
+}
+
+
+
