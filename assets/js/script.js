@@ -13,28 +13,35 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // modale
 
-document.addEventListener('DOMContentLoaded', function () {
-    const openModalButton = document.querySelector('.open-modal');
-    const closeModalButton = document.querySelector('.close-modal');
-    const modalContainer = document.querySelector('.modal-container');
+document.addEventListener("DOMContentLoaded", () => {
+    const openModalButton = document.querySelector(".open-modal");
+    const modal = document.querySelector(".modal");
+    const overlay = document.querySelector(".modal-overlay");
 
-    if (openModalButton && closeModalButton && modalContainer) {
-        openModalButton.addEventListener('click', function () {
-            modalContainer.style.display = 'flex'; // Affiche la modale
+    if (openModalButton && modal && overlay) {
+        // Ouvrir la modale
+        openModalButton.addEventListener("click", () => {
+            modal.classList.add("active");
+            overlay.classList.add("active");
         });
 
-        closeModalButton.addEventListener('click', function () {
-            modalContainer.style.display = 'none'; // Cache la modale
+        // Fermer la modale en cliquant sur l'overlay
+        overlay.addEventListener("click", () => {
+            modal.classList.remove("active");
+            overlay.classList.remove("active");
         });
 
-        // Fermer la modale en cliquant en dehors
-        modalContainer.addEventListener('click', function (e) {
-            if (e.target === modalContainer) {
-                modalContainer.style.display = 'none';
+        // Fermer la modale en cliquant à l'extérieur du formulaire
+        document.addEventListener("click", (e) => {
+            if (modal.classList.contains("active") && !modal.contains(e.target) && e.target !== openModalButton) {
+                modal.classList.remove("active");
+                overlay.classList.remove("active");
             }
         });
     }
 });
+
+
 
 
 

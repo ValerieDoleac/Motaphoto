@@ -16,25 +16,26 @@
         </a>
     </div>
 
-    <!-- Menu -->
-    <nav class="menu">
-        <?php
-        wp_nav_menu(array(
-            'theme_location' => 'primary', // Utiliser une seule localisation
-            'container' => false,
-            'menu_class' => 'nav_menu', // Classe CSS partagée
-            'fallback_cb' => false
-        ));
-        ?>
-    </nav>
-
     <!-- Bouton Hamburger -->
     <button class="hamburger" aria-label="Menu">
         <span></span>
         <span></span>
         <span></span>
     </button>
+
+    <!-- Menu -->
+    <nav class="menu">
+        <?php
+        wp_nav_menu(array(
+            'theme_location' => 'primary',
+            'container' => false,
+            'menu_class' => 'nav_menu', // Classe CSS partagée
+            'fallback_cb' => false
+        ));
+        ?>
+    </nav>
 </header>
+
 
 <?php wp_footer(); ?>
 </body>

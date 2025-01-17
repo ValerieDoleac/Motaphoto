@@ -57,7 +57,8 @@ body {
     text-decoration: none;
     color: black;
     font-family: 'Space Mono', sans-serif;
-    text-transform: uppercase;font-size: 16px;
+    text-transform: uppercase;
+    font-size: 16px;
     font-weight: normal;
     transition: color 0.3s ease;
 }
@@ -107,124 +108,146 @@ body {
 
 
 
+/* Bouton pour ouvrir la modale */
 
-/* Style pour la modale */
+.floating-button {
+    position: fixed; /* Toujours visible, peu importe le défilement */
+    bottom: 20px; /* Distance depuis le bas de l'écran */
+    left: calc(50% - 720px); /* Centré dans une largeur de 1440px */
+    background-color: #ff0000; /* Couleur de fond */
+    color: white; /* Couleur du texte */
+    font-family: 'Space Mono', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 50px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 100; /* Toujours au-dessus des autres éléments */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.floating-button:hover {
+    background-color: #cc0000;
+    transform: scale(1.1); /* Zoom au survol */
+}
+
+.floating-button:active {
+    transform: scale(0.95); /* Effet de clic */
+}
+
+/* Conteneur de la modale */
+
 .modal {
-    width: 597px;
-    height: 769px;
-    padding: 20px;
-    box-sizing: border-box;
-    background-color: white;
-    border: 1px solid black;
-    display: flex; /* Flexbox pour centrer */
-    flex-direction: column;
-    justify-content: center; /* Centre verticalement */
-    align-items: center; /* Centre horizontalement */
-    position: fixed; /* Fixe la modale au centre de la fenêtre */
+    position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Centre avec précision */
-    z-index: 1000; /* Assure que la modale est au-dessus de tout */
-}
-
-/* Contenu du formulaire dans la modale */
-.modal-content {
+    transform: translate(-50%, -50%);
+    width: 597px;
+    height: 769px;
+    background: white;
+    z-index: 999;
+    border: 1px solid black;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Aligne les champs et le bouton au centre */
-    width: 100%; /* S'adapte à la largeur de la modale */
-}
-
-.modal-title {
-    font-family: 'Poppins', sans-serif;
-    font-size: 24px;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-/* Conteneur du formulaire */
-
-/* Conteneur principal */
-.contact {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    width: 100%;
-    max-width: 400px; /* Largeur maximale */
-    margin: 0 auto;
-    padding: 20px;
-    box-sizing: border-box;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    overflow: hidden;
 }
 
-/* Styles pour chaque groupe de champ */
-.contact .form-group {
+/* Afficher la modale et l'overlay */
+.modal.active,
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal::before {
+    content: "CONTACTCONTACTCONTACT \a CONTACTCONTACTCONTACT";
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'poppins', sans-serif;
+    font-size: 48px; /* Taille du texte */
+    font-style: italic;
+    color:black ; /* Couleur semi-transparente */
+    white-space: pre-line; /* Conserve les sauts de ligne */
+    line-height: 0.8; /* Espacement entre les lignes */
+    text-align: center;
+    z-index: -1; /* Derrière la modale */
+    width: calc(100% + 200px); /* Dépasse à gauche et à droite */
+}
+
+
+/* Arrière-plan de l'overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Couleur semi-transparente */
+    z-index: 998; /* Juste en dessous de la modale */
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+/* Formulaire Contact Form 7 */
+.modal .wpcf7-form {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    width: 100%;
-    margin-bottom: 20px; /* Espacement entre les champs */
+    gap: 10px; /* Ajoute un espace uniforme entre les éléments */
 }
 
-/* Labels sans les points */
-.contact label {
+/* Labels */
+.modal .wpcf7-form label {
+    display: block;
     font-family: 'Poppins', sans-serif;
     font-size: 12px;
     font-weight: normal;
     text-transform: uppercase;
-    margin-bottom: 5px; /* Espacement entre le label et le champ */
-    display: block;
-    color: black; /* Couleur du texte */
 }
 
-/* Champs (input et textarea) */
-.contact .input-field {
+/* Champs de formulaire */
+.modal .wpcf7-form .wpcf7-form-control {
+    margin-top: 0; /* Aucune marge au-dessus */
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 8px;
     width: 100%;
-    padding: 15px;
-    border: 1px solid #000; /* Bordure noire */
-    border-radius: 4px; /* Coins arrondis (optionnel) */
+    box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
     font-size: 12px;
-    box-sizing: border-box;
-    background-color: #fff; /* Fond blanc */
 }
 
-/* Style pour textarea */
-.contact textarea.input-field {
-    height: 100px; /* Hauteur du champ message */
-    resize: none; /* Empêche le redimensionnement */
-}
-
-/* Bouton d'envoi */
-.contact .btn-submit {
-    padding: 10px 20px;
+/* Bouton de soumission */
+.modal .wpcf7-form .wpcf7-submit {
+    border: none; /* Enlève la bordure */
+    border-radius: 0; /* Enlève les coins arrondis */
+    padding: 12px 20px; /* Ajoutez un rembourrage si nécessaire */
     background-color: #ccc; /* Couleur de fond */
-    color: black; /* Couleur du texte */
     font-family: 'Space Mono', sans-serif;
-    font-size: 12px;
     text-transform: uppercase;
-    border: none;
+    font-size: 12px;
     cursor: pointer;
-    border-radius: 4px; /* Coins arrondis */
     transition: background-color 0.3s ease;
-    margin-top: 10px; /* Espacement au-dessus du bouton */
 }
 
-.contact .btn-submit:hover {
-    background-color: #bbb; /* Couleur au survol */
+.modal .wpcf7-submit:hover {
+    background-color: black;
+    color: white;
 }
 
-
-
-
-/* Bouton fermer */
-.close_modal {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
-    background: none;
-    border: none;
-    cursor: pointer;
+.contact {
+    margin-top: 50px; /* Ajustez la valeur pour descendre le formulaire */
+    z-index: 1; /* Assurez-vous que le formulaire reste au-dessus du texte */
 }
 
 
@@ -312,18 +335,18 @@ body {
     }
 
     /* Liens dans le menu mobile */
-    .nav_mobile {
+    .nav_menu {
         list-style: none;
         padding: 0;
         margin: 0;
         text-align: center;
     }
 
-    .nav_mobile li {
+    .nav_menu li {
         margin: 20px 0; /* Espacement vertical entre les liens */
     }
 
-    .nav_mobile li a {
+    .nav_menu li a {
         text-decoration: none;
         color: white; /* Texte en blanc */
         font-family: 'Space Mono', sans-serif;
@@ -332,7 +355,7 @@ body {
         text-transform: uppercase;
     }
 
-    .nav_mobile li a:hover {
+    .nav_menu li a:hover {
         font-weight: bold; /* Effet hover */
     }
 
