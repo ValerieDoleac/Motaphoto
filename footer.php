@@ -6,5 +6,8 @@
     </div>
 </footer>
 <?php wp_footer(); ?>
+<button class="open-modal" aria-label="Contact">Contact</button>
+<?php get_template_part('templates_part/contact-modal'); ?>
+
 </body>
 </html>

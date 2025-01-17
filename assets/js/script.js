@@ -10,3 +10,31 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+
+// modale
+
+document.addEventListener('DOMContentLoaded', function () {
+    const openModalButton = document.querySelector('.open-modal');
+    const closeModalButton = document.querySelector('.close-modal');
+    const modalContainer = document.querySelector('.modal-container');
+
+    if (openModalButton && closeModalButton && modalContainer) {
+        openModalButton.addEventListener('click', function () {
+            modalContainer.style.display = 'flex'; // Affiche la modale
+        });
+
+        closeModalButton.addEventListener('click', function () {
+            modalContainer.style.display = 'none'; // Cache la modale
+        });
+
+        // Fermer la modale en cliquant en dehors
+        modalContainer.addEventListener('click', function (e) {
+            if (e.target === modalContainer) {
+                modalContainer.style.display = 'none';
+            }
+        });
+    }
+});
+
+
+

@@ -58,12 +58,12 @@ body {
     color: black;
     font-family: 'Space Mono', sans-serif;
     text-transform: uppercase;font-size: 16px;
-    font-weight: bold;
+    font-weight: normal;
     transition: color 0.3s ease;
 }
 
 .nav_menu li a:hover {
-    color: red;
+    font-weight: bold;
 }
 
 .hamburger {
@@ -78,17 +78,17 @@ body {
     height: 40px;
     background-color: white;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     margin: 0 auto; /* Centre le footer horizontalement */
-    padding: 0 20px; /* Espacement interne */
+    padding: 0; /* Espacement interne */
     box-sizing: border-box;
     border-top: 1px solid #ddd; /* Ligne discrète en haut */
 }
 
 .footer_content {
     display: flex;
-    gap: 20px; /* Espacement entre les liens */
+    gap: 80px; /* Espacement entre les liens */
 }
 
 .footer_link {
@@ -97,13 +97,138 @@ body {
     font-family: 'Space Mono', sans-serif;
     text-transform: uppercase;
     font-size: 16px;
-    font-weight: bold;
+    font-weight: normal;
     transition: color 0.3s ease;
 }
 
 .footer_link:hover {
-    color: red; /* Effet hover */
+    font-weight: bold; /* Effet hover */
 }
+
+
+
+
+/* Style pour la modale */
+.modal {
+    width: 597px;
+    height: 769px;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: white;
+    border: 1px solid black;
+    display: flex; /* Flexbox pour centrer */
+    flex-direction: column;
+    justify-content: center; /* Centre verticalement */
+    align-items: center; /* Centre horizontalement */
+    position: fixed; /* Fixe la modale au centre de la fenêtre */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centre avec précision */
+    z-index: 1000; /* Assure que la modale est au-dessus de tout */
+}
+
+/* Contenu du formulaire dans la modale */
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Aligne les champs et le bouton au centre */
+    width: 100%; /* S'adapte à la largeur de la modale */
+}
+
+.modal-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Conteneur du formulaire */
+
+/* Conteneur principal */
+.contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 400px; /* Largeur maximale */
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Styles pour chaque groupe de champ */
+.contact .form-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 20px; /* Espacement entre les champs */
+}
+
+/* Labels sans les points */
+.contact label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    text-transform: uppercase;
+    margin-bottom: 5px; /* Espacement entre le label et le champ */
+    display: block;
+    color: black; /* Couleur du texte */
+}
+
+/* Champs (input et textarea) */
+.contact .input-field {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #000; /* Bordure noire */
+    border-radius: 4px; /* Coins arrondis (optionnel) */
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    box-sizing: border-box;
+    background-color: #fff; /* Fond blanc */
+}
+
+/* Style pour textarea */
+.contact textarea.input-field {
+    height: 100px; /* Hauteur du champ message */
+    resize: none; /* Empêche le redimensionnement */
+}
+
+/* Bouton d'envoi */
+.contact .btn-submit {
+    padding: 10px 20px;
+    background-color: #ccc; /* Couleur de fond */
+    color: black; /* Couleur du texte */
+    font-family: 'Space Mono', sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px; /* Coins arrondis */
+    transition: background-color 0.3s ease;
+    margin-top: 10px; /* Espacement au-dessus du bouton */
+}
+
+.contact .btn-submit:hover {
+    background-color: #bbb; /* Couleur au survol */
+}
+
+
+
+
+/* Bouton fermer */
+.close_modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+
+
 
 
 
@@ -203,10 +328,15 @@ body {
         color: white; /* Texte en blanc */
         font-family: 'Space Mono', sans-serif;
         font-size: 44px; /* Taille du texte */
-        font-weight: bold;
+        font-weight: normal;
         text-transform: uppercase;
     }
-    
+
+    .nav_mobile li a:hover {
+        font-weight: bold; /* Effet hover */
+    }
+
+
 
     /* Footer - Mobile */
     .footer {
@@ -225,7 +355,7 @@ body {
     .footer_content {
         display: flex;
         flex-direction: column; /* Les liens en colonne */
-        gap:80px;
+        gap:20px;
     }
 
     .footer_link {
@@ -237,7 +367,8 @@ body {
         font-weight: bold;
         text-align: center;
     }
+
+    .footer_link:hover {
+        font-weight: bold; /* Effet hover */
+    }
 }
-
-
-
