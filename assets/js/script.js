@@ -1,45 +1,42 @@
-// Script pour le menu hamburgeur
-
 document.addEventListener('DOMContentLoaded', function () {
+    // Sélecteurs
     const hamburger = document.querySelector('.hamburger');
     const menu = document.querySelector('.menu');
+    const modal = document.querySelector('.modal');
+    const overlay = document.querySelector('.modal-overlay');
+    const openModalButton = document.querySelector('.open-modal');
 
-    hamburger.addEventListener('click', function () {
-        this.classList.toggle('open'); // Ajoute la classe "open" pour transformer en croix
-        menu.classList.toggle('active'); // Affiche/masque le menu mobile
-    });
-});
-
-
-// modale
-
-document.addEventListener("DOMContentLoaded", () => {
-    const openModalButton = document.querySelector(".open-modal");
-    const modal = document.querySelector(".modal");
-    const overlay = document.querySelector(".modal-overlay");
-
-    if (openModalButton && modal && overlay) {
-        // Ouvrir la modale
-        openModalButton.addEventListener("click", () => {
-            modal.classList.add("active");
-            overlay.classList.add("active");
+    // Gestion du menu hamburger
+    if (hamburger && menu) {
+        hamburger.addEventListener('click', function () {
+            this.classList.toggle('open'); // Transforme en croix
+            menu.classList.toggle('active'); // Affiche/masque le menu
         });
 
-        // Fermer la modale en cliquant sur l'overlay
-        overlay.addEventListener("click", () => {
-            modal.classList.remove("active");
-            overlay.classList.remove("active");
-        });
-
-        // Fermer la modale en cliquant à l'extérieur du formulaire
-        document.addEventListener("click", (e) => {
-            if (modal.classList.contains("active") && !modal.contains(e.target) && e.target !== openModalButton) {
-                modal.classList.remove("active");
-                overlay.classList.remove("active");
+        // Ferme le menu si on clique à l'extérieur
+        document.addEventListener('click', function (e) {
+            if (menu.classList.contains('active') && !menu.contains(e.target) && !hamburger.contains(e.target)) {
+                hamburger.classList.remove('open');
+                menu.classList.remove('active');
             }
         });
     }
+
+    // Gestion de la modale
+    if (openModalButton && modal && overlay) {
+        openModalButton.addEventListener('click', function () {
+            modal.classList.add('active'); // Affiche la modale
+            overlay.classList.add('active'); // Affiche l'overlay
+        });
+
+        overlay.addEventListener('click', function () {
+            modal.classList.remove('active'); // Cache la modale
+            overlay.classList.remove('active'); // Cache l'overlay
+        });
+    }
 });
+
+
 
 
 

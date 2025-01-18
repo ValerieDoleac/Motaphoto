@@ -18,8 +18,8 @@
 
 @font-face {
     font-family: 'Poppins';
-    src: url('Poppins-Regular.woff2') format('woff2'),
-        url('Poppins-Regular.woff') format('woff');
+    src: url('../fonts/Poppins-Regular.woff2') format('woff2'),
+        url('../fonts/Poppins-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -27,10 +27,11 @@
 
 @font-face {
     font-family: 'Poppins';
-    src: url('Poppins-BlackItalic.woff2') format('woff2'),
-        url('Poppins-BlackItalic.woff') format('woff');
+    src: url('../fonts/Poppins-BlackItalic.woff2') format('woff2'),
+        url('../fonts/Poppins-BlackItalic.woff') format('woff');
     font-weight: 900;
     font-style: italic;
     font-display: swap;
 }
+
 

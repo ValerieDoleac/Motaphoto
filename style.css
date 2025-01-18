@@ -174,8 +174,9 @@ body {
     transform: translateX(-50%);
     font-family: 'poppins', sans-serif;
     font-size: 48px; /* Taille du texte */
+    font-weight: 900;
     font-style: italic;
-    color:black ; /* Couleur semi-transparente */
+    color:black ;
     white-space: pre-line; /* Conserve les sauts de ligne */
     line-height: 0.8; /* Espacement entre les lignes */
     text-align: center;
@@ -326,16 +327,18 @@ body {
         visibility: hidden; /* Masqué par défaut */
         transform: translateY(-100%); /* Hors de la vue */
         transition: all 0.3s ease-in-out;
+        display: flex;
     }
 
     .menu.active {
         opacity: 1; /* Visible */
         visibility: visible;
-        transform: translateY(0); /* Descend dans la vue */
+        transform: translateY(5%); /* Descend dans la vue */
     }
 
     /* Liens dans le menu mobile */
     .nav_menu {
+        flex-direction: column;
         list-style: none;
         padding: 0;
         margin: 0;
@@ -360,6 +363,79 @@ body {
     }
 
 
+    /* Modale mobile */
+    .modal {
+        width: 286px;
+        height: 583px;
+        padding: 16px;
+        background-color: white;
+        border: 1px solid black;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        box-sizing: border-box;
+        z-index: 1000;
+    }
+
+    .modal::before {
+        content: "CONTACTCONTACT\\A CONTACTCONTACT";
+        white-space: pre;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: 'Poppins', sans-serif;
+        font-size: 24px;
+        font-weight: bold;
+        line-height: 1;
+        text-transform: uppercase;
+        opacity: 0.1;
+        text-align: center;
+    }
+
+    .contact {
+        width: 100%;
+    }
+
+    .contact label {
+        display: block;
+        margin-bottom: 8px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 12px;
+        text-transform: uppercase;
+    }
+
+    .contact input,
+    .contact textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        font-family: 'Poppins', sans-serif;
+        font-size: 14px;
+        box-sizing: border-box;
+    }
+
+    .contact button {
+        width: 100%;
+        padding: 10px;
+        background-color: #ccc;
+        border: none;
+        font-family: 'Space Mono', sans-serif;
+        font-size: 12px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .contact button:hover {
+        background-color: #bbb;
+    }
 
     /* Footer - Mobile */
     .footer {
