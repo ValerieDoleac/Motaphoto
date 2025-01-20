@@ -1,19 +1,17 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Sélecteurs
     const hamburger = document.querySelector('.hamburger');
     const menu = document.querySelector('.menu');
     const modal = document.querySelector('.modal');
     const overlay = document.querySelector('.modal-overlay');
-    const openModalButton = document.querySelector('.open-modal');
+    const openModalLinks = document.querySelectorAll('.open-modal');
 
-    // Gestion du menu hamburger
+    // Gestion du menu mobile
     if (hamburger && menu) {
         hamburger.addEventListener('click', function () {
-            this.classList.toggle('open'); // Transforme en croix
+            this.classList.toggle('open'); // Transforme le hamburger en croix
             menu.classList.toggle('active'); // Affiche/masque le menu
         });
 
-        // Ferme le menu si on clique à l'extérieur
         document.addEventListener('click', function (e) {
             if (menu.classList.contains('active') && !menu.contains(e.target) && !hamburger.contains(e.target)) {
                 hamburger.classList.remove('open');
@@ -23,18 +21,31 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Gestion de la modale
-    if (openModalButton && modal && overlay) {
-        openModalButton.addEventListener('click', function () {
-            modal.classList.add('active'); // Affiche la modale
-            overlay.classList.add('active'); // Affiche l'overlay
+    if (modal && overlay && openModalLinks.length > 0) {
+        openModalLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault(); // Empêche le comportement par défaut du lien
+                
+                // Ferme le menu mobile si actif
+                if (menu.classList.contains('active')) {
+                    hamburger.classList.remove('open');
+                    menu.classList.remove('active');
+                }
+
+                // Affiche la modale
+                modal.classList.add('active');
+                overlay.classList.add('active');
+            });
         });
 
-        overlay.addEventListener('click', function () {
-            modal.classList.remove('active'); // Cache la modale
-            overlay.classList.remove('active'); // Cache l'overlay
+        // Fermer la modale en cliquant sur l'overlay
+        overlay.addEventListener('click', () => {
+            modal.classList.remove('active');
+            overlay.classList.remove('active');
         });
     }
 });
+
 
 
 

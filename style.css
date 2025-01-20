@@ -17,9 +17,9 @@ body {
     font-family: 'Arial', sans-serif;
 }
 
-/* Navbar */
+/* Navbar Desktop */
 
-/* Styles par défaut (Desktop) */
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -74,69 +74,55 @@ body {
 
 
 /* Footer - Ordinateur */
-.footer {
-    width: 1440px;
-    height: 40px;
-    background-color: white;
+
+.footer_wrapper {
+    max-width: 1440px; /* Limite la largeur du footer */
+    max-height: 40px;
+    margin: 0 auto; /* Centre le footer horizontalement */
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 auto; /* Centre le footer horizontalement */
-    padding: 0; /* Espacement interne */
-    box-sizing: border-box;
-    border-top: 1px solid #ddd; /* Ligne discrète en haut */
+    gap: 50px;
+    padding: 0 20px; /* Ajout d'un padding latéral */
 }
 
 .footer_content {
-    display: flex;
-    gap: 80px; /* Espacement entre les liens */
+    display: flex; /* Affiche les éléments en ligne */
+    justify-content: space-between; /* Espacement uniforme */
+    align-items: center;
+    list-style: none; /* Supprime les puces */
+    padding: 0; /* Supprime les marges internes */
+    margin: 0; /* Supprime les marges externes */
+    gap: 50px;
 }
 
-.footer_link {
-    text-decoration: none;
-    color: black;
+.footer_content li {
+    margin: 0 15px; /* Espace entre les éléments */
+    align-items: center;
+}
+
+.footer_content a {
+    text-decoration: none; /* Supprime le soulignement des liens */
+    color: black; /* Couleur par défaut des liens */
     font-family: 'Space Mono', sans-serif;
     text-transform: uppercase;
     font-size: 16px;
-    font-weight: normal;
     transition: color 0.3s ease;
 }
 
-.footer_link:hover {
-    font-weight: bold; /* Effet hover */
+.footer_content a:hover {
+    font-weight: bold; /* Passe le texte en gras au survol */
+    color:black; /* Change la couleur au survol */
 }
 
-
-
-/* Bouton pour ouvrir la modale */
-
-.floating-button {
-    position: fixed; /* Toujours visible, peu importe le défilement */
-    bottom: 20px; /* Distance depuis le bas de l'écran */
-    left: calc(50% - 720px); /* Centré dans une largeur de 1440px */
-    background-color: #ff0000; /* Couleur de fond */
-    color: white; /* Couleur du texte */
+.footer_content p:last-child {
+    margin-left: auto; /* Pousse le texte "Tous droits réservés" à droite */
+    color: black; /* Couleur du texte */
     font-family: 'Space Mono', sans-serif;
     font-size: 14px;
-    font-weight: bold;
-    text-transform: uppercase;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 50px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    z-index: 100; /* Toujours au-dessus des autres éléments */
-    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.floating-button:hover {
-    background-color: #cc0000;
-    transform: scale(1.1); /* Zoom au survol */
-}
 
-.floating-button:active {
-    transform: scale(0.95); /* Effet de clic */
-}
 
 /* Conteneur de la modale */
 
@@ -149,7 +135,7 @@ body {
     height: 769px;
     background: white;
     z-index: 999;
-    border: 1px solid black;
+    border: 2px solid black;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -267,20 +253,21 @@ body {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background-color: white; /* Fond blanc pour la navbar */
+        background-color: white;
         position: relative;
-        z-index: 10; /* Toujours au-dessus du menu mobile */
+        z-index: 10000; /* Toujours au-dessus du menu mobile */
+
     }
 
     /* Logo pour mobile */
     .header .logo img {
-        height: 20px; /* Taille du logo réduite pour mobile */
+        height: 20px; /* Taille du logo mobile */
         width: auto;
     }
 
-    /* Bouton Hamburger (visible uniquement sur mobile) */
+    /* Bouton Hamburger */
     .hamburger {
-        display: flex; /* Visible uniquement en mobile */
+        display: flex; /* Visible mobile */
         flex-direction: column;
         justify-content: space-between;
         width: 40px; /* Largeur des lignes */
@@ -288,7 +275,7 @@ body {
         background: none;
         border: none;
         cursor: pointer;
-        z-index: 15; /* Toujours visible au-dessus du menu mobile */
+        z-index: 15; /* visible au-dessus du menu mobile */
     }
 
     .hamburger span {
@@ -320,11 +307,10 @@ body {
         height: calc(100vh - 72px); /* Hauteur totale moins la hauteur de la navbar */
         background-color: red;
         flex-direction: column;
-        justify-content: center; /* Centrer les liens verticalement */
-        align-items: center; /* Centrer les liens horizontalement */
+        justify-content: center; /*liens verticalement */
+        align-items: center; /* liens horizontalement */
         z-index: 5; /* Sous la navbar */
         opacity: 0; /* Masqué par défaut */
-        visibility: hidden; /* Masqué par défaut */
         transform: translateY(-100%); /* Hors de la vue */
         transition: all 0.3s ease-in-out;
         display: flex;
@@ -332,7 +318,6 @@ body {
 
     .menu.active {
         opacity: 1; /* Visible */
-        visibility: visible;
         transform: translateY(5%); /* Descend dans la vue */
     }
 
@@ -351,90 +336,60 @@ body {
 
     .nav_menu li a {
         text-decoration: none;
-        color: white; /* Texte en blanc */
+        color: white; 
         font-family: 'Space Mono', sans-serif;
-        font-size: 44px; /* Taille du texte */
+        font-size: 44px;
         font-weight: normal;
         text-transform: uppercase;
     }
 
     .nav_menu li a:hover {
-        font-weight: bold; /* Effet hover */
+        font-weight: bold;
     }
 
 
     /* Modale mobile */
     .modal {
-        width: 286px;
-        height: 583px;
-        padding: 16px;
-        background-color: white;
+        max-width: 286px;
+        max-height: 583px;
+        padding: 20px;
         border: 1px solid black;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        box-sizing: border-box;
-        z-index: 1000;
+        }
+    
+        .modal::before {
+            content: "CONTACTCONTACTCONTACT \a CONTACTCONTACTCONTACT";
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Poppins', sans-serif;
+            font-size: 36px; 
+            font-weight: 900;
+            font-style: italic;
+            color: black;
+            white-space: pre-line; /* Conserve les sauts de ligne */
+            line-height: 0.9; /* Réduit l'espacement entre les lignes */
+            text-align: center;
+            z-index: -1; /* Derrière la modale */
+            width: calc(100% + 100px); /* Ajuste la largeur pour mobile */
+        }
+
+    .modal .wpcf7-form {
+        gap: 15px;
     }
 
-    .modal::before {
-        content: "CONTACTCONTACT\\A CONTACTCONTACT";
-        white-space: pre;
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        font-family: 'Poppins', sans-serif;
-        font-size: 24px;
-        font-weight: bold;
-        line-height: 1;
-        text-transform: uppercase;
-        opacity: 0.1;
-        text-align: center;
+    .modal .wpcf7-form label {
+        font-size: 10px; /* Réduit la taille des étiquettes */
     }
 
-    .contact {
-        width: 100%;
+    .modal .wpcf7-form .wpcf7-form-control {
+        padding: 8px; /* Réduit l'espace interne des champs */
+        font-size: 10px;
     }
 
-    .contact label {
-        display: block;
-        margin-bottom: 8px;
-        font-family: 'Poppins', sans-serif;
-        font-size: 12px;
-        text-transform: uppercase;
-    }
-
-    .contact input,
-    .contact textarea {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 20px;
-        border: 1px solid #ccc;
-        font-family: 'Poppins', sans-serif;
-        font-size: 14px;
-        box-sizing: border-box;
-    }
-
-    .contact button {
-        width: 100%;
-        padding: 10px;
-        background-color: #ccc;
-        border: none;
-        font-family: 'Space Mono', sans-serif;
-        font-size: 12px;
-        text-transform: uppercase;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-
-    .contact button:hover {
-        background-color: #bbb;
+    .modal .wpcf7-form .wpcf7-submit {
+        font-size: 12px; /* Taille du texte pour le bouton */
+        padding: 10px 15px; /* Ajuste le rembourrage */
     }
 
     /* Footer - Mobile */
@@ -445,7 +400,7 @@ body {
         display: flex;
         justify-content: center;
         align-items: center;
-        flex-direction: column; /* Les éléments en colonne */
+        flex-direction: column;
         margin: 0 auto;
         padding: 20px;
         box-sizing: border-box;
@@ -453,7 +408,7 @@ body {
 
     .footer_content {
         display: flex;
-        flex-direction: column; /* Les liens en colonne */
+        flex-direction: column;
         gap:20px;
     }
 
@@ -462,12 +417,12 @@ body {
         color: black;
         font-family: 'Space Mono', sans-serif;
         text-transform: uppercase;
-        font-size: 16px; /* Taille légèrement plus grande pour mobile */
+        font-size: 16px; 
         font-weight: bold;
         text-align: center;
     }
 
     .footer_link:hover {
-        font-weight: bold; /* Effet hover */
+        font-weight: bold;
     }
 }

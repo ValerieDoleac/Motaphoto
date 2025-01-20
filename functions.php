@@ -13,12 +13,16 @@ function motaphoto_enqueue_assets() {
 add_action('wp_enqueue_scripts', 'motaphoto_enqueue_assets');
 
 // Permet à WordPress de gérer les menus
+
 function motaphoto_register_menus() {
     register_nav_menus(array(
-        'primary' => __('Menu Principal', 'motaphoto'),
+        'primary' => __('Menu Principal', 'motaphoto'), // Menu principal
+        'footer' => __('Menu Footer', 'motaphoto'), // Menu footer
     ));
 }
 add_action('after_setup_theme', 'motaphoto_register_menus');
+
+
 
 
 
