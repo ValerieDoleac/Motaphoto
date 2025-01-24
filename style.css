@@ -238,6 +238,64 @@ body {
 }
 
 
+/* CSS pour mon fichier archive-photo.php */
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    list-style-type: none;
+}
+
+.photo-item {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.photo-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.photo-item h2 {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #333;
+}
+
+.photo-item p {
+    font-size: 14px;
+    color: #666;
+}
+
+.photo-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.page-numbers {
+    display: inline-block;
+    margin: 5px;
+    padding: 10px 15px;
+    color: #0073aa;
+    border: 1px solid #ddd;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.page-numbers:hover {
+    background: #0073aa;
+    color: #fff;
+    text-decoration: none;
+}
+
 
 
 
