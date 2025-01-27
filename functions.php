@@ -24,29 +24,33 @@ add_action('after_setup_theme', 'motaphoto_register_menus');
 // Ajouter le support des images mises en avant
 add_theme_support('post-thumbnails');
 
-// Associer uniquement une fois les taxonomies au CPT "Photo"
+// Associer les taxonomies au type de contenu personnalisé "Photo"
 function associate_taxonomies_to_photo() {
-    // Associe la catégorie native à "Photo"
     if (taxonomy_exists('category')) {
         register_taxonomy_for_object_type('category', 'photo');
     }
 
-    // Associe la taxonomy personnalisée "Format" à "Photo"
-    //if (taxonomy_exists('format')) {
-        //register_taxonomy_for_object_type('format', 'photo');
-    //}
+    if (taxonomy_exists('format')) {
+        register_taxonomy_for_object_type('format', 'photo');
+    }
 }
 add_action('init', 'associate_taxonomies_to_photo');
 
-// Tester et vérifier les taxonomies associées au type de contenu "Photo"
-add_action('init', function() {
-    // Récupérer les taxonomies associées à "Photo"
-    $taxonomies = get_object_taxonomies('photo', 'objects');
+// Enregistrer les styles pour la page "Photo"
+function motaphoto_enqueue_single_photo_styles() {
+    if (is_singular('photo')) {
+        wp_enqueue_style('single-photo-style', get_template_directory_uri() . '/assets/css/single-photo.css');
+    }
+}
+add_action('wp_enqueue_scripts', 'motaphoto_enqueue_single_photo_styles');
 
-    // Enregistrer les informations dans debug.log pour analyse
-    error_log("Taxonomies associées à 'Photo' :");
-    error_log(print_r($taxonomies, true));
+// Ajouter des tailles d'image personnalisées
+add_action('after_setup_theme', function() {
+    add_image_size('photo-large', 563, 844, true); // Taille de la grande photo
+    add_image_size('photo-thumbnail', 81, 71, true); // Taille des miniatures
 });
+
+
 
 
 

@@ -17,7 +17,7 @@ if ($query->have_posts()) : ?>
                 if (has_post_thumbnail()) {
                     the_post_thumbnail('medium'); // Affiche la taille "medium" de l'image mise en avant
                 } else {
-                    echo '<img src="' . esc_url(get_template_directory_uri() . '/assets/images/placeholder.jpg') . '" alt="Placeholder">';
+                    echo '<img src="' . esc_url(get_template_directory_uri() . '/assets/images/Mise-en-avant.jpeg') . '" alt="Photo mise en avant">';
                 }
                 ?>
                 <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
