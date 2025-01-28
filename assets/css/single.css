@@ -1,0 +1,206 @@
+/* Section 1 : Informations et grande image */
+/* bloc 50¨% de largeur à gauche - informations */
+
+.photo-info-section {
+    display: flex; /* Affiche les blocs en ligne */
+    justify-content: space-between; /* Espace égal entre les deux blocs */
+    align-items: center; /* Aligne les éléments au début verticalement */
+    height: 100vh; /* Prend toute la hauteur de l'écran */
+    max-width: 1440px; /* Largeur maximale de la page */
+    margin: 0 auto; /* Centre horizontalement */
+}
+
+.photo-details {
+    width: 50%; /* Prend 50% de l'espace pour les infos */
+    padding: 20px; /* Ajoute un espace intérieur */
+    box-sizing: border-box; /* Inclut le padding dans la largeur */
+    align-self: flex-end; /* Positionne le contenu en bas */
+}
+
+
+.photo-details h2{
+    font-family: 'space mono', sans-serif;
+    font-size: 66px;
+    font-weight: normal;
+    font-style: italic;
+    line-height: 1; /* Ajustez l'espacement entre les lignes */
+    
+}
+
+.photo-details p {
+    font-family: 'poppins', sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.5;
+}
+
+.trait1 {
+    width: 115%; /* Le trait prend toute la largeur */
+
+    height: 2px; /* Épaisseur du trait */
+    background-color: black; /* Couleur noire */
+    margin: 20px 0; /* Espacement autour du trait */
+}
+
+
+/* bloc 50% de largeur à droite - grande image */
+
+.photo-main {
+    width: 50%; /* Prend 50% de l'espace pour la photo */
+    display: flex;
+    justify-content: center;
+    align-items: right;
+    overflow: hidden; /* Coupe les débordements */
+    height: 844px; /* Hauteur fixe du conteneur */
+    position: relative;
+    left: 22px; /* Ajustez cette valeur pour un alignement parfait */
+}
+
+.photo-main img {
+    width: 563px; /* Largeur fixe */
+    height: 844px; /* Hauteur fixe */
+    object-fit: cover; /* Remplit le conteneur sans déformer */
+    margin-top: 40px;
+}
+
+
+/* Section 2 : Carrousel et bouton conteneur principal */
+
+.photo-interaction-section {
+    display: flex;
+    justify-content: space-between; /* Place les éléments correctement */
+    align-items: center; /* Aligne les éléments verticalement */
+    gap: 20px; /* Ajoute de l'espace entre les éléments */
+    width: 100%; /* Assure que la section prend tout l'écran sans débordement */
+    margin: auto; /* Centre la section */
+    padding: 0; /* Supprime les marges internes */
+    box-sizing: border-box; /* Inclut le padding dans la largeur */
+}
+
+/* phrase et bouton */
+.photo-call-to-action {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Aligne les éléments au début */
+    gap: 20px; /* Ajoute un espace entre la phrase et le bouton */
+    margin-left: 100px; /* Supprime toute marge supplémentaire */
+    width: 70%; /* Aligné à gauche */
+    padding: 30px;
+}
+
+.photo-call-to-action p {
+    margin: 0; /* Supprime les marges par défaut */
+    font-size: 14px; /* Ajuste la taille du texte */
+    font-family: 'Space Mono', sans-serif;
+    white-space: nowrap; /* Empêche le retour à la ligne */
+}
+
+.photo-call-to-action button {
+    width: 272px;
+    height: 50px;
+    background-color: #D8D8D8; /* Couleur de fond */
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: 'Space Mono', sans-serif; /* Police demandée */
+}
+
+button.open-modal {
+    position: relative; /* Assure sa position */
+    z-index: 1000; /* Donne une priorité plus élevée pour le clic */
+}
+
+body.modal-active .photo-call-to-action button {
+    visibility: hidden; /* Le bouton est masqué */
+}
+
+/* Carousel */
+
+.photo-carousel {
+    display: flex;
+    flex-direction: column; /* Les flèches apparaissent sous les images */
+    align-items: flex-end; /* Aligné à droite */
+    gap: 10px; /* Espace entre les miniatures */
+    max-width: 50%; /* Assure un alignement à la largeur de la photo */
+    margin: 0 auto; /* Centre la section */
+}
+
+.carousel-images {
+    display: flex;
+    margin-right: 200px;
+}
+
+.carousel-thumbnail {
+    width: 81px; /* Largeur exacte des miniatures */
+    height: 71px; /* Hauteur exacte des miniatures */
+    object-fit: cover;
+}
+
+.carousel-navigation {
+    display: flex;
+    gap: 10px;
+
+}
+
+.carousel-navigation button {
+    background: none;
+    border: none;
+    font-size: 25px;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.carousel-navigation button:hover {
+    font-size: 34px;
+    cursor: pointer;
+}
+
+/* ligne entre les deux blocs */
+
+.trait2 {
+    width: 100%; /* Le trait prend toute la largeur */
+    max-width: 1440px; /* Limite la largeur à 1440px */
+    height: 2px; /* Épaisseur du trait */
+    background-color: black; /* Couleur noire */
+    margin: 20px auto; /* Centre le trait horizontalement avec un espace vertical */
+}
+
+
+/* Section 3 : Suggestions */
+
+.photo-suggestions-section {
+    margin-top: 40px;
+    max-width: 1440px; /* Assure une largeur maximale alignée avec votre mise en page */
+}
+
+.photo-suggestions-section h3 {
+    font-size: 18px;
+    font-family: 'space mono', sans-serif;
+    font-weight: normal;
+    margin-left: 100px;
+    margin-top: 60px;
+}
+
+.suggestions-grid {
+    display: flex;
+    justify-content: center;
+    gap:20px;
+    margin-top: 40px;
+    margin-bottom: 50px;
+}
+
+.suggestion-item {
+    width: 564px; /* Largeur du conteneur */
+    height: 495px; /* Hauteur du conteneur */
+    overflow: hidden; /* Coupe tout dépassement de l'image */
+}
+
+.suggestion-item .suggestion-image {
+    width: 100%; /* Adapte la largeur au conteneur */
+    height: 100%; /* Adapte la hauteur au conteneur */
+    object-fit: cover; /* Remplit le conteneur sans déformer l'image */
+    display: block;
+}
+
