@@ -43,3 +43,12 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'Space Mono';
+    src: url('SpaceMono-BoldItalic.woff2') format('woff2'),
+        url('SpaceMono-BoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+

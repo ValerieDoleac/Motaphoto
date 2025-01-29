@@ -4,7 +4,7 @@ get_header();
 // Votre requête personnalisée pour afficher les photos
 $args = array(
     'post_type'      => 'photo',
-    'posts_per_page' => 16,
+    'posts_per_page' => 8,
 );
 $query = new WP_Query($args);
 

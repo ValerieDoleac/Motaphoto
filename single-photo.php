@@ -50,11 +50,11 @@ if (have_posts()) :
                 </p>
                 <p>TYPE : <?php echo get_post_meta(get_the_ID(), 'type', true) ?: 'Non spécifié'; ?></p>
                 <p>ANNÉE : <?php echo get_post_meta(get_the_ID(), 'annee', true) ?: 'Non spécifiée'; ?></p>
-
                 <!-- Trait -->
                 <div class="trait1"></div>
-
             </div>
+
+            
             <div class="photo-main">
                 <?php if (has_post_thumbnail()) : ?>
                     <?php the_post_thumbnail('photo-large'); ?>
@@ -68,26 +68,27 @@ if (have_posts()) :
         <section class="photo-interaction-section">
             <div class="photo-call-to-action">
                 <p>Cette photo vous intéresse ?</p>
-                <button class="open-modal" onclick="openContactModal('<?php echo get_post_meta(get_the_ID(), 'référence', true); ?>')">Contact</button>
+                <button class="open-modal" data-reference="<?php echo get_post_meta(get_the_ID(), 'référence', true); ?>">Contact</button>
             </div>
             <div class="photo-carousel">
-                <div class="carousel-images">
-                    <?php
-                    $gallery_images = get_attached_media('image', get_the_ID());
-                    if ($gallery_images) {
-                        foreach ($gallery_images as $image) {
-                            echo wp_get_attachment_image($image->ID, 'photo-thumbnail', array('class' => 'carousel-thumbnail'));
-                        }
-                    } else {
-                        echo '<p>Aucune miniature disponible.</p>';
+            <div class="carousel-images">
+                <?php
+                $gallery_images = get_attached_media('image', get_the_ID());
+                if ($gallery_images) {
+                    foreach ($gallery_images as $image) {
+                        echo wp_get_attachment_image($image->ID, 'photo-thumbnail', array('class' => 'carousel-thumbnail'));
                     }
-                    ?>
-                </div>
-                <div class="carousel-navigation">
-                    <button class="prev-button">←</button>
-                    <button class="next-button">→</button>
-                </div>
+                } else {
+                    echo '<p>Aucune miniature disponible.</p>';
+                }
+                ?>
             </div>
+            <div class="carousel-navigation">
+                <button class="prev-button">←</button>
+                <button class="next-button">→</button>
+            </div>
+
+
         </section>
 
         <!-- Trait -->

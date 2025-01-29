@@ -36,13 +36,12 @@ body {
 .header .logo img {
     height: 20px; /* Taille du logo pour desktop */
     width: auto;
-    margin-left: 30px;
 }
 
 .menu {
     display: flex; /* Afficher le menu horizontalement */
     align-items: center;
-    margin-right: 30px;
+    margin-right: 100px;
 }
 
 .nav_menu {
@@ -84,6 +83,7 @@ body {
     align-items: center;
     gap: 50px;
     padding: 0 20px; /* Ajout d'un padding latéral */
+    border-top: 2px solid black;
 }
 
 .footer_content {
@@ -363,7 +363,7 @@ body {
         left: 0;
         width: 100%;
         height: calc(100vh - 72px); /* Hauteur totale moins la hauteur de la navbar */
-        background-color: red;
+        background-color: #E00000;
         flex-direction: column;
         justify-content: center; /*liens verticalement */
         align-items: center; /* liens horizontalement */
@@ -462,6 +462,11 @@ body {
         margin: 0 auto;
         padding: 20px;
         box-sizing: border-box;
+        border-top: 2px solid black;
+    }
+
+    .footer_wrapper{
+        border: none;
     }
 
     .footer_content {
