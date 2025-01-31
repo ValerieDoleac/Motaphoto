@@ -36,8 +36,8 @@
 
 @font-face {
     font-family: 'Poppins';
-    src: url('Poppins-Light.woff2') format('woff2'),
-        url('Poppins-Light.woff') format('woff');
+    src: url('../fonts/Poppins-Light.woff2') format('woff2'),
+        url('../fonts/Poppins-Light.woff') format('woff');
     font-weight: 300;
     font-style: normal;
     font-display: swap;
@@ -45,8 +45,8 @@
 
 @font-face {
     font-family: 'Space Mono';
-    src: url('SpaceMono-BoldItalic.woff2') format('woff2'),
-        url('SpaceMono-BoldItalic.woff') format('woff');
+    src: url('../fonts/SpaceMono-BoldItalic.woff2') format('woff2'),
+        url('../fonts/SpaceMono-BoldItalic.woff') format('woff');
     font-weight: bold;
     font-style: italic;
     font-display: swap;

@@ -9,7 +9,7 @@ $args = array(
 $query = new WP_Query($args);
 
 if ($query->have_posts()) : ?>
-    <div class="photo-grid">
+    <div id="archive-photo-grid"class="photo-grid">
         <?php while ($query->have_posts()) : $query->the_post(); ?>
             <div class="photo-item">
                 <?php

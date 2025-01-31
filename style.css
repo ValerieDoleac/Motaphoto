@@ -70,6 +70,242 @@ body {
     display: none; /* Caché sur desktop */
 }
 
+/* Page d'accueil - ordinateur */
+
+/* Hero Section */
+.hero-section {
+    position: relative; /* Pour placer les éléments en overlay */
+    width: 1440px;
+    height: 100vh;
+    max-height: 962px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex; /* Active le flexbox */
+    align-items: center; /* Centre verticalement le contenu */
+    justify-content: center; /* Centre horizontalement le contenu */
+    margin: 0 auto; /* Centre horizontalement le conteneur */
+}
+
+/* Overlay Text */
+.hero-section h1 {
+    position: absolute; /* Position relative à la section */
+    top: 50%; /* Centre verticalement */
+    left: 50%; /* Centre horizontalement */
+    transform: translate(-50%, -50%); /* Centre précisément */
+    color: #ffffff; /* Couleur du texte */
+    font-family: 'Space Mono', sans-serif; /* Police personnalisée */
+    font-size: 4vw; /* Taille responsive du texte */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Ombre pour contraster avec l'image */
+    text-transform: uppercase; /* Met le texte en majuscules */
+    margin: 0;
+    text-align: center; /* Centre le texte */
+}
+
+/* Section des filtres */
+/* Styles pour les filtres */
+.filters-section {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin: 40px auto;
+    z-index: 1001;
+}
+
+.filters-box {
+    background-color: white;
+    border-radius: 8px;
+    border: 1px solid  #b8bbc2;
+    width: 260px;
+    height: 43px;
+    text-align: left;
+    position: relative;
+}
+
+/* Style des listes déroulantes */
+.filters-box ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Espacement entre les items */
+.filters-box ul li {
+    padding: 10px 20px; /* Espacement intérieur */
+    font-size: 14px; /* Taille de la police */
+    cursor: pointer; /* Curseur pointeur */
+    transition: background-color 0.3s ease; /* Animation pour la couleur */
+}
+
+/* Changement de couleur au survol et sélection */
+.filters-box ul li:hover,
+.filters-box ul li:focus {
+    background-color: #ff0000; /* Couleur rouge */
+    color: #ffffff; /* Texte blanc pour contraste */
+}
+
+/* Pour espacer davantage les éléments */
+.filters-box ul li:not(:last-child) {
+    margin-bottom: 10px; /* Espace entre les items */
+}
+
+.filters-box:hover{
+    border: 1px solid #215aff;
+}
+
+.filter-toggle {
+    width: 100%;
+    background: none;
+    border: none;
+    font-family: 'Space Mono', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.arrow {
+    font-size: 16px;
+    transform: rotate(0deg);
+    transition: transform 0.3s ease;
+}
+
+.filter-toggle[aria-expanded="true"] .arrow {
+    transform: rotate(180deg);
+}
+
+.filter-list {
+    margin-top: 10px;
+    list-style: none;
+    padding: 0;
+    background: white;
+}
+
+.filter-list li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.filter-list li:hover {
+    background: #eee;
+}
+
+.photo-gallery-controls {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.load-more-button,
+.load-less-button {
+    padding: 10px 20px;
+    background-color: #d8d8d8;
+    border: none;
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 5px;
+}
+
+.load-more-button:hover,
+.load-less-button:hover {
+    background-color: #bbb;
+}
+
+
+
+/* Section de la galerie */
+.photo-gallery .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Deux colonnes */
+    gap: 20px; /* Espacement entre les photos */
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
+.photo-item {
+    position: relative;
+    overflow: hidden;
+    width: 564px; /* Largeur des images */
+    height: 495px; /* Hauteur des images */
+}
+
+.photo-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.photo-image img:hover {
+    transform: scale(1.05); /* Zoom au survol */
+}
+
+.photo-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.photo-item:hover .photo-overlay {
+    opacity: 1; /* Affiche l'overlay au survol */
+}
+
+
+
+.photo-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.photo-category {
+    font-size: 14px;
+    font-style: italic;
+}
+
+.photo-icons {
+    display: flex;
+    gap: 10px;
+}
+
+.photo-icons .icon {
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+
+
+.load-more-button {
+    display: inline-block;
+    width: 272px;
+    height: 50px;
+    font-family: 'Space Mono', sans-serif;
+    font-size: 12px;
+    background-color: #d8d8d8;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.load-more-button:hover {
+    background-color: black;
+    color: white
+}
+
 
 
 /* Footer - Ordinateur */
@@ -233,14 +469,14 @@ body {
 }
 
 .contact {
-    margin-top: 50px; /* Ajustez la valeur pour descendre le formulaire */
-    z-index: 1; /* Assurez-vous que le formulaire reste au-dessus du texte */
+    margin-top: 50px; /*  descendre le formulaire */
+    z-index: 1; /* Le formulaire reste au-dessus du texte */
 }
 
 
 /* CSS pour mon fichier archive-photo.php */
 
-.photo-grid {
+#archive-photo-grid .photo-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
@@ -249,10 +485,8 @@ body {
 }
 
 .photo-item {
-    background: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 15px;
     text-align: center;
     transition: transform 0.2s, box-shadow 0.2s;
 }
@@ -450,9 +684,20 @@ body {
         padding: 10px 15px; /* Ajuste le rembourrage */
     }
 
+
+    /* page accueil mobile */
+
+    .hero-section {
+        height: 60vh; /* Ajuste la hauteur pour les petits écrans */
+        max-height: none; /* Supprime la limite de hauteur */
+    }
+
+    .hero-section h1 {
+        font-size: 6vw; /* Réduit la taille du texte sur mobile */
+    }
+
     /* Footer - Mobile */
     .footer {
-        width: 375px;
         height: 208px;
         background-color: white;
         display: flex;

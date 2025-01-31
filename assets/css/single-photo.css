@@ -9,7 +9,7 @@
     margin-top: 30px;
 }
 
-.photo-details {
+.photo-info-section .photo-details {
     flex: 1; /* Prend 50% de l'espace */
     display: flex;
     flex-direction: column;
@@ -18,7 +18,7 @@
 
 }
 
-.photo-details h2 {
+.photo-info-section .photo-details h2 {
     font-family: 'Space Mono', sans-serif;
     font-size: 4.58vw; /* Taille responsive */
     font-style: italic;
@@ -26,7 +26,7 @@
     line-height: 1;
 }
 
-.photo-details p {
+.photo-info-section .photo-details p {
     font-family: 'Poppins', sans-serif;
     font-size: 0.97vw; /* Taille responsive */
     margin: 10px 0;
