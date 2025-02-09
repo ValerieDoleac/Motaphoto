@@ -28,14 +28,14 @@ if ($random_photo->have_posts()) :
     wp_reset_postdata();
 endif;
 
-/* Start the Loop */
+/* début de la boucle Loop */
 while (have_posts()) :
     the_post();
 
     // Contenu principal de la page
     get_template_part('template-parts/content/content-page');
 
-    // Gestion des commentaires
+    // Gestion commentaires
     if (comments_open() || get_comments_number()) {
         comments_template();
     }
@@ -78,7 +78,7 @@ endwhile; // Fin de la boucle ?>
 
 <section class="photo-gallery">
     <div class="photo-grid">
-        <!-- Les premières photos seront chargées par défaut ici -->
+        <!-- Les premières photos chargé ici -->
         <?php
         $recent_photos = new WP_Query(array(
             'post_type' => 'photo',
@@ -98,7 +98,6 @@ endwhile; // Fin de la boucle ?>
     </div>
     <div class="photo-gallery-controls">
         <button id="load-more" data-page="1" class="load-more-button">Charger plus</button>
-        <button id="load-less" class="load-less-button" style="display: none;">Charger moins</button>
     </div>
 </section>
 

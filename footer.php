@@ -5,7 +5,7 @@
             wp_nav_menu(array(
                 'theme_location' => 'footer', // Utilisation du menu dynamique
                 'container' => false, // Pas de conteneur autour de la liste
-                'menu_class' => 'footer_content', // Classe CSS pour le menu
+                'menu_class' => 'footer_content',
                 'depth' => 1 // Pas de sous-menus
             ));
             ?>

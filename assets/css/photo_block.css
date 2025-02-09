@@ -1,0 +1,172 @@
+/* ----------------------------------------Section 3 : Suggestions--------------------------------- */
+
+/* Conteneur principal de la galerie */
+.photo-gallery {
+    margin-top: 40px;
+    max-width: 1140px; /* Largeur maximale */
+    margin: 0 auto; /* Centrage horizontal */
+    margin-bottom: 50px;
+}
+
+/* Titre de la galerie (si besoin) */
+.photo-gallery h3 {
+    font-size: 1.25rem; /* Taille du texte */
+    font-family: 'Space Mono', sans-serif; /* Police */
+    font-weight: normal;
+    margin-bottom: 40px;
+    margin-top: 20px;
+    text-align: center; /* Centrage */
+}
+
+/* Grille des images */
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
+/* Conteneur d'une photo */
+.photo-item {
+    position: relative; /* Nécessaire pour le positionnement absolu de l'overlay */
+    overflow: hidden;
+    aspect-ratio: 564 / 495; /* Maintient le ratio 564x495 */
+    transition: transform 0.3s ease; /* Animation au survol */
+}
+
+.photo-item:hover {
+    transform: scale(1.02); /* Zoom léger au survol */
+}
+
+/* Image principale */
+.photo-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Recadre l'image sans la déformer */
+    transition: transform 0.3s ease;
+}
+
+.photo-image img:hover {
+    transform: scale(1.05); /* Zoom de l'image au survol */
+}
+
+/* Overlay de l'image */
+.photo-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Superposition semi-transparente */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    opacity: 0; /* Caché par défaut */
+    transition: opacity 0.3s ease-in-out; /* Animation de fondu */
+}
+
+.photo-item:hover .photo-overlay {
+    opacity: 1; /* Visible au survol */
+}
+
+/* Titre de la photo */
+.photo-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}
+
+/* Catégorie de la photo */
+.photo-category {
+    font-size: 14px;
+    font-style: italic;
+    color: #ccc; /* Couleur gris clair */
+    text-align: center;
+}
+
+/* Icônes */
+.photo-icons {
+    display: flex;
+    gap: 10px; /* Espacement entre les icônes */
+}
+
+.photo-icons .icon {
+    color: white; /* Couleur des icônes */
+    font-size: 18px; /* Taille des icônes */
+    text-decoration: none; /* Pas de soulignement */
+    background: rgba(255, 255, 255, 0.2); /* Fond semi-transparent */
+    padding: 10px;
+    border-radius: 50%; /* Icônes rondes */
+    transition: background 0.3s ease;
+}
+
+.photo-icons .icon:hover {
+    background: rgba(255, 255, 255, 0.5); /* Fond plus clair au survol */
+}
+
+/* Bouton charger plus */
+.photo-gallery-controls {
+    text-align: center; /* Centrer le bouton */
+    margin-top: 30px;
+}
+
+.load-more-button {
+    background-color: #d8d8d8; /* Couleur de fond */
+    color: black; /* Couleur du texte */
+    font-size: 14px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.load-more-button:hover {
+    background-color: black; /* Couleur au survol */
+    color: white; /* Couleur du texte au survol */
+}
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 640px) {
+/* Section 3 : Suggestions */
+
+    .photo-suggestions-section h3 {
+    font-size: 18px;
+    font-family: 'Space Mono', sans-serif;
+    font-weight: normal;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    align-items: center;
+    }
+
+    .suggestions-grid {
+        display: flex;
+        flex-direction: column; /* Empile les photos */
+        align-items: center;
+        gap: 10px;
+    }
+
+    .suggestion-item {
+        width: 317.66px;
+        height: 278.8px;
+        margin-top: 20px;
+    }
+
+    .suggestion-item .suggestion-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}

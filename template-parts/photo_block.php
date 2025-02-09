@@ -1,10 +1,10 @@
 <?php
 // $photo_id est défini dans le fichier page.php
 if (!isset($photo_id)) {
-    return; // N'afficher rien si $photo_id n'est pas défini
+    return; // N'affiche rien si $photo_id n'est pas défini
 }
 
-// Récupérer les détails de l'image
+// Récupére les détails de l'image
 $image_url = wp_get_attachment_url(get_post_thumbnail_id($photo_id));
 $image_html = get_the_post_thumbnail($photo_id, 'photo-thumbnail', array('class' => 'suggestion-image'));
 $photo_title = get_the_title($photo_id);
@@ -16,7 +16,7 @@ $category_name = $categories ? $categories[0]->name : 'Non spécifié';
 <div class="photo-item">
     <div class="photo-image">
         <a href="<?php echo get_permalink(); ?>">
-            <?php echo get_the_post_thumbnail(get_the_ID(), 'photo-thumbnail'); ?>
+            <?php echo get_the_post_thumbnail(get_the_ID(), 'photo-suggestion'); ?>
         </a>
     </div>
     <div class="photo-overlay">

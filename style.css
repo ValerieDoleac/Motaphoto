@@ -74,36 +74,36 @@ body {
 
 /* Hero Section */
 .hero-section {
-    position: relative; /* Pour placer les éléments en overlay */
+    position: relative;
     width: 1440px;
     height: 100vh;
     max-height: 962px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    display: flex; /* Active le flexbox */
-    align-items: center; /* Centre verticalement le contenu */
-    justify-content: center; /* Centre horizontalement le contenu */
-    margin: 0 auto; /* Centre horizontalement le conteneur */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
 }
 
 /* Overlay Text */
 .hero-section h1 {
-    position: absolute; /* Position relative à la section */
-    top: 50%; /* Centre verticalement */
-    left: 50%; /* Centre horizontalement */
-    transform: translate(-50%, -50%); /* Centre précisément */
-    color: #ffffff; /* Couleur du texte */
-    font-family: 'Space Mono', sans-serif; /* Police personnalisée */
-    font-size: 4vw; /* Taille responsive du texte */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Ombre pour contraster avec l'image */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+    font-family: 'Space Mono', sans-serif; 
+    font-size: 4vw;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     text-transform: uppercase; /* Met le texte en majuscules */
     margin: 0;
-    text-align: center; /* Centre le texte */
+    text-align: center;
 }
 
 /* Section des filtres */
-/* Styles pour les filtres */
+
 .filters-section {
     display: flex;
     gap: 20px;
@@ -122,31 +122,28 @@ body {
     position: relative;
 }
 
-/* Style des listes déroulantes */
+
 .filters-box ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-/* Espacement entre les items */
 .filters-box ul li {
-    padding: 10px 20px; /* Espacement intérieur */
-    font-size: 14px; /* Taille de la police */
-    cursor: pointer; /* Curseur pointeur */
-    transition: background-color 0.3s ease; /* Animation pour la couleur */
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-/* Changement de couleur au survol et sélection */
 .filters-box ul li:hover,
 .filters-box ul li:focus {
-    background-color: #ff0000; /* Couleur rouge */
-    color: #ffffff; /* Texte blanc pour contraste */
+    background-color: #ff0000; 
+    color: #ffffff; 
 }
 
-/* Pour espacer davantage les éléments */
 .filters-box ul li:not(:last-child) {
-    margin-bottom: 10px; /* Espace entre les items */
+    margin-bottom: 10px;
 }
 
 .filters-box:hover{
@@ -217,78 +214,6 @@ body {
 }
 
 
-
-/* Section de la galerie */
-.photo-gallery .photo-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Deux colonnes */
-    gap: 20px; /* Espacement entre les photos */
-    max-width: 1140px;
-    margin: 0 auto;
-}
-
-.photo-item {
-    position: relative;
-    overflow: hidden;
-    width: 564px; /* Largeur des images */
-    height: 495px; /* Hauteur des images */
-}
-
-.photo-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.photo-image img:hover {
-    transform: scale(1.05); /* Zoom au survol */
-}
-
-.photo-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.photo-item:hover .photo-overlay {
-    opacity: 1; /* Affiche l'overlay au survol */
-}
-
-
-
-.photo-title {
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.photo-category {
-    font-size: 14px;
-    font-style: italic;
-}
-
-.photo-icons {
-    display: flex;
-    gap: 10px;
-}
-
-.photo-icons .icon {
-    color: white;
-    font-size: 18px;
-    text-decoration: none;
-}
-
-
-
 .load-more-button {
     display: inline-block;
     width: 272px;
@@ -299,6 +224,7 @@ body {
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-bottom: 30px;
 }
 
 .load-more-button:hover {
@@ -311,24 +237,24 @@ body {
 /* Footer - Ordinateur */
 
 .footer_wrapper {
-    max-width: 1440px; /* Limite la largeur du footer */
+    max-width: 1440px;
     max-height: 40px;
-    margin: 0 auto; /* Centre le footer horizontalement */
+    margin: 0 auto;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 50px;
-    padding: 0 20px; /* Ajout d'un padding latéral */
+    padding: 0 20px;
     border-top: 2px solid black;
 }
 
 .footer_content {
-    display: flex; /* Affiche les éléments en ligne */
+    display: flex;
     justify-content: space-between; /* Espacement uniforme */
     align-items: center;
-    list-style: none; /* Supprime les puces */
-    padding: 0; /* Supprime les marges internes */
-    margin: 0; /* Supprime les marges externes */
+    list-style: none;
+    padding: 0;
+    margin: 0;
     gap: 50px;
 }
 
@@ -338,8 +264,8 @@ body {
 }
 
 .footer_content a {
-    text-decoration: none; /* Supprime le soulignement des liens */
-    color: black; /* Couleur par défaut des liens */
+    text-decoration: none;
+    color: black;
     font-family: 'Space Mono', sans-serif;
     text-transform: uppercase;
     font-size: 16px;
@@ -347,13 +273,13 @@ body {
 }
 
 .footer_content a:hover {
-    font-weight: bold; /* Passe le texte en gras au survol */
-    color:black; /* Change la couleur au survol */
+    font-weight: bold;
+    color:black;
 }
 
 .footer_content p:last-child {
     margin-left: auto; /* Pousse le texte "Tous droits réservés" à droite */
-    color: black; /* Couleur du texte */
+    color: black;
     font-family: 'Space Mono', sans-serif;
     font-size: 14px;
 }
@@ -372,7 +298,7 @@ body {
     background: white;
     z-index: 999;
     border: 2px solid black;
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -382,7 +308,11 @@ body {
 }
 
 /* Afficher la modale et l'overlay */
-.modal.active,
+.modal.active {
+    display: flex;
+    opacity: 1;
+}
+
 .modal-overlay.active {
     opacity: 1;
     visibility: visible;
@@ -395,7 +325,7 @@ body {
     left: 50%;
     transform: translateX(-50%);
     font-family: 'poppins', sans-serif;
-    font-size: 48px; /* Taille du texte */
+    font-size: 48px;
     font-weight: 900;
     font-style: italic;
     color:black ;
@@ -414,7 +344,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Couleur semi-transparente */
+    background: rgba(0, 0, 0, 0.5);
     z-index: 998; /* Juste en dessous de la modale */
     visibility: hidden;
     opacity: 0;
@@ -426,7 +356,7 @@ body {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Ajoute un espace uniforme entre les éléments */
+    gap: 10px;
 }
 
 /* Labels */
@@ -440,7 +370,7 @@ body {
 
 /* Champs de formulaire */
 .modal .wpcf7-form .wpcf7-form-control {
-    margin-top: 0; /* Aucune marge au-dessus */
+    margin-top: 0;
     padding: 10px;
     border: 1px solid black;
     border-radius: 8px;
@@ -452,10 +382,10 @@ body {
 
 /* Bouton de soumission */
 .modal .wpcf7-form .wpcf7-submit {
-    border: none; /* Enlève la bordure */
-    border-radius: 0; /* Enlève les coins arrondis */
-    padding: 12px 20px; /* Ajoutez un rembourrage si nécessaire */
-    background-color: #ccc; /* Couleur de fond */
+    border: none;
+    border-radius: 0;
+    padding: 12px 20px;
+    background-color: #ccc;
     font-family: 'Space Mono', sans-serif;
     text-transform: uppercase;
     font-size: 12px;
@@ -469,66 +399,12 @@ body {
 }
 
 .contact {
-    margin-top: 50px; /*  descendre le formulaire */
-    z-index: 1; /* Le formulaire reste au-dessus du texte */
+    margin-top: 50px;
+    z-index: 1;
 }
 
 
-/* CSS pour mon fichier archive-photo.php */
 
-#archive-photo-grid .photo-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    padding: 20px;
-    list-style-type: none;
-}
-
-.photo-item {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    text-align: center;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.photo-item:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.photo-item h2 {
-    font-size: 18px;
-    margin: 10px 0;
-    color: #333;
-}
-
-.photo-item p {
-    font-size: 14px;
-    color: #666;
-}
-
-.photo-item img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 4px;
-}
-
-.page-numbers {
-    display: inline-block;
-    margin: 5px;
-    padding: 10px 15px;
-    color: #0073aa;
-    border: 1px solid #ddd;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: background 0.3s;
-}
-
-.page-numbers:hover {
-    background: #0073aa;
-    color: #fff;
-    text-decoration: none;
-}
 
 
 
@@ -539,8 +415,8 @@ body {
 
     /* Styles pour la navbar sur mobile */
     .header {
-        height: 72px; /* Hauteur réduite pour mobile */
-        width: 100%; /* Occupe toute la largeur */
+        height: 72px;
+        width: 100%;
         padding: 0 16px;
         display: flex;
         justify-content: space-between;
@@ -553,7 +429,7 @@ body {
 
     /* Logo pour mobile */
     .header .logo img {
-        height: 20px; /* Taille du logo mobile */
+        height: 20px;
         width: auto;
     }
 
@@ -562,8 +438,8 @@ body {
         display: flex; /* Visible mobile */
         flex-direction: column;
         justify-content: space-between;
-        width: 40px; /* Largeur des lignes */
-        height: 24px; /* Hauteur du bouton */
+        width: 40px;
+        height: 24px;
         background: none;
         border: none;
         cursor: pointer;
@@ -602,8 +478,8 @@ body {
         justify-content: center; /*liens verticalement */
         align-items: center; /* liens horizontalement */
         z-index: 5; /* Sous la navbar */
-        opacity: 0; /* Masqué par défaut */
-        transform: translateY(-100%); /* Hors de la vue */
+        opacity: 0;
+        transform: translateY(-100%);
         transition: all 0.3s ease-in-out;
         display: flex;
     }
@@ -623,7 +499,7 @@ body {
     }
 
     .nav_menu li {
-        margin: 20px 0; /* Espacement vertical entre les liens */
+        margin: 20px 0;
     }
 
     .nav_menu li a {
@@ -648,23 +524,23 @@ body {
         border: 1px solid black;
         }
     
-        .modal::before {
-            content: "CONTACTCONTACTCONTACT \a CONTACTCONTACTCONTACT";
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-family: 'Poppins', sans-serif;
-            font-size: 36px; 
-            font-weight: 900;
-            font-style: italic;
-            color: black;
-            white-space: pre-line; /* Conserve les sauts de ligne */
-            line-height: 0.9; /* Réduit l'espacement entre les lignes */
-            text-align: center;
-            z-index: -1; /* Derrière la modale */
-            width: calc(100% + 100px); /* Ajuste la largeur pour mobile */
-        }
+    .modal::before {
+        content: "CONTACTCONTACTCONTACT \a CONTACTCONTACTCONTACT";
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: 'Poppins', sans-serif;
+        font-size: 36px; 
+        font-weight: 900;
+        font-style: italic;
+        color: black;
+        white-space: pre-line; /* Conserve les sauts de ligne */
+        line-height: 0.9; /* Réduit l'espacement entre les lignes */
+        text-align: center;
+        z-index: -1; /* Derrière la modale */
+        width: calc(100% + 100px); /* Ajuste la largeur pour mobile */
+    }
 
     .modal .wpcf7-form {
         gap: 15px;
@@ -680,20 +556,20 @@ body {
     }
 
     .modal .wpcf7-form .wpcf7-submit {
-        font-size: 12px; /* Taille du texte pour le bouton */
-        padding: 10px 15px; /* Ajuste le rembourrage */
+        font-size: 12px;
+        padding: 10px 15px;
     }
 
 
     /* page accueil mobile */
 
     .hero-section {
-        height: 60vh; /* Ajuste la hauteur pour les petits écrans */
-        max-height: none; /* Supprime la limite de hauteur */
+        height: 60vh;
+        max-height: none;
     }
 
     .hero-section h1 {
-        font-size: 6vw; /* Réduit la taille du texte sur mobile */
+        font-size: 6vw;
     }
 
     /* Footer - Mobile */

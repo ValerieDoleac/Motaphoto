@@ -1,13 +1,15 @@
 
-/* Section 1 : Informations et grande image */
+/* -------------------------------Section 1 : Informations et grande image --------------------------*/
+
 .photo-info-section {
     display: flex; /* Positionne les deux blocs côte à côte */
-    height: 80vh; /* Adapte à la hauteur de l'écran */
-    max-width: 1150px; /* Largeur maximale */
+    height: 80vh;
+    max-width: 1150px;
     margin: 0 auto; /* Centré horizontalement */
     gap: 5vw; /* Espace entre les deux blocs */
     margin-top: 30px;
 }
+
 
 .photo-info-section .photo-details {
     flex: 1; /* Prend 50% de l'espace */
@@ -33,54 +35,55 @@
 }
 
 .trait1 {
-    width: 117%; /* Ligne pleine largeur */
-    height: 2px; /* Épaisseur de la ligne */
+    width: 117%;
+    height: 2px;
     background-color: black;
     margin-top: 2vh; /* Espacement vertical */
 }
 
-/* Bloc à droite - Grande image */
+/* -------------------------------------------Bloc à droite - Grande image -------------------------------*/
+
 .photo-main {
     flex: 1; /* Prend 50% de l'espace */
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden; /* Coupe les débordements */
+    overflow: hidden;
 }
 
 .photo-main img {
-    width: 100%; /* Adapte à la largeur du conteneur */
-    height: 100%; /* Adapte à la hauteur du conteneur */
-    object-fit: contain; /* Affiche l'image au format natif sans recadrer */
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Affiche l'image sans recadrer */
     transform: translateY(0); /* Ajuste légèrement la position verticale */
 }
 
 /* Section 2 : Interactions */
 .photo-interaction-section {
-    display: flex; /* Aligne le texte, bouton, et carrousel sur une seule ligne */
+    display: flex;
     justify-content: space-between; /* Sépare les éléments */
     align-items: center;
-    height: 118px; /* Hauteur fixe */
-    max-width: 1150px; /* Largeur maximale */
+    height: 118px;
+    max-width: 1150px;
     margin: 2vh auto 0; /* Centré horizontalement avec espacement vertical */
     padding: 0 2vw; /* Espacement interne horizontal */
 }
 
 .photo-call-to-action {
-    display: flex; /* Affiche la phrase et le bouton côte à côte */
+    display: flex; /* phrase et bouton côte à côte */
     align-items: center;
-    gap: 55px; /* Espace entre la phrase et le bouton */
+    gap: 55px; 
 }
 
 .photo-call-to-action p {
     font-family: 'Space Mono', sans-serif;
-    font-size: 14px; /* Taille responsive */
+    font-size: 14px;
     margin: 0;
 }
 
 .photo-call-to-action button {
-    width: 16.65vw; /* Largeur relative */
-    height: 4.63vh; /* Hauteur relative */
+    width: 16.65vw; 
+    height: 4.63vh;
     background-color: #D8D8D8;
     border: none;
     font-size: 0.83vw; /* Taille responsive */
@@ -100,7 +103,8 @@ body.modal-active .photo-call-to-action button {
 }
 
 
-/* Carousel */
+/* -------------------------------------------Carousel ------------------------------------------*/
+
 .photo-carousel {
     display: flex;
     flex-direction: column;
@@ -110,22 +114,14 @@ body.modal-active .photo-call-to-action button {
 
 .carousel-images {
     display: flex;
-    overflow-x: auto; /* Active le défilement horizontal */
-    scroll-behavior: smooth; /* Défilement fluide */
+    width: 81px;
+    height: 71px;
 }
 
 .carousel-thumbnail {
     transition: transform 0.3s ease, border 0.3s ease;
-    border: 2px solid transparent; /* Bordure par défaut */
-}
-
-.carousel-thumbnail.active {
-    border: 2px solid black; /* Bordure pour l'image active */
-    transform: scale(1.1); /* Zoom léger */
-}
-
-.carousel-thumbnail:hover {
-    transform: scale(1.1); /* Zoom au survol */
+    width: 81px;
+    height: 71px;
 }
 
 .carousel-navigation {
@@ -146,7 +142,7 @@ body.modal-active .photo-call-to-action button {
     transform: scale(1.2); /* Ajoute un effet de zoom au survol */
 }
 
-/* Ligne horizontale */
+/*----------------------------------------- Trait 2------------------------------------- */
 .trait2 {
     width: 100%;
     max-width: 1150px;
@@ -156,74 +152,6 @@ body.modal-active .photo-call-to-action button {
 }
 
 
-/* Section 3 : Suggestions */
-.photo-suggestions-section {
-    margin-top: 40px;
-    max-width: 1440px; /* Largeur maximale */
-    margin: 0 auto;
-    margin-bottom: 50px;
-}
-
-.photo-suggestions-section h3 {
-    font-size: 1.25vw;
-    font-family: 'Space Mono', sans-serif;
-    font-weight: normal;
-    margin-bottom: 60px;
-    margin-top: 40px;
-    margin-left: 150px;
-}
-
-.suggestions-grid {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-}
-
-.suggestion-item {
-    width: 564px;
-    height: 495px;
-    overflow: hidden;
-    position: relative;
-}
-
-.suggestion-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease; /* Animation sur le survol */
-}
-
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    background: rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-}
-
-.suggestion-item:hover .overlay {
-    opacity: 1;
-}
-
-.icon {
-    color: white;
-    font-size: 20px;
-    text-decoration: none;
-    background: rgba(0, 0, 0, 0.8);
-    padding: 10px;
-    border-radius: 50%;
-}
-
-
-
-
 
 
 
@@ -231,15 +159,15 @@ body.modal-active .photo-call-to-action button {
     /* Section 1 : Informations et grande image */
     .photo-info-section {
         display: flex;
-        flex-direction: column; /* Change l'ordre pour mobile */
-        align-items: center; /* Centre les éléments horizontalement */
-        gap: 20px; /* Espace entre les éléments */
+        flex-direction: column; 
+        align-items: center;
+        gap: 20px;
     }
 
     .photo-main img {
         order: 1;
-        width: 265px; /* Largeur spécifiée */
-        height: 397px; /* Hauteur spécifiée */
+        width: 265px;
+        height: 397px;
         object-fit: cover; /* Adapte l'image sans déformer */
     }
 
@@ -250,7 +178,7 @@ body.modal-active .photo-call-to-action button {
     }
 
     .photo-details h2 {
-        font-size: 66px; /* Adapte la taille du titre */
+        font-size: 66px;
         font-family: 'space mono', sans-serif;
         font-weight: bold;
         font-style: italic;
@@ -258,7 +186,7 @@ body.modal-active .photo-call-to-action button {
     }
 
     .photo-details p {
-        font-size: 14px; /* Adapte la taille des paragraphes */
+        font-size: 14px;
         font-family: 'space mono', sans-serif;
         font-weight: normal;
         margin: 5px 0; /* Réduit l'espacement vertical */
@@ -282,22 +210,22 @@ body.modal-active .photo-call-to-action button {
     /* Section 2 : Interactions */
     .photo-interaction-section {
         display: flex;
-        flex-direction: column; /* Aligne les éléments verticalement */
+        flex-direction: column;
         align-items: left; /* Centre les éléments horizontalement */
     }
 
     .photo-call-to-action {
         display: flex;
-        flex-direction: column; /* Affiche les éléments en colonne */
+        flex-direction: column;
         align-items: left; /* Centre horizontalement la phrase et le bouton */
-        gap: 10px; /* Ajoute un espace entre la phrase et le bouton */
-        width: 100%; /* S'aligne avec la largeur disponible */
+        gap: 10px;
+        width: 100%;
     }
 
     .photo-call-to-action p {
         margin: 0;
         font-family: 'poppins', sans-serif;
-        font-size: 14px; /* Adapte la taille du texte */
+        font-size: 14px;
         text-align: left;
     }
 
@@ -315,36 +243,5 @@ body.modal-active .photo-call-to-action button {
         background-color: black;
         color: white;
     }
-
-    /* Section 3 : Suggestions */
-
-    .photo-suggestions-section h3 {
-    font-size: 18px;
-    font-family: 'Space Mono', sans-serif;
-    font-weight: normal;
-    margin-bottom: 30px;
-    margin-top: 30px;
-    align-items: center;
-    }
-
-    .suggestions-grid {
-        display: flex;
-        flex-direction: column; /* Empile les photos */
-        align-items: center;
-        gap: 10px;
-    }
-
-    .suggestion-item {
-        width: 317.66px; /* Largeur spécifiée */
-        height: 278.8px; /* Hauteur spécifiée */
-        margin-top: 20px;
-    }
-
-    .suggestion-item .suggestion-image {
-        width: 100%; /* Prend toute la largeur du conteneur */
-        height: 100%; /* Prend toute la hauteur du conteneur */
-        object-fit: cover; /* Adapte sans déformer */
-    }
 }
-
 
