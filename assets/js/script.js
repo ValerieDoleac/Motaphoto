@@ -49,93 +49,179 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Gestion du carrousel
-
-    const carouselImages = document.querySelector('.carousel-images');
-    const thumbnails = carouselImages ? carouselImages.querySelectorAll('.carousel-thumbnail') : [];
-    const prevButton = document.querySelector('.prev-button');
-    const nextButton = document.querySelector('.next-button');
-    const mainPhoto = document.getElementById('main-photo');
+    document.addEventListener("DOMContentLoaded", () => {
+    const carouselImages = document.querySelector(".carousel-images");
+    const thumbnails = carouselImages ? carouselImages.querySelectorAll(".carousel-thumbnail") : [];
+    const prevButton = document.querySelector(".prev-button");
+    const nextButton = document.querySelector(".next-button");
     let currentIndex = 0;
 
-    if (carouselImages && thumbnails.length > 0 && prevButton && nextButton && mainPhoto) {
-        function updateActiveThumbnail() {
+    if (carouselImages && thumbnails.length > 0 && prevButton && nextButton) {
+        /**
+         * Met à jour les vignettes visibles et applique l'effet actif
+         */
+        function updateCarousel() {
             thumbnails.forEach((thumb, index) => {
-                thumb.classList.toggle('active', index === currentIndex);
+                thumb.style.display = "none"; // Cache toutes les vignettes
+                if (index >= currentIndex && index < currentIndex + 3) {
+                    // Affiche uniquement 3 vignettes à la fois
+                    thumb.style.display = "block";
+                }
+                thumb.classList.toggle("active", index === currentIndex); // Marque la vignette active
             });
-
-            const thumbWidth = thumbnails[0].offsetWidth;
-            const thumbMargin = parseInt(getComputedStyle(thumbnails[0]).marginRight, 10) || 0;
-            const offset = thumbWidth + thumbMargin;
-            carouselImages.scrollLeft = currentIndex * offset;
-
-            const largeUrl = thumbnails[currentIndex].dataset.large || '';
-            if (largeUrl) {
-                mainPhoto.src = largeUrl;
-            }
         }
 
-        prevButton.addEventListener('click', () => {
-            currentIndex = (currentIndex === 0) ? thumbnails.length - 1 : currentIndex - 1;
-            updateActiveThumbnail();
+        /**
+         * Gestion du bouton précédent
+         */
+        prevButton.addEventListener("click", () => {
+            currentIndex = currentIndex > 0 ? currentIndex - 1 : thumbnails.length - 1;
+            updateCarousel();
         });
 
-        nextButton.addEventListener('click', () => {
-            currentIndex = (currentIndex === thumbnails.length - 1) ? 0 : currentIndex + 1;
-            updateActiveThumbnail();
+        /**
+         * Gestion du bouton suivant
+         */
+        nextButton.addEventListener("click", () => {
+            currentIndex = (currentIndex + 1) % thumbnails.length;
+            updateCarousel();
         });
 
-        thumbnails.forEach((thumb, index) => {
-            thumb.addEventListener('click', () => {
-                currentIndex = index;
-                updateActiveThumbnail();
-            });
-        });
-
-        updateActiveThumbnail();
-    }
-
-document.addEventListener("DOMContentLoaded", () => {
-    const photoGrid = document.querySelector(".photo-grid");
-    if (photoGrid) {
-        photoGrid.style.display = "grid";
-        photoGrid.style.gridTemplateColumns = "repeat(2, 1fr)";
-        photoGrid.style.gap = "20px";
+        // Initialise le carousel
+        updateCarousel();
     }
 });
 
     // Bouton charger plus
 
-    const loadMoreButton = document.getElementById("load-more");
+        document.addEventListener("DOMContentLoaded", () => {
+        const loadMoreButton = document.getElementById("load-more");
 
-    if (loadMoreButton) {
-        loadMoreButton.addEventListener("click", function () {
-            const currentPage = parseInt(this.getAttribute("data-page"));
-            const nextPage = currentPage + 1;
+        if (loadMoreButton) {
+            console.log("Bouton trouvé dans le DOM."); // Test pour vérifier si le bouton est détecté
+            loadMoreButton.addEventListener("click", function () {
+                console.log("Bouton 'Charger plus' cliqué !");
+                const currentPage = parseInt(this.getAttribute("data-page"));
+                const nextPage = currentPage + 1;
 
-            const xhr = new XMLHttpRequest();
-            xhr.open("POST", motaphoto_ajax.ajax_url, true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            console.log(motaphoto_ajax.ajax_url);
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", motaphoto_ajax.ajax_url, true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
+                xhr.onload = function () {
+                    if (xhr.status === 200 && xhr.responseText) {
+                        console.log("Réponse AJAX : ", xhr.responseText);
 
-            xhr.onload = function () {
-                if (xhr.status === 200 && xhr.responseText) {
-                    const newPhotos = document.createElement("div");
-                    newPhotos.innerHTML = xhr.responseText;
-                    document.querySelector(".photo-grid").appendChild(newPhotos);
-                    loadMoreButton.setAttribute("data-page", nextPage);
-                }
-            };
+                        const newPhotos = document.createElement("div");
+                        newPhotos.innerHTML = xhr.responseText;
 
-            xhr.onerror = function () {
-                console.error("Une erreur est survenue pendant la requête AJAX.");
-            };
+                        document.querySelector(".photo-grid").appendChild(newPhotos);
+                        loadMoreButton.setAttribute("data-page", nextPage);
+                    } else {
+                        console.error("Erreur AJAX, statut : ", xhr.status);
+                    }
+                };
 
-            xhr.send(`action=load_more_photos&page=${nextPage}`);
-        });
-    }
+                xhr.onerror = function () {
+                    console.error("Erreur lors de la requête AJAX.");
+                };
+
+                xhr.send(`action=load_more_photos&page=${nextPage}`);
+            });
+        } else {
+            console.error("Bouton 'Charger plus' introuvable !");
+        }
+    });
+
 });
+
+
+// Ouverture des listes
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('.filter-toggle').forEach(toggle => {
+        toggle.addEventListener('click', function () {
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !isExpanded);
+
+            // Fermer les autres filtres
+            document.querySelectorAll('.filter-list').forEach(list => {
+                list.style.display = 'none';
+            });
+
+            // Afficher la liste actuelle
+            const filterList = this.nextElementSibling;
+            filterList.style.display = !isExpanded ? 'block' : 'none';
+        });
+    });
+
+    document.addEventListener('click', function (e) {
+        if (!e.target.closest('.filters-box')) {
+            document.querySelectorAll('.filter-list').forEach(list => {
+                list.style.display = 'none';
+            });
+        }
+    });
+
+
+    document.querySelectorAll('.filter-toggle').forEach(button => {
+        button.addEventListener('click', function () {
+            const expanded = this.getAttribute('aria-expanded') === 'true' || false;
+            this.setAttribute('aria-expanded', !expanded);
+
+            // Fermer les autres filtres
+            document.querySelectorAll('.filter-list').forEach(list => {
+                list.hidden = true;
+            });
+
+            const list = this.nextElementSibling;
+            if (!expanded) {
+                list.hidden = false;
+            }
+        });
+    });
+
+    document.addEventListener('click', function (e) {
+        if (!e.target.closest('.filters-box')) {
+            document.querySelectorAll('.filter-list').forEach(list => {
+                list.hidden = true;
+            });
+        }
+    });
+});
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const filterItems = document.querySelectorAll(".filter-list li");
+
+    filterItems.forEach(item => {
+        item.addEventListener("click", function () {
+            // Supprime la classe 'active' de tous les éléments
+            filterItems.forEach(i => i.classList.remove("active"));
+
+            // Ajoute la classe 'active' à l'élément cliqué
+            this.classList.add("active");
+        });
+    });
+});
+
+
+// Fonction pour mettre à jour les photos avec AJAX
+function updatePhotos(category) {
+    fetch(motaphoto_ajax.ajax_url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: `action=filter_photos&category=${category}`
+    })
+    .then(response => response.text())
+    .then(data => {
+        document.querySelector(".photo-grid").innerHTML = data;
+    })
+    .catch(error => console.error("Erreur AJAX :", error));
+}
 
 
 

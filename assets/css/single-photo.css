@@ -11,7 +11,7 @@
 }
 
 
-.photo-info-section .photo-details {
+.photo-details {
     flex: 1; /* Prend 50% de l'espace */
     display: flex;
     flex-direction: column;
@@ -20,15 +20,18 @@
 
 }
 
-.photo-info-section .photo-details h2 {
+.photo-details h2 {
     font-family: 'Space Mono', sans-serif;
     font-size: 4.58vw; /* Taille responsive */
     font-style: italic;
     margin: 0;
     line-height: 1;
+    max-width: 100%; /* Assure que le texte respecte la largeur disponible */
+    white-space: normal; /* Autorise le retour à la ligne */
+    text-wrap: balance; /* Optimise la mise en page */
 }
 
-.photo-info-section .photo-details p {
+.photo-details p {
     font-family: 'Poppins', sans-serif;
     font-size: 0.97vw; /* Taille responsive */
     margin: 10px 0;
@@ -105,32 +108,52 @@ body.modal-active .photo-call-to-action button {
 
 /* -------------------------------------------Carousel ------------------------------------------*/
 
+/* Conteneur principal du carousel */
+
 .photo-carousel {
     display: flex;
     flex-direction: column;
-    align-items: flex-end; /* Aligne le carrousel à droite */
-    margin-right: 1vw; /* Ajuste l'alignement */
+    align-items: flex-end;
+    width: 81px;
+    margin-right: 20px;
 }
+
+/* Images dans le carousel */
 
 .carousel-images {
     display: flex;
-    width: 81px;
-    height: 71px;
+    flex-direction: column;
+    gap: 10px; /* Espacement entre les vignettes */
+    overflow: hidden; /* Cache les éléments hors de la vue */
+    max-height: calc(71px * 3 + 20px); /* Affiche 3 vignettes avec espace */
 }
 
+/* Vignettes */
+
 .carousel-thumbnail {
-    transition: transform 0.3s ease, border 0.3s ease;
     width: 81px;
     height: 71px;
+    object-fit: cover;
+    transition: transform 0.3s ease, border 0.3s ease;
+    border: 2px solid transparent;
 }
+
+.carousel-thumbnail:hover {
+    transform: scale(1.1);
+}
+
+
+/* Navigation (flèches) */
 
 .carousel-navigation {
     display: flex;
+    justify-content: center;
     gap: 10px;
+    margin-top: 5px;
 }
 
 .carousel-navigation button {
-    font-size: 1.5vw;
+    font-size: 1.5rem;
     background: none;
     border: none;
     cursor: pointer;
@@ -138,9 +161,13 @@ body.modal-active .photo-call-to-action button {
 }
 
 .carousel-navigation button:hover {
-    font-size: 1.7vw;
-    transform: scale(1.2); /* Ajoute un effet de zoom au survol */
+    transform: scale(1.2);
 }
+
+
+
+
+
 
 /*----------------------------------------- Trait 2------------------------------------- */
 .trait2 {
@@ -157,45 +184,69 @@ body.modal-active .photo-call-to-action button {
 
 @media (max-width: 640px) {
     /* Section 1 : Informations et grande image */
+    /* On passe la section en colonne */
     .photo-info-section {
         display: flex;
-        flex-direction: column; 
+        flex-direction: column;
         align-items: center;
-        gap: 20px;
+        text-align: left; /* Assure un alignement naturel du texte */
+        gap: 20px; /* Espacement entre l’image et le texte */
+        max-width: 90%; /* Ajuste la largeur du contenu */
+        margin: 0 auto; /* Centre sur la page */
     }
 
-    .photo-main img {
-        order: 1;
-        width: 265px;
-        height: 397px;
-        object-fit: cover; /* Adapte l'image sans déformer */
+    .photo-info-section .photo-details{
+        flex:1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
     }
+
+    /* Ajustement de la taille du texte */
 
     .photo-details {
-        order: 2;
         text-align: left;
-        margin-bottom: 20px;
+        width: auto;
+        max-width: 80%; /* Ajuster la largeur pour ne pas trop occuper l’écran */
+        padding: 0;
+        margin-left: 20px;
     }
 
     .photo-details h2 {
-        font-size: 66px;
-        font-family: 'space mono', sans-serif;
-        font-weight: bold;
+        font-size: 46px;
         font-style: italic;
-        margin-left: 0;
+        font-family: 'Space Mono', sans-serif;
+        margin: 0;
     }
 
     .photo-details p {
         font-size: 14px;
         font-family: 'space mono', sans-serif;
         font-weight: normal;
-        margin: 5px 0; /* Réduit l'espacement vertical */
-        margin-left: 0;
+        margin: 5px 0;
+    }
+
+    /* Image en haut */
+    .photo-main {
+        order: -1; /* Change l’ordre pour mettre la photo en premier */
+        width: 265px; /* Largeur fixe */
+        height: 397px; /* Hauteur fixe */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto; /* Centre le bloc horizontalement */
+        margin-top: 30px;
+    }
+
+    /* Image principale */
+    .photo-main img {
+        width: 100%; /* L'image prend la largeur du conteneur */
+        height: 100%; /* L'image prend toute la hauteur */
     }
 
         /* Traits */
     .trait1 {
-        margin-top: 40px;
+        display: none;
     }
 
     .trait2 {
@@ -244,4 +295,3 @@ body.modal-active .photo-call-to-action button {
         color: white;
     }
 }
-

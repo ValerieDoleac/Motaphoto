@@ -48,19 +48,37 @@ endwhile; // Fin de la boucle ?>
             CATÉGORIES <span class="arrow">▼</span>
         </button>
         <ul class="filter-list" hidden>
-            <li>Réception</li>
-            <li>Télévision</li>
-            <li>Concert</li>
-            <li>Mariage</li>
+            <?php
+            $categories = get_terms(array(
+                'taxonomy' => 'category', // Nom de la taxonomie pour les catégories
+                'hide_empty' => true, // N'affiche pas les catégories vides
+            ));
+        
+            if (!empty($categories) && !is_wp_error($categories)) {
+                foreach ($categories as $category) {
+                    echo '<li data-category-id="' . esc_attr($category->term_id) . '">' . esc_html($category->name) . '</li>';
+                }
+            } else {
+                echo '<li>Aucune catégorie disponible</li>';
+            }
+            ?>
         </ul>
+
     </div>
     <div class="filters-box">
         <button class="filter-toggle" aria-expanded="false">
             FORMATS <span class="arrow">▼</span>
         </button>
         <ul class="filter-list" hidden>
-            <li>Paysage</li>
-            <li>Portrait</li>
+            <?php
+            $formats = get_terms(array(
+                'taxonomy' => 'format',
+                'hide_empty' => true,
+            ));
+            foreach ($formats as $format) {
+                echo '<li data-slug="' . esc_attr($format->slug) . '">' . esc_html($format->name) . '</li>';
+            }
+            ?>
         </ul>
     </div>
     <div class="filters-box">
@@ -68,12 +86,12 @@ endwhile; // Fin de la boucle ?>
             TRIER PAR <span class="arrow">▼</span>
         </button>
         <ul class="filter-list" hidden>
-            <li>Date</li>
-            <li>Nom</li>
-            <li>Popularité</li>
+            <li data-sort="date_desc">Plus récentes</li>
+            <li data-sort="date_asc">Plus anciennes</li>
         </ul>
     </div>
 </section>
+
 
 
 <section class="photo-gallery">

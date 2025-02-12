@@ -118,14 +118,74 @@ add_action('wp_enqueue_scripts', 'motaphoto_enqueue_single_photo_styles');
 
 // Fonction AJAX pour charger plus de photos
 function motaphoto_load_more_photos() {
+    // Récupère le numéro de page envoyé par AJAX
     $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
     $photos_per_page = 8;
+    error_log('Page reçue via AJAX : ' . $page);
 
+    // Arguments pour WP_Query
     $args = array(
         'post_type'      => 'photo',
         'posts_per_page' => $photos_per_page,
         'paged'          => $page,
     );
+
+    // Requête WP_Query
+    $query = new WP_Query($args);
+    error_log('Nombre de posts trouvés : ' . $query->found_posts);
+
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            // Inclut le template partiel pour chaque photo
+            include locate_template('template-parts/photo_block.php');
+        }
+        wp_reset_postdata();
+    } else {
+        echo '<p>Aucune photo supplémentaire disponible.</p>';
+    }
+
+    wp_die(); // Termine proprement l'exécution
+}
+add_action('wp_ajax_load_more_photos', 'motaphoto_load_more_photos');
+add_action('wp_ajax_nopriv_load_more_photos', 'motaphoto_load_more_photos');
+
+// Fonction AJAX pour filtrer les photos
+function motaphoto_filter_photos() {
+    $args = array(
+        'post_type' => 'photo',
+        'posts_per_page' => 8,
+    );
+
+    if (!empty($_POST['filter_type']) && !empty($_POST['value'])) {
+        if ($_POST['filter_type'] === 'CATÉGORIES') {
+            $args['tax_query'] = array(
+                array(
+                    'taxonomy' => 'categorie',
+                    'field' => 'slug',
+                    'terms' => sanitize_text_field($_POST['value']),
+                ),
+            );
+        } elseif ($_POST['filter_type'] === 'FORMATS') {
+            $args['tax_query'] = array(
+                array(
+                    'taxonomy' => 'format',
+                    'field' => 'slug',
+                    'terms' => sanitize_text_field($_POST['value']),
+                ),
+            );
+        }
+    }
+
+    if ($_POST['filter_type'] === 'TRIER PAR') {
+        if ($_POST['value'] === 'date_desc') {
+            $args['orderby'] = 'date';
+            $args['order'] = 'DESC';
+        } elseif ($_POST['value'] === 'date_asc') {
+            $args['orderby'] = 'date';
+            $args['order'] = 'ASC';
+        }
+    }
 
     $query = new WP_Query($args);
 
@@ -134,16 +194,14 @@ function motaphoto_load_more_photos() {
             $query->the_post();
             include locate_template('template-parts/photo_block.php');
         }
-        wp_reset_postdata();
     } else {
-        echo '<p>Aucune photo supplémentaire disponible.</p>';
+        echo '<p>Aucune photo trouvée.</p>';
     }
 
-    wp_die(); // Fin de la requête AJAX
+    wp_die();
 }
-add_action('wp_ajax_load_more_photos', 'motaphoto_load_more_photos');
-add_action('wp_ajax_nopriv_load_more_photos', 'motaphoto_load_more_photos');
-
+add_action('wp_ajax_filter_photos', 'motaphoto_filter_photos');
+add_action('wp_ajax_nopriv_filter_photos', 'motaphoto_filter_photos');
 
 
 

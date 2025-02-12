@@ -78,23 +78,28 @@ if (have_posts()) :
                     $gallery_images = get_attached_media('image', get_the_ID());
                     if ($gallery_images) {
                         foreach ($gallery_images as $image) {
-                        $large_url = wp_get_attachment_image_url($image->ID, 'photo-large');
-
-                        echo wp_get_attachment_image($image->ID, 'photo-thumbnail', false, array(
-                            'class' => 'carousel-thumbnail',
-                            'data-large' => $large_url
-                        ));
+                            $large_url = wp_get_attachment_image_url($image->ID, 'photo-large');
+                        
+                            echo '<div class="carousel-item">';
+                            echo wp_get_attachment_image($image->ID, 'photo-thumbnail', false, array(
+                                'class' => 'carousel-thumbnail',
+                                'data-large' => esc_url($large_url)
+                            ));
+                            echo '</div>';
                         }
                     } else {
                         echo '<p>Aucune miniature disponible.</p>';
                     }
                     ?>
                 </div>
+                
+                <!-- Navigation -->
                 <div class="carousel-navigation">
-                    <button class="prev-button">←</button>
-                    <button class="next-button">→</button>
+                    <button class="prev-button" aria-label="Image précédente">←</button>
+                    <button class="next-button" aria-label="Image suivante">→</button>
                 </div>
             </div>
+
         </section>
 
         <div class="trait2"></div>

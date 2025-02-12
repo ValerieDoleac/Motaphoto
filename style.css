@@ -106,131 +106,125 @@ body {
 
 .filters-section {
     display: flex;
-    gap: 20px;
-    justify-content: center;
-    margin: 40px auto;
-    z-index: 1001;
+    justify-content: center; /* Centre les filtres horizontalement */
+    gap: 20px; /* Espace entre les filtres */
+    margin: 20px 0; /* Marge en haut et en bas */
 }
 
 .filters-box {
-    background-color: white;
-    border-radius: 8px;
-    border: 1px solid  #b8bbc2;
-    width: 260px;
-    height: 43px;
-    text-align: left;
     position: relative;
+    display: inline-block;
 }
 
+/* Pour le bouton lorsque la liste est ouverte */
+.filters-box button:focus {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 
-.filters-box ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
 }
 
-.filters-box ul li {
-    padding: 10px 20px;
-    font-size: 14px;
+/* Pour la liste déroulante */
+.filters-box .filter-list {
+    margin-top: -4px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top: #215aff solid 1px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px; 
+}
+
+/* Style de base pour la liste des catégories */
+.filters-box .filter-list li {
+    padding: 10px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.filters-box ul li:hover,
-.filters-box ul li:focus {
-    background-color: #ff0000; 
-    color: #ffffff; 
-}
-
-.filters-box ul li:not(:last-child) {
-    margin-bottom: 10px;
-}
-
-.filters-box:hover{
-    border: 1px solid #215aff;
-}
-
-.filter-toggle {
-    width: 100%;
-    background: none;
-    border: none;
-    font-family: 'Space Mono', sans-serif;
-    font-size: 14px;
     font-weight: bold;
-    text-align: left;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    margin-bottom: 20px;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
-.arrow {
-    font-size: 16px;
-    transform: rotate(0deg);
-    transition: transform 0.3s ease;
-}
+/* Appliquer une couleur différente pour chaque catégorie */
+.filters-box .filter-list li[data-category="Réception"] { background: #FFDADA; color: black; } /* Rose clair */
+.filters-box .filter-list li[data-category="Mariage"] { background: #FFB6C1; color: black; } /* Rose */
+.filters-box .filter-list li[data-category="Concert"] { background: #FF7F7F !important; color: white; } /* Rouge clair */
+.filters-box .filter-list li[data-category="Télévision"] { background: #D40000; color: white; } /* Rouge foncé */
 
-.filter-toggle[aria-expanded="true"] .arrow {
-    transform: rotate(180deg);
-}
-
+/* Retirer le point devant les éléments de liste */
 .filter-list {
-    margin-top: 10px;
     list-style: none;
     padding: 0;
-    background: white;
 }
 
 .filter-list li {
     padding: 10px;
     cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.filter-toggle {
+    display: flex;
+    justify-content: space-between; /* Espace entre texte et flèche */
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 12px;
+    font-family: 'poppins', sans-serif;
+    font-weight: 300;
+    text-transform: uppercase; /* Texte en majuscules */
+    background-color: white;
+    color: black;
+    border: #b8bbc2 solid 1px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 260px;
+    height: 43px;
+    text-align: left;
+}
+
+.filter-toggle:hover {
+    border: #215aff solid 1px;
+    color: black;
+}
+
+.arrow {
+    margin-left: auto;
+    font-size: 12px;
+}
+
+.filter-list {
+    position: absolute;
+    top: 100%; /* Place la liste juste en dessous du bouton */
+    left: 0;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: none; /* Par défaut, la liste est masquée */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.filter-list li {
+    padding: 10px;
+    font-size: 14px;
+    color: black;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: left;
+    font-family: 'poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
 }
 
 .filter-list li:hover {
-    background: #eee;
+    background-color: #f4f4f4; /* Couleur de fond au survol */
 }
 
-.photo-gallery-controls {
-    text-align: center;
-    margin-top: 20px;
+/* Affiche la liste lorsqu'elle est ouverte */
+.filter-box[aria-expanded="true"] .filter-list {
+    display: block;
 }
 
-.load-more-button,
-.load-less-button {
-    padding: 10px 20px;
-    background-color: #d8d8d8;
-    border: none;
-    font-family: 'Space Mono', monospace;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin: 5px;
-}
-
-.load-more-button:hover,
-.load-less-button:hover {
-    background-color: #bbb;
-}
-
-
-.load-more-button {
-    display: inline-block;
-    width: 272px;
-    height: 50px;
-    font-family: 'Space Mono', sans-serif;
-    font-size: 12px;
-    background-color: #d8d8d8;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-bottom: 30px;
-}
-
-.load-more-button:hover {
-    background-color: black;
-    color: white
-}
 
 
 
@@ -564,12 +558,41 @@ body {
     /* page accueil mobile */
 
     .hero-section {
-        height: 60vh;
-        max-height: none;
+        width: 100%;
+        height: 253px; /* Hauteur spécifique */
+        max-height: 253px; 
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
     }
 
     .hero-section h1 {
         font-size: 6vw;
+    }
+
+    .filters-section {
+        display: flex;
+        flex-direction: column; /* Filtres en colonne */
+        align-items: center; /* Centre les filtres */
+        gap: 15px;
+        width: 100%;
+        margin-top: 25px;
+    }
+
+    .filters-box {
+        width: 90%; /* Largeur adaptable */
+        max-width: 260px; /* Largeur maximale des boutons */
+    }
+
+    .filter-toggle {
+        width: 100%;
+        text-align: center;
+        height: 43px;
+        font-size: 12px;
+        font-weight: 300;
     }
 
     /* Footer - Mobile */
