@@ -1,7 +1,7 @@
 <?php
-// Charge les styles et scripts
+// Fonction pour charger les styles et scripts du thème
 function motaphoto_enqueue_assets() {
-    // Charge les polices
+    // Charger les polices
     wp_enqueue_style(
         'motaphoto-fonts',
         get_template_directory_uri() . '/assets/css/fonts.css',
@@ -9,15 +9,15 @@ function motaphoto_enqueue_assets() {
         null
     );
 
-    // Charge le style principal
+    // Charger le style principal
     wp_enqueue_style(
         'motaphoto-style',
         get_stylesheet_uri(),
         array(),
-        filemtime(get_stylesheet_directory() . '/style.css') // Ajout de versioning
+        filemtime(get_stylesheet_directory() . '/style.css')
     );
 
-    // Charge le script JavaScript principal
+    // Charger le script principal JavaScript
     wp_enqueue_script(
         'motaphoto-script',
         get_template_directory_uri() . '/assets/js/script.js',
@@ -33,6 +33,7 @@ function motaphoto_enqueue_assets() {
 }
 add_action('wp_enqueue_scripts', 'motaphoto_enqueue_assets');
 
+// Charger les styles du bloc photo
 function enqueue_photo_block_styles() {
     wp_enqueue_style(
         'photo-block-styles',
@@ -43,7 +44,7 @@ function enqueue_photo_block_styles() {
 }
 add_action('wp_enqueue_scripts', 'enqueue_photo_block_styles');
 
-
+// Configuration du thème (menus)
 function motaphoto_theme_setup() {
     add_theme_support('menus');
     register_nav_menus(array(
@@ -53,6 +54,24 @@ function motaphoto_theme_setup() {
 }
 add_action('after_setup_theme', 'motaphoto_theme_setup');
 
+// Charger le script et le style pour la lightbox
+function enqueue_lightbox_script() {
+    wp_enqueue_script(
+        'lightbox-script',
+        get_template_directory_uri() . '/assets/js/lightbox.js',
+        array('jquery'),
+        filemtime(get_template_directory() . '/assets/js/lightbox.js'),
+        true
+    );
+
+    wp_enqueue_style(
+        'lightbox-style',
+        get_template_directory_uri() . '/assets/css/lightbox.css',
+        array(),
+        filemtime(get_template_directory() . '/assets/css/lightbox.css')
+    );
+}
+add_action('wp_enqueue_scripts', 'enqueue_lightbox_script');
 
 // Ajouter le type de contenu personnalisé "photo"
 function motaphoto_register_photo_post_type() {
@@ -118,37 +137,34 @@ add_action('wp_enqueue_scripts', 'motaphoto_enqueue_single_photo_styles');
 
 // Fonction AJAX pour charger plus de photos
 function motaphoto_load_more_photos() {
-    // Récupère le numéro de page envoyé par AJAX
     $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
-    $photos_per_page = 8;
-    error_log('Page reçue via AJAX : ' . $page);
+    $per_page = isset($_POST['per_page']) ? intval($_POST['per_page']) : 16; // Charge 16 photos par requête
 
-    // Arguments pour WP_Query
     $args = array(
         'post_type'      => 'photo',
-        'posts_per_page' => $photos_per_page,
+        'posts_per_page' => $per_page,
         'paged'          => $page,
     );
 
-    // Requête WP_Query
     $query = new WP_Query($args);
-    error_log('Nombre de posts trouvés : ' . $query->found_posts);
 
-    if ($query->have_posts()) {
-        while ($query->have_posts()) {
-            $query->the_post();
-            // Inclut le template partiel pour chaque photo
+    if ($query->have_posts()) :
+        while ($query->have_posts()) : $query->the_post();
+            $photo_id = get_the_ID();
             include locate_template('template-parts/photo_block.php');
-        }
+        endwhile;
         wp_reset_postdata();
-    } else {
-        echo '<p>Aucune photo supplémentaire disponible.</p>';
-    }
+    else :
+        echo ''; // Si plus de photos, renvoie une chaîne vide
+    endif;
 
-    wp_die(); // Termine proprement l'exécution
+    wp_die(); // Fin de l'exécution
 }
 add_action('wp_ajax_load_more_photos', 'motaphoto_load_more_photos');
-add_action('wp_ajax_nopriv_load_more_photos', 'motaphoto_load_more_photos');
+add_action('wp_ajax_nopriv_load_more_photos', 'motaphoto_load_more_photos'); // Pour les visiteurs non connectés
+
+
+
 
 // Fonction AJAX pour filtrer les photos
 function motaphoto_filter_photos() {
@@ -161,7 +177,7 @@ function motaphoto_filter_photos() {
         if ($_POST['filter_type'] === 'CATÉGORIES') {
             $args['tax_query'] = array(
                 array(
-                    'taxonomy' => 'categorie',
+                    'taxonomy' => 'category',
                     'field' => 'slug',
                     'terms' => sanitize_text_field($_POST['value']),
                 ),
@@ -202,6 +218,9 @@ function motaphoto_filter_photos() {
 }
 add_action('wp_ajax_filter_photos', 'motaphoto_filter_photos');
 add_action('wp_ajax_nopriv_filter_photos', 'motaphoto_filter_photos');
+
+
+
 
 
 

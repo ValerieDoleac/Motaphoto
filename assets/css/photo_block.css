@@ -45,6 +45,7 @@
     height: 100%;
     object-fit: cover; /* Recadre l'image sans la déformer */
     transition: transform 0.3s ease;
+    aspect-ratio: 564 / 495; /* Maintient le ratio 564x495 */
 }
 
 .photo-image img:hover {
@@ -149,10 +150,6 @@
     text-decoration: none;
 }
 
-.photo-icons .icon.eye-icon:hover {
-    background: rgba(255, 255, 255, 0.5);
-}
-
 /* Icône agrandir l'écran en haut à gauche */
 .photo-icons .icon.fullscreen-icon {
     position: absolute;
@@ -164,10 +161,6 @@
     border-radius: 50%;
     transition: background 0.3s ease;
     text-decoration: none;
-}
-
-.photo-icons .icon.fullscreen-icon:hover {
-    background: rgba(255, 255, 255, 0.5);
 }
 
 

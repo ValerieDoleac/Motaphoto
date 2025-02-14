@@ -49,6 +49,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+
+    /* carousel */
+
     document.addEventListener("DOMContentLoaded", () => {
     const carouselImages = document.querySelector(".carousel-images");
     const thumbnails = carouselImages ? carouselImages.querySelectorAll(".carousel-thumbnail") : [];
@@ -57,9 +60,9 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentIndex = 0;
 
     if (carouselImages && thumbnails.length > 0 && prevButton && nextButton) {
-        /**
-         * Met à jour les vignettes visibles et applique l'effet actif
-         */
+
+        /* * Met à jour les vignettes visibles et applique l'effet actif*/
+
         function updateCarousel() {
             thumbnails.forEach((thumb, index) => {
                 thumb.style.display = "none"; // Cache toutes les vignettes
@@ -71,17 +74,17 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
-        /**
-         * Gestion du bouton précédent
-         */
+
+        /*Gestion du bouton précédent*/
+
         prevButton.addEventListener("click", () => {
             currentIndex = currentIndex > 0 ? currentIndex - 1 : thumbnails.length - 1;
             updateCarousel();
         });
 
-        /**
-         * Gestion du bouton suivant
-         */
+
+        /*Gestion du bouton suivant*/
+
         nextButton.addEventListener("click", () => {
             currentIndex = (currentIndex + 1) % thumbnails.length;
             updateCarousel();
@@ -92,49 +95,27 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-    // Bouton charger plus
-
-        document.addEventListener("DOMContentLoaded", () => {
-        const loadMoreButton = document.getElementById("load-more");
-
-        if (loadMoreButton) {
-            console.log("Bouton trouvé dans le DOM."); // Test pour vérifier si le bouton est détecté
-            loadMoreButton.addEventListener("click", function () {
-                console.log("Bouton 'Charger plus' cliqué !");
-                const currentPage = parseInt(this.getAttribute("data-page"));
-                const nextPage = currentPage + 1;
-
-                const xhr = new XMLHttpRequest();
-                xhr.open("POST", motaphoto_ajax.ajax_url, true);
-                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-                xhr.onload = function () {
-                    if (xhr.status === 200 && xhr.responseText) {
-                        console.log("Réponse AJAX : ", xhr.responseText);
-
-                        const newPhotos = document.createElement("div");
-                        newPhotos.innerHTML = xhr.responseText;
-
-                        document.querySelector(".photo-grid").appendChild(newPhotos);
-                        loadMoreButton.setAttribute("data-page", nextPage);
-                    } else {
-                        console.error("Erreur AJAX, statut : ", xhr.status);
-                    }
-                };
-
-                xhr.onerror = function () {
-                    console.error("Erreur lors de la requête AJAX.");
-                };
-
-                xhr.send(`action=load_more_photos&page=${nextPage}`);
-            });
-        } else {
-            console.error("Bouton 'Charger plus' introuvable !");
-        }
-    });
-
 });
 
+
+    // Bouton charger plus
+function loadImage(num){
+    let photoGrid = document.querySelector(".photo-grid");
+    let perPage = num;
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", motaphoto_ajax.ajax_url, true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onload = function () {
+
+        if (xhr.status === 200) {
+            let response = xhr.responseText;
+            if (response.trim() !== "") {
+                photoGrid.innerHTML = response; // Ajoute les nouvelles photos
+            }
+        }
+    };
+    xhr.send("action=load_more_photos&page=" + "&per_page=" + perPage);
+}
 
 // Ouverture des listes
 

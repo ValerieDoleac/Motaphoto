@@ -115,7 +115,7 @@ endwhile; // Fin de la boucle ?>
         ?>
     </div>
     <div class="photo-gallery-controls">
-        <button id="load-more" data-page="1" class="load-more-button">Charger plus</button>
+        <button id="load-more" onClick="loadImage(16)" class="load-more-button">Charger plus</button>
     </div>
 </section>
 
