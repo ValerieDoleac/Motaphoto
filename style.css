@@ -141,12 +141,6 @@ body {
     transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* Appliquer une couleur différente pour chaque catégorie */
-.filters-box .filter-list li[data-category="Réception"] { background: #FFDADA; color: black; } /* Rose clair */
-.filters-box .filter-list li[data-category="Mariage"] { background: #FFB6C1; color: black; } /* Rose */
-.filters-box .filter-list li[data-category="Concert"] { background: #FF7F7F !important; color: white; } /* Rouge clair */
-.filters-box .filter-list li[data-category="Télévision"] { background: #D40000; color: white; } /* Rouge foncé */
-
 /* Retirer le point devant les éléments de liste */
 .filter-list {
     list-style: none;
@@ -156,8 +150,6 @@ body {
 .filter-list li {
     padding: 10px;
     cursor: pointer;
-    border-radius: 5px;
-    transition: background 0.3s;
 }
 
 .filter-toggle {
@@ -217,7 +209,26 @@ body {
 }
 
 .filter-list li:hover {
-    background-color: #f4f4f4; /* Couleur de fond au survol */
+    animation: filterColorTransition 1s forwards;
+}
+
+@keyframes filterColorTransition {
+    0% {
+        background-color: white;
+        color: black;
+    }
+    30% {
+        background-color: #FFD6D6;
+        color: black;
+    }
+    60% {
+        background-color: #FE5858;
+        color: black;
+    }
+    100% {
+        background-color: #E00000;
+        color: white;
+    }
 }
 
 /* Affiche la liste lorsqu'elle est ouverte */
@@ -301,6 +312,22 @@ body {
     overflow: hidden;
 }
 
+.modal-header {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%); /* Centre l'image horizontalement */
+    width: 140%;
+    height: auto;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.modal-header-image {
+    width: 100%;
+    height: 100%;
+}
+
 /* Afficher la modale et l'overlay */
 .modal.active {
     display: flex;
@@ -313,7 +340,6 @@ body {
 }
 
 .modal::before {
-    content: "CONTACTCONTACTCONTACT \a CONTACTCONTACTCONTACT";
     position: absolute;
     top: 15px;
     left: 50%;
@@ -423,17 +449,19 @@ body {
 
 /* Lightbox Content */
 .lightbox-content {
-    position: relative;
-    width: 564px;
-    height: 495px;
     display: flex;
-    flex-direction: column;
     align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    max-width: 85%;
+    max-height: 90%;
+    position: relative;
 }
 
-.lightbox-content img {
-    width: 564px;
-    height: 495px;
+#lightbox-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
 }
 
 /* Lightbox Buttons */
@@ -449,25 +477,40 @@ body {
     border: none;
 }
 
-.lightbox-prev { left: 250px; }
-.lightbox-next { right: 250px; }
+.lightbox-prev { left: 100px; }
+.lightbox-next { right: 100px; }
 
 
-/* Lightbox Info */
-
-.lightbox-title{
-    font-family: 'poppins', sans-serif;
-    font-size: 14px;
-    font-weight: light;
+/* Lightbox Info sous l'image */
+.lightbox-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 5px 20px;
     color: white;
+    position: absolute;
+    bottom: 5%;
+    left: 0;
+    box-sizing: border-box;
 }
 
-.lightbox-category{
+.lightbox-title {
+    font-family: 'poppins', sans-serif;
+    font-weight: regular;
+    font-size: 14px;
+    text-align: left;
+    margin-left: 50px;
+}
+
+.lightbox-category {
     font-family: 'space mono', sans-serif;
     font-size: 14px;
-    font-weight: 400;
-    color: white;
+    font-style: regular;
+    text-align: right;
+    margin-right: 50px;
 }
+
 
 /* Close Button */
 .lightbox-close {
@@ -605,19 +648,10 @@ body {
         }
     
     .modal::before {
-        content: "CONTACTCONTACTCONTACT \a CONTACTCONTACTCONTACT";
         position: absolute;
-        top: 10px;
+        top: 0;
         left: 50%;
         transform: translateX(-50%);
-        font-family: 'Poppins', sans-serif;
-        font-size: 36px; 
-        font-weight: 900;
-        font-style: italic;
-        color: black;
-        white-space: pre-line; /* Conserve les sauts de ligne */
-        line-height: 0.9; /* Réduit l'espacement entre les lignes */
-        text-align: center;
         z-index: -1; /* Derrière la modale */
         width: calc(100% + 100px); /* Ajuste la largeur pour mobile */
     }

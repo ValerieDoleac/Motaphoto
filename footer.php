@@ -21,10 +21,10 @@
     <button class="lightbox-next">Suivante →</button>
     <div class="lightbox-content">
         <img id="lightbox-image" src="" alt="Image en plein écran">
-        <div class="lightbox-info">
-            <span class="lightbox-title"></span>
-            <span class="lightbox-category"></span>
-        </div>
+    </div>
+    <div class="lightbox-info">
+        <span class="lightbox-title"></span>
+        <span class="lightbox-category"></span>
     </div>
 </div>
 

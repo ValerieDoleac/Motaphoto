@@ -74,8 +74,9 @@ if (have_posts()) :
 
             <div class="photo-carousel">
                 <div class="carousel-images">
+                    <?php var_dump($gallery_images); ?>
                     <?php
-                    $gallery_images = get_attached_media('image', get_the_ID());
+                    $gallery_images = get_post_meta(get_the_ID(), 'photo_gallery', true);
                     if ($gallery_images) {
                         foreach ($gallery_images as $image) {
                             $large_url = wp_get_attachment_image_url($image->ID, 'photo-large');
@@ -109,9 +110,10 @@ if (have_posts()) :
             <h3>VOUS AIMEREZ AUSSI</h3>
             <div class="photo-grid">
             <?php
+            //recupere la catégorie actuelle
             $current_categories = get_the_terms(get_the_ID(), 'category');
             $current_category_ids = $current_categories ? wp_list_pluck($current_categories, 'term_id') : array();
-
+            // requete pour récupérer 2 photos de la mme categorie
             $suggested_photos = new WP_Query(array(
                 'post_type' => 'photo',
                 'posts_per_page' => 2,
@@ -124,7 +126,7 @@ if (have_posts()) :
                 ),
             ),
         ));
-        
+            // affichage des photos suggérées
             if ($suggested_photos->have_posts()) :
             while ($suggested_photos->have_posts()) : $suggested_photos->the_post();
                 $photo_id = get_the_ID();

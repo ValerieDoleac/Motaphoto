@@ -43,53 +43,39 @@ while (have_posts()) :
 endwhile; // Fin de la boucle ?>
 
 <section class="filters-section">
+
     <div class="filters-box">
-        <button class="filter-toggle" aria-expanded="false">
+        <button  id="filter-categories" class="filter-toggle" aria-expanded="false">
             CATÉGORIES <span class="arrow">▼</span>
         </button>
         <ul class="filter-list" hidden>
-            <?php
-            $categories = get_terms(array(
-                'taxonomy' => 'category', // Nom de la taxonomie pour les catégories
-                'hide_empty' => true, // N'affiche pas les catégories vides
-            ));
-        
-            if (!empty($categories) && !is_wp_error($categories)) {
-                foreach ($categories as $category) {
-                    echo '<li data-category-id="' . esc_attr($category->term_id) . '">' . esc_html($category->name) . '</li>';
-                }
-            } else {
-                echo '<li>Aucune catégorie disponible</li>';
-            }
-            ?>
+            <li class="filter-item" data-filter-type="category" data-value="concert">Concert</li>
+            <li class="filter-item" data-filter-type="category" data-value="mariage">Mariage</li>
+            <li class="filter-item" data-filter-type="category" data-value="reception">Réception</li>
+            <li class="filter-item" data-filter-type="category" data-value="television">Télévision</li>
         </ul>
-
     </div>
+
     <div class="filters-box">
-        <button class="filter-toggle" aria-expanded="false">
+        <button id="filter-formats" class="filter-toggle" aria-expanded="false">
             FORMATS <span class="arrow">▼</span>
         </button>
         <ul class="filter-list" hidden>
-            <?php
-            $formats = get_terms(array(
-                'taxonomy' => 'format',
-                'hide_empty' => true,
-            ));
-            foreach ($formats as $format) {
-                echo '<li data-slug="' . esc_attr($format->slug) . '">' . esc_html($format->name) . '</li>';
-            }
-            ?>
+            <li class="filter-item" data-filter-type="format" data-value="portrait">Portrait</li>
+            <li class="filter-item" data-filter-type="format" data-value="paysage">Paysage</li>
         </ul>
     </div>
+
     <div class="filters-box">
-        <button class="filter-toggle" aria-expanded="false">
+        <button id="filter-sort" class="filter-toggle" aria-expanded="false">
             TRIER PAR <span class="arrow">▼</span>
         </button>
         <ul class="filter-list" hidden>
-            <li data-sort="date_desc">Plus récentes</li>
-            <li data-sort="date_asc">Plus anciennes</li>
+            <li class="filter-item" data-filter-type="TRIER PAR" data-value="Plus récentes">Plus récentes</li>
+            <li class="filter-item" data-filter-type="TRIER PAR" data-value="plus anciennes">Plus anciennes</li>
         </ul>
     </div>
+
 </section>
 
 

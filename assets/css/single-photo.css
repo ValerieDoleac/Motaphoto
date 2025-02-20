@@ -57,23 +57,23 @@
 .photo-main img {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Affiche l'image sans recadrer */
-    transform: translateY(0); /* Ajuste légèrement la position verticale */
+    object-fit: contain; /*  sans recadrage */
+    transform: translateY(0);
 }
 
 /* Section 2 : Interactions */
 .photo-interaction-section {
     display: flex;
-    justify-content: space-between; /* Sépare les éléments */
+    justify-content: space-between;
     align-items: center;
     height: 118px;
     max-width: 1150px;
-    margin: 2vh auto 0; /* Centré horizontalement avec espacement vertical */
-    padding: 0 2vw; /* Espacement interne horizontal */
+    margin: 2vh auto 0;
+    padding: 0 2vw;
 }
 
 .photo-call-to-action {
-    display: flex; /* phrase et bouton côte à côte */
+    display: flex; 
     align-items: center;
     gap: 55px; 
 }
@@ -140,6 +140,12 @@ body.modal-active .photo-call-to-action button {
 
 .carousel-thumbnail:hover {
     transform: scale(1.1);
+}
+
+.carousel-thumbnail.active {
+    border: 2px solid black; /* Bordure noire sur la miniature active */
+    transform: scale(1.1);   /* Zoom sur la miniature active */
+    transition: transform 0.3s ease, border 0.3s ease;
 }
 
 
