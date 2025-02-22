@@ -33,12 +33,7 @@ while (have_posts()) :
     the_post();
 
     // Contenu principal de la page
-    get_template_part('template-parts/content/content-page');
-
-    // Gestion commentaires
-    if (comments_open() || get_comments_number()) {
-        comments_template();
-    }
+    get_template_part('template-parts/content/photo_block.php');
 
 endwhile; // Fin de la boucle ?>
 

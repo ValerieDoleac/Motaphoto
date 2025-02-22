@@ -135,7 +135,7 @@ add_action('wp_ajax_nopriv_load_more_photos', 'motaphoto_load_more_photos'); // 
 //Fonction AJAX pour filtrer les photos
 
 function motaphoto_filter_photos() {
-    // Vérifie si des filtres sont envoyés via AJAX
+    // je vérifie si des filtres sont envoyés via AJAX
     $args = array(
         'post_type'      => 'photo',
 
@@ -180,25 +180,18 @@ function motaphoto_filter_photos() {
     if ($query->have_posts()) :
         while ($query->have_posts()) : $query->the_post();
             $photo_id = get_the_ID();
-            include locate_template('template-parts/photo_block.php'); // Utilisation du template existant
+            include locate_template('template-parts/photo_block.php');
         endwhile;
         wp_reset_postdata();
     else :
         echo '<p>Aucune photo trouvée.</p>';
     endif;
 
-    wp_die(); // Termine proprement l'exécution
+    wp_die(); 
 }
 add_action('wp_ajax_filter_photos', 'motaphoto_filter_photos'); // Pour les utilisateurs connectés
 add_action('wp_ajax_nopriv_filter_photos', 'motaphoto_filter_photos'); // Pour les visiteurs non connectés
 
-
-
-
-add_action('admin_init', function() {
-    global $wp_post_types;
-    error_log(print_r(array_keys($wp_post_types), true));
-});
 
 
 

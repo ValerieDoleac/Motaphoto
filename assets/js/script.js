@@ -1,3 +1,7 @@
+function test() {
+    console.log(filterPhotos("category", "mariage"));
+}
+
 document.addEventListener("DOMContentLoaded", () => {
 
         // Gestion du menu mobile
@@ -52,57 +56,86 @@ document.addEventListener("DOMContentLoaded", () => {
 
         //carousel
 
-        document.addEventListener("DOMContentLoaded", () => {
-        const thumbnails = document.querySelectorAll(".carousel-thumbnail");
-        const prevButton = document.querySelector(".prev-button");
-        const nextButton = document.querySelector(".next-button");
-        
-        let currentIndex = 0;
+    
 
-        // Fonction pour afficher uniquement la miniature active
-        function showThumbnail(index) {
-            thumbnails.forEach(thumb => {
-                thumb.classList.remove("active");
-                thumb.style.border = "2px solid transparent"; // Réinitialiser
-                thumb.style.transform = "scale(1)"; // Réinitialiser
-            });
+});
+document.addEventListener("DOMContentLoaded", () => {
+    const thumbnailsContainer = document.querySelector(".carousel-images");
+    const prevButton = document.querySelector(".prev-button");
+    const nextButton = document.querySelector(".next-button");
+    const categorie = document.getElementById('categorie');
 
-            // Ajouter le style actif
-            if (thumbnails[index]) {
-                thumbnails[index].classList.add("active");
-                thumbnails[index].style.border = "2px solid black";
-                thumbnails[index].style.transform = "scale(1.1)";
-            }
+    let currentIndex = 0;
+    let photosArray = [];
+
+    // 📌 Fonction pour charger les photos via AJAX et les insérer dans le carousel
+    function loadPhotosForCarousel() {
+        filterPhotos("category", categorie.textContent)
+            .then(response => {
+                // Convertir la réponse en un élément HTML temporaire
+                let tempDiv = document.createElement("div");
+                tempDiv.innerHTML = response;
+
+                // Récupérer les `.photo-item` de la réponse AJAX
+                photosArray = Array.from(tempDiv.querySelectorAll(".photo-item"));
+                
+                if (photosArray.length > 0) {
+                    thumbnailsContainer.innerHTML = ""; // Efface le contenu actuel
+                    photosArray.forEach(photo => {
+                        thumbnailsContainer.appendChild(photo); // Ajoute chaque photo
+                    });
+
+                    showThumbnail(0); // Affiche la première image
+                    attachCarouselEvents(); // Active les boutons
+                }
+            })
+            .catch(error => console.error("Erreur chargement carrousel :", error));
+    }
+
+    // 📌 Fonction pour afficher la miniature active
+    function showThumbnail(index) {
+        photosArray.forEach(thumb => {
+            thumb.classList.remove("photo-item");
+            thumb.classList.add("carousel-thumbnail");
+
+        });
+        photosArray.forEach(thumb => {
+            thumb.classList.remove("active");
+        });
+
+        if (photosArray[index]) {
+            photosArray[index].classList.add("active");
         }
+    }
 
-        // Initialiser avec la première miniature
-        if (thumbnails.length > 0) {
-            showThumbnail(currentIndex);
-        }
+    // 📌 Fonction pour attacher les événements du carousel
+    function attachCarouselEvents() {
+        if (photosArray.length === 0) return; // Vérification pour éviter les erreurs
 
-        // Événement bouton précédent
         prevButton.addEventListener("click", () => {
-            currentIndex = (currentIndex - 1 + thumbnails.length) % thumbnails.length;
+            currentIndex = (currentIndex - 1 + photosArray.length) % photosArray.length;
             showThumbnail(currentIndex);
         });
 
-        // Événement bouton suivant
         nextButton.addEventListener("click", () => {
-            currentIndex = (currentIndex + 1) % thumbnails.length;
+            currentIndex = (currentIndex + 1) % photosArray.length;
             showThumbnail(currentIndex);
         });
 
-        // Navigation au clavier
         document.addEventListener("keydown", (e) => {
             if (e.key === "ArrowLeft") {
-                currentIndex = (currentIndex - 1 + thumbnails.length) % thumbnails.length;
+                currentIndex = (currentIndex - 1 + photosArray.length) % photosArray.length;
             } else if (e.key === "ArrowRight") {
-                currentIndex = (currentIndex + 1) % thumbnails.length;
+                currentIndex = (currentIndex + 1) % photosArray.length;
             }
             showThumbnail(currentIndex);
         });
-    });
+    }
+
+    // 📌 Charger les photos dès le chargement du DOM
+    loadPhotosForCarousel();
 });
+
 
 
 // Fonction pour charger plus de photos avec AJAX (charger plus)
@@ -217,7 +250,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         document.querySelectorAll('.sort-item').forEach(item => {
             item.addEventListener('click', function () {
-                const sortValue = this.dataset.sort; // date_desc, date_asc
+                const sortValue = this.dataset.sort;
                 updatePhotos('sort', sortValue);
             });
         });
@@ -242,25 +275,27 @@ document.addEventListener("DOMContentLoaded", () => {
             formatFilter.textContent = "FORMATS";
             categorieFilter.textContent = "CATEGORIES";
         }
-        fetch(motaphoto_ajax.ajax_url, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: `action=filter_photos&filter_type=${filterType}&value=${filterValue}`
-        })
-        .then(response => response.text())
-        .then(data => {
-            photoGrid.innerHTML = data; // Met à jour la galerie avec les nouvelles images
-            attachLightboxEvents(); // Recharge les événements Lightbox
-        })
-        .catch(error => console.error("Erreur AJAX :", error));
+        const photoGrid = document.querySelector('.photo-grid');    
+        let data = filterPhotos(filterType, filterValue);
+        photoGrid.innerHTML = data; // Met à jour la galerie avec les nouvelles images
+        attachLightboxEvents();
     }
 
     // Applique les filtres dès le chargement
     attachFilterEvents();
 });
 
+function filterPhotos (filterType, filterValue) {
+    return fetch(motaphoto_ajax.ajax_url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: `action=filter_photos&filter_type=${filterType}&value=${filterValue}`
+    })
+    .then(response => response.text())   
+    .catch(error => console.error("Erreur AJAX :", error));
+}
 
 
 

@@ -121,6 +121,7 @@ body.modal-active .photo-call-to-action button {
 /* Images dans le carousel */
 
 .carousel-images {
+    display: none;
     display: flex;
     flex-direction: column;
     gap: 10px; /* Espacement entre les vignettes */
@@ -133,6 +134,7 @@ body.modal-active .photo-call-to-action button {
 .carousel-thumbnail {
     width: 81px;
     height: 71px;
+    display: none;
     object-fit: cover;
     transition: transform 0.3s ease, border 0.3s ease;
     border: 2px solid transparent;
@@ -171,7 +173,9 @@ body.modal-active .photo-call-to-action button {
 }
 
 
-
+.active{
+    display: block;
+}
 
 
 
@@ -188,7 +192,7 @@ body.modal-active .photo-call-to-action button {
 
 
 
-@media (max-width: 640px) {
+@media (max-width: 575px) {
     /* Section 1 : Informations et grande image */
     /* On passe la section en colonne */
     .photo-info-section {

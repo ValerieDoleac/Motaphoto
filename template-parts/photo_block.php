@@ -12,7 +12,10 @@ $categories = get_the_terms($photo_id, 'category');
 $category_name = ($categories && !is_wp_error($categories)) ? $categories[0]->name : 'Non spécifié';
 ?>
 
-<div class="photo-item" data-id="<?php echo esc_attr($photo_id); ?>" data-title="<?php echo esc_attr($photo_title); ?>" data-src="<?php echo esc_url($image_url); ?>" data-category="<?php echo esc_attr($category_name); ?>">
+<div class="photo-item" data-id="<?php echo esc_attr($photo_id); ?>" 
+    data-title="<?php echo esc_attr($photo_title); ?>" 
+    data-src="<?php echo esc_url($image_url); ?>" 
+    data-category="<?php echo esc_attr($category_name); ?>">
 
     <div class="photo-image">
         <a href="#" class="open-lightbox">

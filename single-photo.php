@@ -26,7 +26,7 @@ if (have_posts()) :
                 $categories = get_the_terms(get_the_ID(), 'category');
                 if ($categories && !is_wp_error($categories)) {
                     foreach ($categories as $category) {
-                    echo '<span>' . $category->name . '</span> ';
+                    echo '<span id="categorie">' . $category->name . '</span> ';
                 }
                 } else {
                 echo 'Non spécifiée';
@@ -74,20 +74,19 @@ if (have_posts()) :
 
             <div class="photo-carousel">
                 <div class="carousel-images">
-                    <?php var_dump($gallery_images); ?>
+                    
                     <?php
-                    $gallery_images = get_post_meta(get_the_ID(), 'photo_gallery', true);
-                    if ($gallery_images) {
-                        foreach ($gallery_images as $image) {
-                            $large_url = wp_get_attachment_image_url($image->ID, 'photo-large');
-                        
-                            echo '<div class="carousel-item">';
-                            echo wp_get_attachment_image($image->ID, 'photo-thumbnail', false, array(
+                    $photo_id = get_the_ID(); // Récupère l'ID du post
+                    if (has_post_thumbnail($photo_id)) {
+                        $large_url = get_the_post_thumbnail_url($photo_id, 'photo-large'); // URL de la grande image
+                        ?>
+                        <div class="carousel-item">
+                            <?php echo get_the_post_thumbnail($photo_id, 'photo-thumbnail', array(
                                 'class' => 'carousel-thumbnail',
                                 'data-large' => esc_url($large_url)
-                            ));
-                            echo '</div>';
-                        }
+                            )); ?>
+                        </div>
+                        <?php
                     } else {
                         echo '<p>Aucune miniature disponible.</p>';
                     }
@@ -96,7 +95,7 @@ if (have_posts()) :
                 
                 <!-- Navigation -->
                 <div class="carousel-navigation">
-                    <button class="prev-button" aria-label="Image précédente">←</button>
+                    <button class="prev-button" aria-label="Image précédente" >←</button>
                     <button class="next-button" aria-label="Image suivante">→</button>
                 </div>
             </div>
