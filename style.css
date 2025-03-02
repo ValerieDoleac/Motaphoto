@@ -238,6 +238,10 @@ body {
     display: block;
 }
 
+#load-more{
+    position: relative;
+    z-index: 10001; /* Doit être supérieur à celui de .modal */
+}
 
 
 
@@ -309,7 +313,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    opacity: 0;
     transition: opacity 0.3s ease, visibility 0.3s ease;
     overflow: hidden;
 }
@@ -428,6 +431,7 @@ body {
 /* ================= LIGHTBOX STYLES ================= */
 
 /* Lightbox Overlay */
+
 .lightbox-overlay {
     position: fixed;
     top: 0;
@@ -450,7 +454,7 @@ body {
 }
 
 /* Lightbox Content */
-.lightbox-content {
+.lightbox-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -460,59 +464,91 @@ body {
     position: relative;
 }
 
-#lightbox-image {
-    max-width: 100%;
-    max-height: 100%;
+/* Ajustement des images dans la lightbox */
+.lightbox-container img {
+    max-width: 90vw;
+    max-height: 90vh;
     object-fit: contain;
 }
 
-/* Lightbox Buttons */
-.lightbox-prev, .lightbox-next {
-    position: absolute;
-    top: 50%;
-    color: white;
-    font-size: 12px;
-    padding: 10px;
-    cursor: pointer;
-    transition: 0.3s;
-    background: none;
-    border: none;
+/* Spécifique aux images en mode portrait */
+.lightbox-container img.portrait {
+    max-height: 80vh;
+    max-width: 40vw;
+    object-fit: contain;
 }
 
-.lightbox-prev { left: 100px; }
-.lightbox-next { right: 100px; }
+/* Spécifique aux images en mode paysage */
+.lightbox-container img.landscape {
+    max-width: 80vw;
+    max-height: 60vh;
+    object-fit: contain;
+}
+
+.lightbox-nav-mobile{
+    display: none;
+}
 
 
-/* Lightbox Info sous l'image */
-.lightbox-info {
+/* Lightbox Buttons */
+.lightbox-prev, .lightbox-next {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 12px;
+    font-family: 'Space Mono', sans-serif;
+    padding: 15px;
+    cursor: pointer;
+}
+
+.lightbox-prev { 
+    left: 20px;
+    margin-left: 300px;
+}
+
+.lightbox-next { 
+    right: 20px;
+    margin-right: 300px;
+}
+
+/* Enlever le fond blanc et le style de bouton */
+.lightbox-prev, 
+.lightbox-next, 
+.lightbox-close {
+    background: none;
+    border: none;
+    box-shadow: none;
+    padding: 10px; /* Pour garder un espace cliquable */
+}
+
+/* Lightbox Info */
+
+.lightbox-text{
+    color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 5px 20px;
     color: white;
-    position: absolute;
-    bottom: 5%;
-    left: 0;
+    position: relative; /* Changer de absolute à relative */
+    text-align: center;
     box-sizing: border-box;
 }
 
-.lightbox-title {
+.lightbox-title{
     font-family: 'poppins', sans-serif;
-    font-weight: regular;
     font-size: 14px;
+    font-weight: 300;
     text-align: left;
-    margin-left: 50px;
 }
 
-.lightbox-category {
+.lightbox-category{
     font-family: 'space mono', sans-serif;
     font-size: 14px;
-    font-style: regular;
+    font-weight: normal;
     text-align: right;
-    margin-right: 50px;
 }
-
 
 /* Close Button */
 .lightbox-close {
@@ -536,7 +572,7 @@ body {
 
 
 
-@media (max-width: 575px) {
+@media (max-width: 375px) {
 
     /* Styles pour la navbar sur mobile */
     .header {
@@ -549,12 +585,12 @@ body {
         background-color: white;
         position: relative;
         z-index: 10000; /* Toujours au-dessus du menu mobile */
-
+        
     }
 
     /* Logo pour mobile */
     .header .logo img {
-        height: 20px;
+        height: 15px;
         width: auto;
     }
 
@@ -641,6 +677,7 @@ body {
     }
 
 
+
     /* Modale mobile */
     .modal {
         max-width: 286px;
@@ -674,6 +711,15 @@ body {
     .modal .wpcf7-form .wpcf7-submit {
         font-size: 12px;
         padding: 10px 15px;
+    }
+
+    /* lightbox mobile */
+    .lightbox-overlay{
+        display:none !important;
+    }
+
+    .lightbox-info {
+        flex-direction: column;
     }
 
 
@@ -717,6 +763,7 @@ body {
         font-weight: 300;
     }
 
+    
     /* Footer - Mobile */
     .footer {
         height: 208px;

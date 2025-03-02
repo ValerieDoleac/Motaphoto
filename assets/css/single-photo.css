@@ -132,9 +132,9 @@ body.modal-active .photo-call-to-action button {
 /* Vignettes */
 
 .carousel-thumbnail {
+    display: none;
     width: 81px;
     height: 71px;
-    display: none;
     object-fit: cover;
     transition: transform 0.3s ease, border 0.3s ease;
     border: 2px solid transparent;
@@ -145,7 +145,7 @@ body.modal-active .photo-call-to-action button {
 }
 
 .carousel-thumbnail.active {
-    border: 2px solid black; /* Bordure noire sur la miniature active */
+    display: flex;
     transform: scale(1.1);   /* Zoom sur la miniature active */
     transition: transform 0.3s ease, border 0.3s ease;
 }
@@ -192,7 +192,7 @@ body.modal-active .photo-call-to-action button {
 
 
 
-@media (max-width: 575px) {
+@media (max-width: 375px) {
     /* Section 1 : Informations et grande image */
     /* On passe la section en colonne */
     .photo-info-section {
@@ -239,18 +239,23 @@ body.modal-active .photo-call-to-action button {
     /* Image en haut */
     .photo-main {
         order: -1; /* Change l’ordre pour mettre la photo en premier */
-        width: 265px; /* Largeur fixe */
+        max-width: 265px; /* Largeur fixe */
         height: 397px; /* Hauteur fixe */
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 0 auto; /* Centre le bloc horizontalement */
-        margin-top: 30px;
+    }
+
+    #main-photo {
+        max-width: 265px;
+        height: 100%;
+        object-fit: cover; /* Ajuste pour occuper tout l'espace sans distorsion */
+        margin-top: 40px;
     }
 
     /* Image principale */
     .photo-main img {
-        width: 100%; /* L'image prend la largeur du conteneur */
+        max-width: 265px; /* L'image prend la largeur du conteneur */
         height: 100%; /* L'image prend toute la hauteur */
     }
 

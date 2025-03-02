@@ -16,17 +16,26 @@
 
 <!-- Lightbox Overlay -->
 <div id="lightbox-overlay" class="lightbox-overlay">
-    <span class="lightbox-close">&times;</span> <!-- Bouton Fermer -->
-    <button class="lightbox-prev">← Précédente</button>
-    <button class="lightbox-next">Suivante →</button>
-    <div class="lightbox-content">
-        <img id="lightbox-image" src="" alt="Image en plein écran">
-    </div>
-    <div class="lightbox-info">
-        <span class="lightbox-title"></span>
-        <span class="lightbox-category"></span>
+    <!-- Bouton Fermer -->
+    <button class="lightbox-close">&times;</button> 
+
+    <div class="lightbox-container">
+        <!-- Image + Navigation -->
+        <div class="lightbox-main">
+            
+            <button class="lightbox-prev">← Précédente</button> 
+            <div class="lightbox-image-wrapper">
+                <img id="lightbox-image" src="" alt="Image en plein écran">
+            </div>
+            <button class="lightbox-next">Suivante →</button>
+            <div class="lightbox-text">
+                <span class="lightbox-title"></span>
+                <span class="lightbox-category"></span>
+            </div>
+        </div>
     </div>
 </div>
+
 
 
     <?php get_template_part('template-parts/contact-modal'); ?>

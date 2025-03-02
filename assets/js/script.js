@@ -1,145 +1,75 @@
-function test() {
-    console.log(filterPhotos("category", "mariage"));
-}
+jQuery.noConflict();
+console.log("JQuery chargé :", typeof jQuery);
+console.log("📜 [TEST] Le fichier script.js est bien chargé et s'exécute !");
+
+
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
+    // Gestion du menu mobile
 
-        // Gestion du menu mobile
+    const hamburger = document.querySelector('.hamburger');
+    const menu = document.querySelector('.menu');
 
-        const hamburger = document.querySelector('.hamburger');
-        const menu = document.querySelector('.menu');
-
-        if (hamburger && menu) {
-            hamburger.addEventListener('click', function () {
-                this.classList.toggle('open');
-                menu.classList.toggle('active');
-            });
-
-            document.addEventListener('click', function (e) {
-                if (menu.classList.contains('active') && !menu.contains(e.target) && !hamburger.contains(e.target)) {
-                    hamburger.classList.remove('open');
-                    menu.classList.remove('active');
-                }
-            });
-        }
-
-        // Gestion de la modale
-
-        const modal = document.querySelector('.modal');
-        const overlay = document.querySelector('.modal-overlay');
-        const openModalLinks = document.querySelectorAll('.open-modal');
-        const referenceField = document.querySelector('#reference-input');
-        const referenceChamp = document.querySelector('.reference');
-        const reference = referenceChamp ? referenceChamp.textContent : ''; // récupere la référence dans le champ
-
-        if (modal && overlay && openModalLinks.length > 0) {
-            openModalLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    modal.classList.add('active');
-                    overlay.classList.add('active');
-                    document.body.classList.add('modal-active');
-
-                    if (referenceField && reference) {
-                        referenceField.value = reference;
-                    }
-                });
-            });
-
-            overlay.addEventListener('click', () => {
-                modal.classList.remove('active');
-                overlay.classList.remove('active');
-                document.body.classList.remove('modal-active');
-            });
-        }
-
-
-        //carousel
-
-    
-
-});
-document.addEventListener("DOMContentLoaded", () => {
-    const thumbnailsContainer = document.querySelector(".carousel-images");
-    const prevButton = document.querySelector(".prev-button");
-    const nextButton = document.querySelector(".next-button");
-    const categorie = document.getElementById('categorie');
-
-    let currentIndex = 0;
-    let photosArray = [];
-
-    // 📌 Fonction pour charger les photos via AJAX et les insérer dans le carousel
-    function loadPhotosForCarousel() {
-        filterPhotos("category", categorie.textContent)
-            .then(response => {
-                // Convertir la réponse en un élément HTML temporaire
-                let tempDiv = document.createElement("div");
-                tempDiv.innerHTML = response;
-
-                // Récupérer les `.photo-item` de la réponse AJAX
-                photosArray = Array.from(tempDiv.querySelectorAll(".photo-item"));
-                
-                if (photosArray.length > 0) {
-                    thumbnailsContainer.innerHTML = ""; // Efface le contenu actuel
-                    photosArray.forEach(photo => {
-                        thumbnailsContainer.appendChild(photo); // Ajoute chaque photo
-                    });
-
-                    showThumbnail(0); // Affiche la première image
-                    attachCarouselEvents(); // Active les boutons
-                }
-            })
-            .catch(error => console.error("Erreur chargement carrousel :", error));
-    }
-
-    // 📌 Fonction pour afficher la miniature active
-    function showThumbnail(index) {
-        photosArray.forEach(thumb => {
-            thumb.classList.remove("photo-item");
-            thumb.classList.add("carousel-thumbnail");
-
-        });
-        photosArray.forEach(thumb => {
-            thumb.classList.remove("active");
+    if (hamburger && menu) {
+        hamburger.addEventListener('click', function () {
+            this.classList.toggle('open');
+            menu.classList.toggle('active');
         });
 
-        if (photosArray[index]) {
-            photosArray[index].classList.add("active");
-        }
-    }
-
-    // 📌 Fonction pour attacher les événements du carousel
-    function attachCarouselEvents() {
-        if (photosArray.length === 0) return; // Vérification pour éviter les erreurs
-
-        prevButton.addEventListener("click", () => {
-            currentIndex = (currentIndex - 1 + photosArray.length) % photosArray.length;
-            showThumbnail(currentIndex);
-        });
-
-        nextButton.addEventListener("click", () => {
-            currentIndex = (currentIndex + 1) % photosArray.length;
-            showThumbnail(currentIndex);
-        });
-
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "ArrowLeft") {
-                currentIndex = (currentIndex - 1 + photosArray.length) % photosArray.length;
-            } else if (e.key === "ArrowRight") {
-                currentIndex = (currentIndex + 1) % photosArray.length;
+        document.addEventListener('click', function (e) {
+            if (menu.classList.contains('active') && !menu.contains(e.target) && !hamburger.contains(e.target)) {
+                hamburger.classList.remove('open');
+                menu.classList.remove('active');
             }
-            showThumbnail(currentIndex);
+        }, { passive: true });
+    }
+});
+
+// Gestion de la modale
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("✅ DOM chargé !");
+    const modal = document.querySelector('.modal');
+    const overlay = document.querySelector('.modal-overlay');
+    const referenceField = document.querySelector('#reference-input');
+    const referenceChamp = document.querySelector('.reference');
+    const boutonsModal = document.querySelectorAll('.open-modal');
+    const reference = referenceChamp ? referenceChamp.textContent : '';
+    if (!modal || !overlay) {
+        console.warn("⚠️ La modale ou l'overlay sont introuvables !");
+        return;
+    }
+
+    for (let i = 0; i < boutonsModal.length; i++) {
+        // 🔹 Écoute tous les clics sur le document
+        boutonsModal[i].addEventListener('click', function (e) {
+
+            e.preventDefault(); // 🔹 Bloque la redirection
+
+            modal.classList.add('active');
+            overlay.classList.add('active');
+            document.body.classList.add('modal-active');
+
+            if (referenceField && reference) {
+                referenceField.value = reference;
+            }
         });
     }
 
-    // 📌 Charger les photos dès le chargement du DOM
-    loadPhotosForCarousel();
-});
 
+    // 🔹 Ferme la modale en cliquant sur l'overlay
+    overlay.addEventListener('click', () => {
+        console.log("📢 Clic sur l'overlay, fermeture de la modale !");
+        modal.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.classList.remove('modal-active');
+    }, { passive: true });
+});
 
 
 // Fonction pour charger plus de photos avec AJAX (charger plus)
-function loadImage(num){
+function loadImage(num) {
     let photoGrid = document.querySelector(".photo-grid");
     let perPage = num;
     // nouvelle requete ajax
@@ -163,139 +93,215 @@ function loadImage(num){
 
 // Ouverture des listes
 
-document.addEventListener("DOMContentLoaded", () => {
-    const photoGrid = document.querySelector(".photo-grid");
+jQuery(document).ready(function ($) {
 
-    // Fonction unique pour gérer les filtres avec AJAX
-    function updatePhotos(filterType, filterValue) {
-    const formData = new URLSearchParams();
-    formData.append('action', 'filter_photos');
-    formData.append('filter_type', filterType);
-    formData.append('value', filterValue);
-    console.log(`Filtre envoyé : type=${filterType}, value=${filterValue}`);
+    // Fonction pour ouvrir et fermer les menus déroulants des filtres
+    $(".filter-toggle").on("click", function (e) {
+        e.stopPropagation(); // Empêche la propagation pour éviter la fermeture immédiate
 
+        let isExpanded = $(this).attr("aria-expanded") === "true";
 
-    fetch(motaphoto_ajax.ajax_url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: formData.toString()
-    })
-    .then(response => response.text())
-    .then(data => {
-        const photoGrid = document.querySelector('.photo-grid');
-        photoGrid.innerHTML = data;
-        attachLightboxEvents(); // Recharge les événements de lightbox
-    })
-    .catch(error => console.error("Erreur AJAX :", error));
-}
+        // Ferme toutes les autres listes
+        $(".filter-list").hide();
+        $(".filter-toggle").attr("aria-expanded", "false");
 
-
-    // Fonction pour attacher les événements aux filtres
-    function attachFilterEvents() {
-        document.querySelectorAll('.filter-item').forEach(item => {
-            item.addEventListener('click', function () {
-                const filterType = this.dataset.filterType;   // "category" ou "format"
-                const filterValue = this.dataset.value;       // slug ou ID
-                updatePhotos(filterType, filterValue);
-            });
-        });
-    }
-
-    // Ouvrir et Fermer les listes de filtres
-    document.querySelectorAll('.filter-toggle').forEach(toggle => {
-        toggle.addEventListener('click', function () {
-            const isExpanded = this.getAttribute('aria-expanded') === 'true';
-            this.setAttribute('aria-expanded', !isExpanded);
-
-            // Ferme toutes les autres
-            document.querySelectorAll('.filter-list').forEach(list => {
-                list.style.display = 'none';
-            });
-
-            // Affiche la liste actuelle
-            const filterList = this.nextElementSibling;
-            filterList.style.display = isExpanded ? 'none' : 'block';
-        });
-    });
-
-    // Fermer les listes au clic en dehors
-    document.addEventListener('click', function (e) {
-        if (!e.target.closest('.filters-box')) {
-            document.querySelectorAll('.filter-list').forEach(list => {
-                list.style.display = 'none';
-            });
+        // Ouvre ou ferme la liste sélectionnée
+        if (!isExpanded) {
+            $(this).attr("aria-expanded", "true");
+            $(this).next(".filter-list").show();
         }
     });
 
-    // Lance les événements filtres au chargement
-    attachFilterEvents();
-});
+    // Fermer les listes lorsqu'on clique en dehors
+    $(document).on("click", function () {
+        $(".filter-list").hide();
+        $(".filter-toggle").attr("aria-expanded", "false");
+    });
 
+    // Fonction AJAX pour mettre à jour les photos en fonction des filtres
+    $(".filter-item").on("click", function () {
+        let selectedCategory = $("#filter-categories").data("value") || "";
+        let selectedFormat = $("#filter-formats").data("value") || "";
+        let selectedSort = $("#filter-sort").data("value") || "DESC";
 
-// fonction pour charger les photos en fonction des filtres
-document.addEventListener("DOMContentLoaded", () => {
-    const photoGrid = document.querySelector(".photo-grid");
-
-    // Fonction principale pour gérer les filtres avec AJAX
-    function attachFilterEvents() {
-        
-        document.querySelectorAll('.filter-item').forEach(item => {
-            item.addEventListener('click', function () {
-                const filterType = this.dataset.filterType;
-                const filterValue = this.dataset.value;
-                updatePhotos(filterType, filterValue);
-            });
-        });
-        
-        
-        document.querySelectorAll('.sort-item').forEach(item => {
-            item.addEventListener('click', function () {
-                const sortValue = this.dataset.sort;
-                updatePhotos('sort', sortValue);
-            });
-        });
-    }
-
-    // Fonction AJAX pour charger les photos selon les filtres
-    function updatePhotos(filterType, filterValue) {
-        let categorieFilter=document.getElementById("filter-categories");
-        let formatFilter=document.getElementById("filter-formats");
-        let sortFilter=document.getElementById("filter-sort");
-
-        if (filterType === "category") {
-            categorieFilter.textContent = filterValue;
-            formatFilter.textContent = "FORMATS";
-            sortFilter.textContent = "TRIER PAR";
-        } else if (filterType === "format") {
-            formatFilter.textContent = filterValue;
-            sortFilter.textContent = "TRIER PAR";
-            categorieFilter.textContent = "CATEGORIES";
-        } else if (filterType === "TRIER PAR") {
-            sortFilter.textContent = filterValue;
-            formatFilter.textContent = "FORMATS";
-            categorieFilter.textContent = "CATEGORIES";
+        // Mise à jour du texte des boutons
+        if ($(this).data("categorie")) {
+            selectedCategory = $(this).data("categorie");
+            $("#filter-categories").text($(this).text()).data("value", selectedCategory);
+        } else if ($(this).data("format")) {
+            selectedFormat = $(this).data("format");
+            $("#filter-formats").text($(this).text()).data("value", selectedFormat);
+        } else if ($(this).data("sort")) {
+            selectedSort = $(this).data("sort");
+            $("#filter-sort").text($(this).text()).data("value", selectedSort);
         }
-        const photoGrid = document.querySelector('.photo-grid');    
-        let data = filterPhotos(filterType, filterValue);
-        photoGrid.innerHTML = data; // Met à jour la galerie avec les nouvelles images
-        attachLightboxEvents();
-    }
 
-    // Applique les filtres dès le chargement
-    attachFilterEvents();
+        // Afficher dans la console pour debug
+        console.log("Filtres envoyés ->", {
+            categorie: selectedCategory,
+            format: selectedFormat,
+            sort: selectedSort,
+        });
+
+        // Ferme la liste après sélection
+        $(".filter-list").hide();
+        $(".filter-toggle").attr("aria-expanded", "false");
+
+        // Envoi AJAX
+        $.ajax({
+            type: "POST",
+            url: motaphoto_ajax.ajax_url,
+            data: {
+                action: "filter_photos",
+                categorie: selectedCategory,
+                format: selectedFormat,
+                sort: selectedSort,
+            },
+            beforeSend: function () {
+                $(".photo-grid").html("<p>Chargement des photos...</p>");
+            },
+            success: function (response) {
+                $(".photo-grid").html(response);
+                attachLightboxEvents();
+            },
+            error: function () {
+                console.error("Erreur lors du chargement des photos.");
+            },
+        });
+    });
+
 });
 
-function filterPhotos (filterType, filterValue) {
-    return fetch(motaphoto_ajax.ajax_url, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: `action=filter_photos&filter_type=${filterType}&value=${filterValue}`
-    })
-    .then(response => response.text())   
-    .catch(error => console.error("Erreur AJAX :", error));
-}
+// permet d'appuyer sur une photo en mobile pour afficher  le détail des photos
+document.addEventListener("DOMContentLoaded", function () {
+    const lightboxLinks = document.querySelectorAll(".open-lightbox");
+
+    function isMobile() {
+        return window.innerWidth <= 375; // Définit un mode mobile
+    }
+
+    lightboxLinks.forEach(link => {
+        link.addEventListener("click", function (e) {
+            if (isMobile()) {
+                e.preventDefault(); // Empêche la lightbox de s'ouvrir
+
+                // Trouver l'élément parent .photo-item
+                const photoItem = this.closest(".photo-item");
+                if (!photoItem) {
+                    return;
+                }
+
+                // Trouver le lien vers la page de détails
+                const photoLink = photoItem.querySelector(".eye-icon");
+                if (!photoLink || !photoLink.href || photoLink.href === "#") {
+                    return;
+                }
+
+                window.location.href = photoLink.href; // Redirection vers la page de détails
+            }
+        });
+    });
+});
+
+
+
+
+
+jQuery(document).ready(function ($) {
+
+    function filterPhotos(filterType, filterValue) {
+
+        return $.ajax({
+            type: "POST",
+            url: motaphoto_ajax.ajax_url,
+            data: {
+                action: "filter_photos",
+                categorie: filterType === "category" ? filterValue : "",
+                format: filterType === "format" ? filterValue : "",
+                sort: filterType === "sort" ? filterValue : "DESC",
+            }
+        }).fail(function () {
+            console.error("Erreur lors du chargement des photos.");
+        });
+    }
+
+    function loadPhotosForCarousel() {
+        const thumbnailsContainer = document.querySelector(".carousel-images");
+        const prevButton = document.querySelector(".prev-button");
+        const nextButton = document.querySelector(".next-button");
+        const categorie = document.getElementById('categorie');
+        let currentIndex = 0;
+        let photosArray = [];
+        if (thumbnailsContainer != null) {
+            filterPhotos("category", categorie.textContent)
+                .then(response => {
+                    let tempDiv = document.createElement("div");
+                    tempDiv.innerHTML = response;
+
+                    // Récupérer les `.photo-item` de la réponse AJAX
+                    photosArray = Array.from(tempDiv.querySelectorAll(".photo-item"));
+                    function showThumbnail(index) {
+                        photosArray.forEach(thumb => {
+                            thumb.classList.remove("photo-item");
+                            thumb.classList.add("carousel-thumbnail");
+
+                        });
+                        photosArray.forEach(thumb => {
+                            thumb.classList.remove("active");
+                        });
+
+                        if (photosArray[index]) {
+                            photosArray[index].classList.add("active");
+                        }
+                    }
+
+                    function attachCarouselEvents() {
+                        if (photosArray.length === 0) return; // Vérification pour éviter les erreurs
+
+                        prevButton.addEventListener("click", () => {
+                            currentIndex = (currentIndex - 1 + photosArray.length) % photosArray.length;
+                            showThumbnail(currentIndex);
+                        });
+
+                        nextButton.addEventListener("click", () => {
+                            currentIndex = (currentIndex + 1) % photosArray.length;
+                            showThumbnail(currentIndex);
+                        });
+
+                        document.addEventListener("keydown", (e) => {
+                            if (e.key === "ArrowLeft") {
+                                currentIndex = (currentIndex - 1 + photosArray.length) % photosArray.length;
+                            } else if (e.key === "ArrowRight") {
+                                currentIndex = (currentIndex + 1) % photosArray.length;
+                            }
+                            showThumbnail(currentIndex);
+                        });
+                    }
+
+                    if (photosArray.length > 0) {
+                        thumbnailsContainer.innerHTML = ""; // Efface le contenu actuel
+                        photosArray.forEach(photo => {
+                            thumbnailsContainer.appendChild(photo); // Ajoute chaque photo
+                        });
+
+                        showThumbnail(0); // Affiche la première image
+                        attachCarouselEvents(); // Active les boutons
+                    } else {
+                        console.warn("⚠️ Aucune photo trouvée pour le carrousel !");
+                    }
+                })
+                .catch(error => console.error("Erreur chargement carrousel :", error));
+        }
+    }
+
+
+    loadPhotosForCarousel();
+
+});
+
+
+
+
 
 
 

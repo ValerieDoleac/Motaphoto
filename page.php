@@ -38,40 +38,56 @@ while (have_posts()) :
 endwhile; // Fin de la boucle ?>
 
 <section class="filters-section">
-
+    <!-- Filtre Catégories -->
     <div class="filters-box">
-        <button  id="filter-categories" class="filter-toggle" aria-expanded="false">
+        <button id="filter-categories" class="filter-toggle" aria-expanded="false">
             CATÉGORIES <span class="arrow">▼</span>
         </button>
         <ul class="filter-list" hidden>
-            <li class="filter-item" data-filter-type="category" data-value="concert">Concert</li>
-            <li class="filter-item" data-filter-type="category" data-value="mariage">Mariage</li>
-            <li class="filter-item" data-filter-type="category" data-value="reception">Réception</li>
-            <li class="filter-item" data-filter-type="category" data-value="television">Télévision</li>
+            <?php
+            $categories = get_terms(array('taxonomy' => 'category', 'hide_empty' => true));
+            if (!empty($categories)) {
+                foreach ($categories as $category) {
+                    echo '<li class="filter-item" data-categorie="' . esc_attr($category->slug) . '">' . esc_html($category->name) . '</li>';
+                }
+            }
+            ?>
         </ul>
     </div>
 
+    <!-- Filtre Formats -->
     <div class="filters-box">
         <button id="filter-formats" class="filter-toggle" aria-expanded="false">
             FORMATS <span class="arrow">▼</span>
         </button>
         <ul class="filter-list" hidden>
-            <li class="filter-item" data-filter-type="format" data-value="portrait">Portrait</li>
-            <li class="filter-item" data-filter-type="format" data-value="paysage">Paysage</li>
+            <?php
+            $formats = get_terms(array('taxonomy' => 'format', 'hide_empty' => true));
+            if (!empty($formats)) {
+                foreach ($formats as $format) {
+                    echo '<li class="filter-item" data-format="' . esc_attr($format->slug) . '">' . esc_html($format->name) . '</li>';
+                }
+            }
+            ?>
         </ul>
     </div>
 
+    <!-- Filtre Trier par -->
     <div class="filters-box">
         <button id="filter-sort" class="filter-toggle" aria-expanded="false">
             TRIER PAR <span class="arrow">▼</span>
         </button>
         <ul class="filter-list" hidden>
-            <li class="filter-item" data-filter-type="TRIER PAR" data-value="Plus récentes">Plus récentes</li>
-            <li class="filter-item" data-filter-type="TRIER PAR" data-value="plus anciennes">Plus anciennes</li>
+            <li class="filter-item" data-sort="DESC">Plus récentes</li>
+            <li class="filter-item" data-sort="ASC">Plus anciennes</li>
         </ul>
     </div>
-
 </section>
+
+<!-- Champ caché pour AJAX -->
+<input type="hidden" name="action" value="motaphoto_filter_photos" />
+
+
 
 
 

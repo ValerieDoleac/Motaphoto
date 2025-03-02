@@ -23,7 +23,21 @@ document.addEventListener("DOMContentLoaded", function () {
         lightboxCategory.textContent = image.dataset.category || "Catégorie";
         lightboxOverlay.classList.add("active");
         currentIndex = index;
-    }
+
+        // Charger l'image et détecter son orientation
+    lightboxImage.onload = function () {
+        // Supprimer les classes existantes
+        lightboxImage.classList.remove("portrait", "landscape");
+
+        // Vérifier l'orientation et ajouter la classe correspondante
+        if (lightboxImage.naturalWidth > lightboxImage.naturalHeight) {
+            lightboxImage.classList.add("landscape"); // Image paysage
+        } else {
+            lightboxImage.classList.add("portrait"); // Image portrait
+        }
+
+        console.log("📸 Orientation détectée :", lightboxImage.classList);
+    }};
 
     // Fonction pour fermer la lightbox
     function closeLightbox() {
@@ -32,13 +46,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Image suivante
     function showNextImage() {
-    currentIndex = (currentIndex + 1) % images.length; // Repart à zéro après la dernière
+    currentIndex = (currentIndex + 1) % images.length;
     openLightbox(currentIndex);
     }
 
     // Image précédente
     function showPrevImage() {
-    currentIndex = (currentIndex - 1 + images.length) % images.length; // Passe de la première à la dernière
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
     openLightbox(currentIndex);
     }
 
@@ -51,17 +65,17 @@ document.addEventListener("DOMContentLoaded", function () {
         image.addEventListener("click", (event) => {
             // Vérifier si le clic vient de l'icône de l'œil (Infos)
             if (event.target.closest(".eye-icon")) {
-                return; // Ne rien faire, ne pas ouvrir la lightbox
+                return; 
             }
 
             // Vérifier si le clic vient de l'icône plein écran (⛶)
             if (event.target.closest(".fullscreen-icon")) {
-                event.preventDefault(); // Empêche l’ouverture dans un nouvel onglet
-                openLightbox(index); // Ouvre la lightbox avec l’image en grand
-                return; // Ne rien faire, laisser WordPress gérer la redirection
+                event.preventDefault(); 
+                openLightbox(index);
+                return; 
             }
 
-            event.preventDefault(); // Empêche l'ouverture du lien normal
+            event.preventDefault()
             openLightbox(index);
         });
     });
@@ -71,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Fonction de gestion du clic sur les images
     function handleImageClick(event, index) {
-        event.preventDefault(); // Empêche l'ouverture d'un nouvel onglet
+        event.preventDefault();
         openLightbox(index);
     }
 
