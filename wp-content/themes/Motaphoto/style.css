@@ -1,0 +1,804 @@
+/*
+Theme Name: Motaphoto
+Theme URI: http://localhost/Motaphoto
+Author: Valerie Doleac
+Author URI: https://votresite.com
+Description: Un thème WordPress personnalisé.
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: nathalie-mota
+*/
+
+/* Pour tout le site*/
+
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Navbar Desktop */
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    height: 80px;
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+    width: 1440px;
+    margin: 0 auto; /* Centrer la navbar */
+    box-sizing: border-box;
+}
+
+.header .logo img {
+    height: 20px; /* Taille du logo pour desktop */
+    width: auto;
+}
+
+.menu {
+    display: flex; /* Afficher le menu horizontalement */
+    align-items: center;
+    margin-right: 100px;
+}
+
+.nav_menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 30px;
+}
+
+.nav_menu li a {
+    text-decoration: none;
+    color: black;
+    font-family: 'Space Mono', sans-serif;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: normal;
+    transition: color 0.3s ease;
+}
+
+.nav_menu li a:hover {
+    font-weight: bold;
+}
+
+.hamburger {
+    display: none; /* Caché sur desktop */
+}
+
+/* Page d'accueil - ordinateur */
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    width: 1440px;
+    height: 100vh;
+    max-height: 962px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+/* Overlay Text */
+.hero-section h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Space Mono', sans-serif; 
+    font-size: 4vw;
+    font-weight: bold;
+    font-style: italic;
+    color: transparent;
+    -webkit-text-stroke: 2px white; /* contour du titre */
+    text-transform: uppercase; /* Met le texte en majuscules */
+    margin: 0;
+    text-align: center;
+}
+
+/* Section des filtres */
+
+.filters-section {
+    display: flex;
+    justify-content: center; /* Centre les filtres horizontalement */
+    gap: 20px; /* Espace entre les filtres */
+    margin: 20px 0; /* Marge en haut et en bas */
+}
+
+.filters-box {
+    position: relative;
+    display: inline-block;
+}
+
+/* Pour le bouton lorsque la liste est ouverte */
+.filters-box button:focus {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+}
+
+/* Pour la liste déroulante */
+.filters-box .filter-list {
+    margin-top: -4px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top: #215aff solid 1px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px; 
+}
+
+/* Style de base pour la liste des catégories */
+.filters-box .filter-list li {
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Retirer le point devant les éléments de liste */
+.filter-list {
+    list-style: none;
+    padding: 0;
+}
+
+.filter-list li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.filter-toggle {
+    display: flex;
+    justify-content: space-between; /* Espace entre texte et flèche */
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 12px;
+    font-family: 'poppins', sans-serif;
+    font-weight: 300;
+    text-transform: uppercase; /* Texte en majuscules */
+    background-color: white;
+    color: black;
+    border: #b8bbc2 solid 1px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 260px;
+    height: 43px;
+    text-align: left;
+}
+
+.filter-toggle:hover {
+    border: #215aff solid 1px;
+    color: black;
+}
+
+.arrow {
+    margin-left: auto;
+    font-size: 12px;
+}
+
+.filter-list {
+    position: absolute;
+    top: 100%; /* Place la liste juste en dessous du bouton */
+    left: 0;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: none; /* Par défaut, la liste est masquée */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.filter-list li {
+    padding: 10px;
+    font-size: 14px;
+    color: black;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: left;
+    font-family: 'poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+}
+
+.filter-list li:hover {
+    animation: filterColorTransition 1s forwards;
+}
+
+@keyframes filterColorTransition {
+    0% {
+        background-color: white;
+        color: black;
+    }
+    30% {
+        background-color: #FFD6D6;
+        color: black;
+    }
+    60% {
+        background-color: #FE5858;
+        color: black;
+    }
+    100% {
+        background-color: #E00000;
+        color: white;
+    }
+}
+
+/* Affiche la liste lorsqu'elle est ouverte */
+.filter-box[aria-expanded="true"] .filter-list {
+    display: block;
+}
+
+#load-more{
+    position: relative;
+    z-index: 10001; /* Doit être supérieur à celui de .modal */
+}
+
+
+
+/* Footer - Ordinateur */
+
+.footer_wrapper {
+    max-width: 1440px;
+    max-height: 40px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    padding: 0 20px;
+    border-top: 2px solid black;
+}
+
+.footer_content {
+    display: flex;
+    justify-content: space-between; /* Espacement uniforme */
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 50px;
+}
+
+.footer_content li {
+    margin: 0 15px; /* Espace entre les éléments */
+    align-items: center;
+}
+
+.footer_content a {
+    text-decoration: none;
+    color: black;
+    font-family: 'Space Mono', sans-serif;
+    text-transform: uppercase;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.footer_content a:hover {
+    font-weight: bold;
+    color:black;
+}
+
+.footer_content p:last-child {
+    margin-left: auto; /* Pousse le texte "Tous droits réservés" à droite */
+    color: black;
+    font-family: 'Space Mono', sans-serif;
+    font-size: 14px;
+}
+
+
+
+/* Conteneur de la modale */
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 597px;
+    height: 769px;
+    background: white;
+    z-index: 999;
+    border: 2px solid black;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    overflow: hidden;
+}
+
+.modal-header {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%); /* Centre l'image horizontalement */
+    width: 140%;
+    height: auto;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.modal-header-image {
+    width: 100%;
+    height: 100%;
+}
+
+/* Afficher la modale et l'overlay */
+.modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal::before {
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'poppins', sans-serif;
+    font-size: 48px;
+    font-weight: 900;
+    font-style: italic;
+    color:black ;
+    white-space: pre-line; /* Conserve les sauts de ligne */
+    line-height: 0.8; /* Espacement entre les lignes */
+    text-align: center;
+    z-index: -1; /* Derrière la modale */
+    width: calc(100% + 200px); /* Dépasse à gauche et à droite */
+}
+
+
+/* Arrière-plan de l'overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998; /* Juste en dessous de la modale */
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+/* Formulaire Contact Form 7 */
+.modal .wpcf7-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Labels */
+.modal .wpcf7-form label {
+    display: block;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    text-transform: uppercase;
+}
+
+/* Champs de formulaire */
+.modal .wpcf7-form .wpcf7-form-control {
+    margin-top: 0;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+}
+
+/* Bouton de soumission */
+.modal .wpcf7-form .wpcf7-submit {
+    border: none;
+    border-radius: 0;
+    padding: 12px 20px;
+    background-color: #ccc;
+    font-family: 'Space Mono', sans-serif;
+    text-transform: uppercase;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal .wpcf7-submit:hover {
+    background-color: black;
+    color: white;
+}
+
+.contact {
+    margin-top: 50px;
+    z-index: 1;
+}
+
+/* ================= LIGHTBOX STYLES ================= */
+
+/* Lightbox Overlay */
+
+.lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 10000;
+}
+
+.lightbox-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Lightbox Content */
+.lightbox-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    max-width: 85%;
+    max-height: 90%;
+    position: relative;
+}
+
+/* Ajustement des images dans la lightbox */
+.lightbox-container img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+}
+
+/* Spécifique aux images en mode portrait */
+.lightbox-container img.portrait {
+    max-height: 80vh;
+    max-width: 40vw;
+    object-fit: contain;
+}
+
+/* Spécifique aux images en mode paysage */
+.lightbox-container img.landscape {
+    max-width: 80vw;
+    max-height: 60vh;
+    object-fit: contain;
+}
+
+.lightbox-nav-mobile{
+    display: none;
+}
+
+
+/* Lightbox Buttons */
+.lightbox-prev, .lightbox-next {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 12px;
+    font-family: 'Space Mono', sans-serif;
+    padding: 15px;
+    cursor: pointer;
+}
+
+.lightbox-prev { 
+    left: 20px;
+    margin-left: 300px;
+}
+
+.lightbox-next { 
+    right: 20px;
+    margin-right: 300px;
+}
+
+/* Enlever le fond blanc et le style de bouton */
+.lightbox-prev, 
+.lightbox-next, 
+.lightbox-close {
+    background: none;
+    border: none;
+    box-shadow: none;
+    padding: 10px; /* Pour garder un espace cliquable */
+}
+
+/* Lightbox Info */
+
+.lightbox-text{
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    color: white;
+    position: relative; /* Changer de absolute à relative */
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.lightbox-title{
+    font-family: 'poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    text-align: left;
+}
+
+.lightbox-category{
+    font-family: 'space mono', sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    text-align: right;
+}
+
+/* Close Button */
+.lightbox-close {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    font-size: 50px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 375px) {
+
+    /* Styles pour la navbar sur mobile */
+    .header {
+        height: 72px;
+        width: 100%;
+        padding: 0 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: white;
+        position: relative;
+        z-index: 10000; /* Toujours au-dessus du menu mobile */
+        
+    }
+
+    /* Logo pour mobile */
+    .header .logo img {
+        height: 15px;
+        width: auto;
+    }
+
+    /* Bouton Hamburger */
+    .hamburger {
+        display: flex; /* Visible mobile */
+        flex-direction: column;
+        justify-content: space-between;
+        width: 40px;
+        height: 24px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        z-index: 15; /* visible au-dessus du menu mobile */
+    }
+
+    .hamburger span {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background: black;
+        transition: all 0.3s ease;
+    }
+
+    /* Transformation en croix lorsque le menu est actif */
+    .hamburger.open span:nth-child(1) {
+        transform: rotate(45deg) translate(4px, 4px);
+    }
+
+    .hamburger.open span:nth-child(2) {
+        opacity: 0; /* Cache le trait du milieu */
+    }
+
+    .hamburger.open span:nth-child(3) {
+        transform: rotate(-45deg) translate(4px, -4px);
+    }
+
+    .menu {
+        position: fixed;
+        top: 72px; /* Juste en dessous de la navbar */
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 72px); /* Hauteur totale moins la hauteur de la navbar */
+        background-color: #E00000;
+        flex-direction: column;
+        justify-content: center; /*liens verticalement */
+        align-items: center; /* liens horizontalement */
+        z-index: 5; /* Sous la navbar */
+        opacity: 0;
+        transform: translateY(-100%);
+        transition: all 0.3s ease-in-out;
+        display: flex;
+    }
+
+    .menu.active {
+        opacity: 1; /* Visible */
+        transform: translateY(5%); /* Descend dans la vue */
+    }
+
+    /* Liens dans le menu mobile */
+    .nav_menu {
+        flex-direction: column;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        text-align: center;
+    }
+
+    .nav_menu li {
+        margin: 20px 0;
+    }
+
+    .nav_menu li a {
+        text-decoration: none;
+        color: white; 
+        font-family: 'Space Mono', sans-serif;
+        font-size: 44px;
+        font-weight: normal;
+        text-transform: uppercase;
+    }
+
+    .nav_menu li a:hover {
+        font-weight: bold;
+    }
+
+
+
+    /* Modale mobile */
+    .modal {
+        max-width: 286px;
+        max-height: 583px;
+        padding: 20px;
+        border: 1px solid black;
+        }
+    
+    .modal::before {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: -1; /* Derrière la modale */
+        width: calc(100% + 100px); /* Ajuste la largeur pour mobile */
+    }
+
+    .modal .wpcf7-form {
+        gap: 15px;
+    }
+
+    .modal .wpcf7-form label {
+        font-size: 10px; /* Réduit la taille des étiquettes */
+    }
+
+    .modal .wpcf7-form .wpcf7-form-control {
+        padding: 8px; /* Réduit l'espace interne des champs */
+        font-size: 10px;
+    }
+
+    .modal .wpcf7-form .wpcf7-submit {
+        font-size: 12px;
+        padding: 10px 15px;
+    }
+
+    /* lightbox mobile */
+    .lightbox-overlay{
+        display:none !important;
+    }
+
+    .lightbox-info {
+        flex-direction: column;
+    }
+
+
+    /* page accueil mobile */
+
+    .hero-section {
+        width: 100%;
+        height: 253px; /* Hauteur spécifique */
+        max-height: 253px; 
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+    }
+
+    .hero-section h1 {
+        font-size: 6vw;
+    }
+
+    .filters-section {
+        display: flex;
+        flex-direction: column; /* Filtres en colonne */
+        align-items: center; /* Centre les filtres */
+        gap: 15px;
+        width: 100%;
+        margin-top: 25px;
+    }
+
+    .filters-box {
+        width: 90%; /* Largeur adaptable */
+        max-width: 260px; /* Largeur maximale des boutons */
+    }
+
+    .filter-toggle {
+        width: 100%;
+        text-align: center;
+        height: 43px;
+        font-size: 12px;
+        font-weight: 300;
+    }
+
+    
+    /* Footer - Mobile */
+    .footer {
+        height: 208px;
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin: 0 auto;
+        padding: 20px;
+        box-sizing: border-box;
+        border-top: 2px solid black;
+    }
+
+    .footer_wrapper{
+        border: none;
+    }
+
+    .footer_content {
+        display: flex;
+        flex-direction: column;
+        gap:20px;
+    }
+
+    .footer_link {
+        text-decoration: none;
+        color: black;
+        font-family: 'Space Mono', sans-serif;
+        text-transform: uppercase;
+        font-size: 16px; 
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .footer_link:hover {
+        font-weight: bold;
+    }
+}

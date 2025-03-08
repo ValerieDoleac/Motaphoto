@@ -1,0 +1,351 @@
+/* ----------------------------------------Section 3 : Suggestions--------------------------------- */
+
+/* Conteneur principal de la galerie */
+.photo-gallery {
+    margin-top: 40px;
+    max-width: 1140px; /* Largeur maximale */
+    margin: 0 auto; /* Centrage horizontal */
+    margin-bottom: 50px;
+}
+
+/* Titre de la galerie (si besoin) */
+.photo-gallery h3 {
+    font-size: 1.25rem; /* Taille du texte */
+    font-family: 'Space Mono', sans-serif; /* Police */
+    font-weight: normal;
+    margin-top: 20px;
+    text-align: center; /* Centrage */
+}
+
+/* Grille des images */
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
+/* Conteneur d'une photo */
+.photo-item {
+    position: relative; /* Nécessaire pour le positionnement absolu de l'overlay */
+    overflow: hidden;
+    aspect-ratio: 564 / 495; /* Maintient le ratio 564x495 */
+    transition: transform 0.3s ease; /* Animation au survol */
+}
+
+.photo-item:hover {
+    transform: scale(1.02); /* Zoom léger au survol */
+}
+
+/* Image principale */
+.photo-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Recadre l'image sans la déformer */
+    transition: transform 0.3s ease;
+    aspect-ratio: 564 / 495; /* Maintient le ratio 564x495 */
+}
+
+.photo-image img:hover {
+    transform: scale(1.05); /* Zoom de l'image au survol */
+}
+
+/* Overlay de l'image */
+.photo-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Superposition semi-transparente */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    opacity: 0; /* Caché par défaut */
+    transition: opacity 0.3s ease-in-out; /* Animation de fondu */
+}
+
+.photo-item:hover .photo-overlay {
+    opacity: 1; /* Visible au survol */
+}
+
+/* Positionnement de l'overlay */
+.photo-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Overlay semi-transparent */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Positionnement haut et bas */
+    align-items: stretch;
+    opacity: 0; /* Caché par défaut */
+    transition: opacity 0.3s ease-in-out;
+    padding: 10px; /* Espace intérieur */
+}
+
+.photo-item:hover .photo-overlay {
+    opacity: 1; /* Visible au survol */
+}
+
+/* Positionnement de l'overlay */
+.photo-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Overlay semi-transparent */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Aligner les éléments entre le haut et le bas */
+    opacity: 0; /* Caché par défaut */
+    transition: opacity 0.3s ease-in-out;
+    padding: 10px;
+}
+
+.photo-item:hover .photo-overlay {
+    opacity: 1; /* Visible au survol */
+}
+
+/* Titre de la photo en bas à gauche */
+.photo-title {
+    position: absolute;
+    bottom: 10px; /* Positionné à 10px du bas */
+    left: 20px; /* Positionné à 10px de la gauche */
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+}
+
+/* Catégorie de la photo en bas à droite */
+.photo-category {
+    position: absolute;
+    bottom: 20px; /* Positionné à 10px du bas */
+    right: 30px; /* Positionné à 10px de la droite */
+    font-size: 14px;
+    font-style: italic;
+    color: #ccc; /* Couleur gris clair */
+    text-transform: uppercase; /* Convertit le texte en majuscules */
+
+}
+
+/* Icône œil au centre */
+.photo-icons .icon.eye-icon {
+    position: absolute;
+    top: 50%; /* Centre vertical */
+    left: 50%; /* Centre horizontal */
+    transform: translate(-50%, -50%); /* Ajuste le centrage */
+    color: white;
+    font-size: 30px;
+    padding: 10px;
+    border-radius: 50%;
+    transition: background 0.3s ease;
+    text-decoration: none;
+}
+
+/* Icône agrandir l'écran en haut à gauche */
+.photo-icons .icon.fullscreen-icon {
+    position: absolute;
+    top: 8px; /* Distance du haut */
+    right: 25px; /* Distance de la gauche */
+    color: white;
+    font-size: 25px;
+    padding: 10px;
+    border-radius: 50%;
+    transition: background 0.3s ease;
+    text-decoration: none;
+}
+
+
+
+/* Bouton charger plus */
+.photo-gallery-controls {
+    text-align: center; /* Centrer le bouton */
+    margin-top: 30px;
+}
+
+.load-more-button {
+    background-color: #d8d8d8; /* Couleur de fond */
+    color: black; /* Couleur du texte */
+    font-size: 14px;
+    width: 272px;
+    height: 50px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.load-more-button:hover {
+    background-color: black; /* Couleur au survol */
+    color: white; /* Couleur du texte au survol */
+}
+
+
+
+
+
+
+
+@media (max-width: 375px) {
+
+    /* Ajustement de la galerie */
+    .photo-gallery {
+        margin-top: 20px; /* Réduit l’espace */
+        max-width: 100%; /* Pleine largeur */
+        margin-bottom: 30px;
+        padding: 0 10px; /* Ajoute un léger padding */
+    }
+
+    /* Titre de la galerie */
+    .photo-gallery h3 {
+        font-size: 1rem; /* Réduit la taille du titre */
+        margin-top: 10px;
+    }
+
+    /* Ajustement de la grille */
+    .photo-grid {
+        display: grid;
+        grid-template-columns: 1fr; /* 1 colonne sur mobile */
+        gap: 10px; /* Moins d’espace */
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    /* Image principale */
+    .photo-image img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Ajustement de l’overlay */
+    .photo-overlay {
+        display: none;
+        background: rgba(0, 0, 0, 0.4); /* Légèrement plus transparent */
+        padding: 5px;
+        opacity: 0;
+    }
+
+    /* Ajustement du titre */
+    .photo-title {
+        font-size: 16px;
+        bottom: 5px;
+        left: 10px;
+    }
+
+    /* Ajustement de la catégorie */
+    .photo-category {
+        font-size: 12px;
+        bottom: 5px;
+        right: 10px;
+    }
+
+    /* Ajustement des icônes */
+    .photo-icons .icon.eye-icon {
+        font-size: 24px;
+        padding: 8px;
+    }
+
+    .photo-icons .icon.fullscreen-icon {
+        font-size: 20px;
+        top: 5px;
+        right: 10px;
+    }
+
+    /* Bouton charger plus */
+    .load-more-button {
+        width: 90%; /* Prend presque toute la largeur */
+        font-size: 12px;
+        height: 45px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 640px) {
+/* Section 3 : Suggestions */
+
+    .photo-gallery h3 {
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .photo-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+        width: 100%;
+    }
+
+    .photo-item {
+        width: 90%;
+        max-width: 300px;
+        aspect-ratio: auto;
+    }
+
+    /* Overlay */
+    .photo-overlay {
+        padding: 5px;
+        opacity: 1; /* Toujours visible en mobile */
+        background: rgba(0, 0, 0, 0.4); /* Légèrement moins sombre */
+    }
+
+    /* Titre de la photo en bas */
+    .photo-title {
+        font-size: 14px;
+        bottom: 5px;
+        left: 10px;
+    }
+
+    /* Catégorie de la photo à droite */
+    .photo-category {
+        font-size: 12px;
+        bottom: 5px;
+        right: 15px;
+    }
+
+    /* Icône œil au centre */
+    .photo-icons .icon.eye-icon {
+        font-size: 20px;
+        padding: 5px;
+    }
+
+    /* Icône agrandir l'écran en haut à gauche */
+    .photo-icons .icon.fullscreen-icon {
+        font-size: 18px;
+        padding: 5px;
+        top: 5px;
+        right: 15px;
+    }
+
+    /* Masquer l'overlay par défaut comme sur ordinateur */
+    .photo-overlay {
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    /* Afficher l'overlay lorsqu'on touche la photo */
+    .photo-item:active .photo-overlay {
+        opacity: 1;
+    }
+}
+
