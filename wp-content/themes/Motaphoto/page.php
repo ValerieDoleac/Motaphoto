@@ -97,7 +97,7 @@ endwhile; // Fin de la boucle ?>
         <?php
         $recent_photos = new WP_Query(array(
             'post_type' => 'photo',
-            'posts_per_page' => 8, // Les premières 8 photos
+            'posts_per_page' => 8,
             'paged' => 1
         ));
 

@@ -1,6 +1,6 @@
 jQuery.noConflict();
 console.log("JQuery chargé :", typeof jQuery);
-console.log("📜 [TEST] Le fichier script.js est bien chargé et s'exécute !");
+console.log("Le fichier script.js est bien chargé et s'exécute !");
 
 
 
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Gestion de la modale
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("✅ DOM chargé !");
+    console.log(" DOM chargé !");
     const modal = document.querySelector('.modal');
     const overlay = document.querySelector('.modal-overlay');
     const referenceField = document.querySelector('#reference-input');
@@ -37,7 +37,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const boutonsModal = document.querySelectorAll('.open-modal');
     const reference = referenceChamp ? referenceChamp.textContent : '';
     if (!modal || !overlay) {
-        console.warn("⚠️ La modale ou l'overlay sont introuvables !");
         return;
     }
 
@@ -60,7 +59,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 🔹 Ferme la modale en cliquant sur l'overlay
     overlay.addEventListener('click', () => {
-        console.log("📢 Clic sur l'overlay, fermeture de la modale !");
         modal.classList.remove('active');
         overlay.classList.remove('active');
         document.body.classList.remove('modal-active');
@@ -188,26 +186,52 @@ document.addEventListener("DOMContentLoaded", function () {
 
 jQuery(document).ready(function ($) {
     let categorieVide;
+    let formatVide;
+    let sortVide;
     try {
         categorieVide = document.getElementById('filter-categories').textContent;
+        formatVide = document.getElementById('filter-formats').textContent;
+        sortVide = document.getElementById('filter-sort').textContent;
 
-        loadImage(8); // Charge 6 photos par défaut
+        loadImage(8);
         let chargerPlus = document.getElementById("load-more");
 
         chargerPlus.addEventListener('click', function () {
-        loadImage(16);
-        });    
+            loadImage(16);
+        });
     } catch (error) {
         console.error(error);
     }
-    
+
 
     // Fonction pour charger plus de photos avec AJAX (charger plus)
     function loadImage(num) {
         let categorie = document.getElementById('filter-categories').textContent;
+        let format = document.getElementById('filter-formats').textContent;
+        let sort = document.getElementById('filter-sort').textContent;
         let photoGrid = document.querySelector(".photo-grid");
         let perPage = num;
-        if (categorie == categorieVide) {
+        if (categorie != categorieVide || format != formatVide || sort != sortVide) {
+            if (categorie == categorieVide) {
+                categorie = "";
+            }
+            if (format == formatVide) {
+                format = "";
+            }
+            if (sort == sortVide) {
+                sort = "";
+            }
+            console.log(categorie);
+            filterPhotos(categorie, format, sort) // Filtre les photos par catégorie
+                .then(response => {
+                    photoGrid.innerHTML = response; // Ajoute les nouvelles photos
+                    // réapplique le lightbox    
+                    window.attachLightboxEvents();
+                })
+                .catch(error => {
+                    console.error("Erreur lors du chargement des photos :", error);
+                });
+        } else {
             // nouvelle requete ajax
             let xhr = new XMLHttpRequest();
             xhr.open("POST", motaphoto_ajax.ajax_url, true);
@@ -225,29 +249,19 @@ jQuery(document).ready(function ($) {
                 }
             };
             xhr.send("action=load_more_photos&page=" + "&per_page=" + perPage);
-        }else{
-            filterPhotos("category", categorie) // Filtre les photos par catégorie
-                .then(response => {
-                    photoGrid.innerHTML = response; // Ajoute les nouvelles photos
-                    // réapplique le lightbox    
-                    window.attachLightboxEvents();
-                })
-                .catch(error => {
-                    console.error("Erreur lors du chargement des photos :", error); // Affiche l'erreur dans la console du navigateur  
-                });
-        }  
+        }
     }
 
-    function filterPhotos(filterType, filterValue) {
+    function filterPhotos(categorie = "", format = "", sort = "") {
 
         return $.ajax({
             type: "POST",
             url: motaphoto_ajax.ajax_url,
             data: {
                 action: "filter_photos",
-                categorie: filterType === "category" ? filterValue : "",
-                format: filterType === "format" ? filterValue : "",
-                sort: filterType === "sort" ? filterValue : "DESC",
+                categorie: categorie,
+                format: format,
+                sort: sort,
             }
         }).fail(function () {
             console.error("Erreur lors du chargement des photos.");
@@ -264,7 +278,7 @@ jQuery(document).ready(function ($) {
         let currentIndex = 0;
         let photosArray = [];
         if (thumbnailsContainer != null) {
-            filterPhotos("category", categorie.textContent)
+            filterPhotos(categorie.textContent)
                 .then(response => {
                     let tempDiv = document.createElement("div");
                     tempDiv.innerHTML = response;

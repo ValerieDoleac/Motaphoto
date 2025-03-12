@@ -47,7 +47,7 @@ add_action('init', 'mon_plugin_register_blog_post_type');
 
 // Associe les catégories et tags natifs au type de contenu "Blog"
 function mon_plugin_associate_taxonomies_with_blog() {
-    register_taxonomy_for_object_type('category', 'blog'); // Catégories
+    register_taxonomy_for_object_type('category', 'blog');
     register_taxonomy_for_object_type('post_tag', 'blog'); // Étiquettes
 }
 add_action('init', 'mon_plugin_associate_taxonomies_with_blog');

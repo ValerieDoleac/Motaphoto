@@ -155,7 +155,7 @@ function motaphoto_filter_photos() {
     $format = isset($_POST['format']) ? sanitize_text_field($_POST['format']) : '';
     $categorie = isset($_POST['categorie']) ? sanitize_text_field($_POST['categorie']) : '';
 
-    $tax_query = array('relation' => 'AND'); // Assurez-vous que les filtres sont combinés
+    $tax_query = array('relation' => 'AND'); // Assure que les filtres sont combinés
 
     if (!empty($categorie)) {
         $tax_query[] = array(

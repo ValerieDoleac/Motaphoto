@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const lightboxClose = document.querySelector(".lightbox-close");
     const prevButton = document.querySelector(".lightbox-prev");
     const nextButton = document.querySelector(".lightbox-next");
-
     let images = [];
     let currentIndex = 0;
 

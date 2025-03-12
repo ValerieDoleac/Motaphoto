@@ -11,6 +11,9 @@ Text Domain: nathalie-mota
 */
 
 /* Pour tout le site*/
+*{
+    box-sizing: border-box;
+}
 
 body {
     margin: 0;
@@ -41,7 +44,6 @@ body {
 .menu {
     display: flex; /* Afficher le menu horizontalement */
     align-items: center;
-    margin-right: 100px;
 }
 
 .nav_menu {
@@ -75,7 +77,7 @@ body {
 /* Hero Section */
 .hero-section {
     position: relative;
-    width: 1440px;
+    max-width: 1440px;
     height: 100vh;
     max-height: 962px;
     background-size: cover;
@@ -240,6 +242,8 @@ body {
 
 #load-more{
     position: relative;
+    width: 50vw;
+    height: 8vh;
     z-index: 10001; /* Doit être supérieur à celui de .modal */
 }
 
@@ -485,9 +489,6 @@ body {
     object-fit: contain;
 }
 
-.lightbox-nav-mobile{
-    display: none;
-}
 
 
 /* Lightbox Buttons */
@@ -504,12 +505,12 @@ body {
 
 .lightbox-prev { 
     left: 20px;
-    margin-left: 300px;
+    margin-left: 100px;
 }
 
 .lightbox-next { 
     right: 20px;
-    margin-right: 300px;
+    margin-right: 100px;
 }
 
 /* Enlever le fond blanc et le style de bouton */
@@ -531,7 +532,7 @@ body {
     align-items: center;
     width: 100%;
     color: white;
-    position: relative; /* Changer de absolute à relative */
+    position: relative;
     text-align: center;
     box-sizing: border-box;
 }
@@ -564,6 +565,75 @@ body {
 
 
 
+@media (max-width: 850px) {
+    /* Header ajustements */
+    .header {
+        width: 100%;
+    }
+
+    /* Menu navigation */
+    .nav_menu {
+        gap: 15px;
+    }
+
+    .nav_menu li a {
+        font-size: 14px;
+    }
+
+    /* Hero section */
+    .hero-section {
+        max-height: 600px;
+    }
+
+    .hero-section h1 {
+        font-size: 6vw;
+    }
+
+    /* Section des filtres */
+    .filters-section {
+        flex-wrap: wrap;
+        padding: 0 20px;
+    }
+
+    .filter-toggle {
+        width: 220px;
+    }
+
+    /* Modal ajustements */
+    .modal {
+        width: 80%;
+        height: auto;
+        max-height: 80vh;
+        padding: 20px;
+    }
+
+    /* Lightbox ajustements */
+    .lightbox-prev {
+        margin-left: 50px;
+    }
+
+    .lightbox-next {
+        margin-right: 50px;
+    }
+
+    .lightbox-container img {
+        max-width: 85vw;
+    }
+
+    /* Footer ajustements */
+    .footer_wrapper {
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    .footer_content {
+        gap: 30px;
+    }
+
+    .footer_content a {
+        font-size: 14px;
+    }
+}
 
 
 
@@ -655,7 +725,7 @@ body {
         flex-direction: column;
         list-style: none;
         padding: 0;
-        margin: 0;
+        margin-top: 50%;
         text-align: center;
     }
 
@@ -676,12 +746,9 @@ body {
         font-weight: bold;
     }
 
-
-
-    /* Modale mobile */
     .modal {
-        max-width: 286px;
-        max-height: 583px;
+        max-width: 90vw;
+        max-height: 95vh;
         padding: 20px;
         border: 1px solid black;
         }
@@ -714,14 +781,103 @@ body {
     }
 
     /* lightbox mobile */
-    .lightbox-overlay{
-        display:none !important;
+    .lightbox-container {
+        max-width: 95%;
+        max-height: 85%;
+        flex-direction: column; /* Pour mieux organiser le contenu */
     }
 
-    .lightbox-info {
-        flex-direction: column;
+    .lightbox-container img {
+        max-width: 90%;
+        max-height: 70vh; /* Pour éviter que l'image ne prenne tout l'écran */
     }
 
+    /* Ajustements pour les images portrait et paysage */
+    .lightbox-container img.portrait {
+        max-width: 60vw;
+        max-height: 70vh;
+    }
+
+    .lightbox-container img.landscape {
+        max-width: 85vw;
+        max-height: 50vh;
+    }
+
+    /* Réduction des marges des boutons de navigation */
+    .lightbox-prev, 
+    .lightbox-next {
+        font-size: 10px;
+        padding: 10px;
+    }
+
+    .lightbox-prev { 
+        left: 10px;
+        margin-left: 30px;
+    }
+
+    .lightbox-next { 
+        right: 10px;
+        margin-right: 30px;
+    }
+
+    /* Ajustement du bouton de fermeture */
+    .lightbox-close {
+        top: 20px;
+        right: 20px;
+        font-size: 35px;
+    }
+
+    /* Ajustement du texte */
+    .lightbox-text {
+        order:1;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        font-size: 14px;
+        box-sizing: border-box;
+    }
+
+    .lightbox-title {
+        text-align: left;
+        flex: 1;
+    }
+
+    .lightbox-category {
+        text-align: right;
+        flex: 1;
+    }
+
+    .lightbox-prev, 
+    .lightbox-next {
+        background: none;
+        color: white;
+        padding: 8px 12px;
+        font-size: 12px;
+        cursor: pointer;
+    }
+
+    /* Ajustement des images */
+    .lightbox-image-wrapper img {
+        max-width: 90vw;
+        max-height: 70vh;
+        object-fit: contain;
+    }
+
+    /* Affichage des flèches de navigation mobiles */
+    .lightbox-nav-mobile {
+        order:2;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    /* Masquer les boutons de navigation principaux en mobile */
+    .lightbox-main > .lightbox-prev,
+    .lightbox-main > .lightbox-next {
+        display: none;
+    }
 
     /* page accueil mobile */
 
