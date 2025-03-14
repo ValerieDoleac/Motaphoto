@@ -5,7 +5,7 @@
     display: flex; /* Positionne les deux blocs côte à côte */
     height: calc(100vh - 118px - 130px); /* Hauteur de la fenêtre moins la hauteur de la section 2 */
     max-width: 1150px;
-    margin: 0 auto; /* Centré horizontalement */
+    margin: 0 auto;
     gap: 5vw; /* Espace entre les deux blocs */
     margin-top: 30px;
 }
@@ -15,7 +15,7 @@
     flex: 1; /* Prend 50% de l'espace */
     display: flex;
     flex-direction: column;
-    justify-content: flex-end; /* Aligne le contenu en bas */
+    justify-content: flex-end;
     box-sizing: border-box;
 
 }
@@ -26,14 +26,14 @@
     font-style: italic;
     margin: 0;
     line-height: 1;
-    max-width: 100%; /* Assure que le texte respecte la largeur disponible */
-    white-space: normal; /* Autorise le retour à la ligne */
-    text-wrap: balance; /* Optimise la mise en page */
+    max-width: 100%;
+    white-space: normal;
+    text-wrap: balance;
 }
 
 .photo-details p {
     font-family: 'Poppins', sans-serif;
-    font-size: 0.97vw; /* Taille responsive */
+    font-size: 0.97vw;
     margin: 10px 0;
 }
 
@@ -41,7 +41,7 @@
     width: 117%;
     height: 2px;
     background-color: black;
-    margin-top: 2vh; /* Espacement vertical */
+    margin-top: 2vh;
 }
 
 /* -------------------------------------------Bloc à droite - Grande image -------------------------------*/
@@ -89,20 +89,20 @@
     height: 4.63vh;
     background-color: #D8D8D8;
     border: none;
-    font-size: 0.83vw; /* Taille responsive */
+    font-size: 0.83vw;
     font-family: 'Space Mono', sans-serif;
     cursor: pointer;
-    transition: background-color 0.3s ease; /* Animation CSS */
+    transition: background-color 0.3s ease;
     z-index: 1000;
 }
 
 .photo-call-to-action button:hover {
-    background-color: black; /* Change la couleur au survol */
+    background-color: black;
     color: white;
 }
 
 body.modal-active .photo-call-to-action button {
-    visibility: hidden; /* bouton invisible quand la modale est ouverte */
+    visibility: hidden;
 }
 
 
@@ -124,8 +124,8 @@ body.modal-active .photo-call-to-action button {
     display: none;
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Espacement entre les vignettes */
-    overflow: hidden; /* Cache les éléments hors de la vue */
+    gap: 10px;
+    overflow: hidden;
     max-height: calc(71px * 3 + 20px); /* Affiche 3 vignettes avec espace */
 }
 
@@ -207,8 +207,8 @@ body.modal-active .photo-call-to-action button {
     }
 
     .photo-details {
-        text-align: left;
-        align-items: left;
+        text-align: center;
+        align-items: center;
         justify-content: center;
         padding: 0 5%;
     }
@@ -222,10 +222,7 @@ body.modal-active .photo-call-to-action button {
     }
 
     .trait1 {
-        width: 100%;
-        height: 2px;
-        background-color: black;
-        margin: 2vh auto;
+        display: none;
     }
 
     /* Bloc à droite - Grande image */
@@ -258,14 +255,14 @@ body.modal-active .photo-call-to-action button {
     }
 
     .photo-call-to-action p {
-        font-size: 4vw;
+        font-size: 3vw;
         text-align: center;
     }
 
     .photo-call-to-action button {
         width: 80%;
-        height: 40px;
-        font-size: 4vw;
+        height: 80px;
+        font-size: 3vw;
     }
 
     .photo-carousel {
@@ -300,7 +297,7 @@ body.modal-active .photo-call-to-action button {
     .photo-details {
         text-align: left;
         width: auto;
-        max-width: 80%; /* Ajuster la largeur pour ne pas trop occuper l’écran */
+        max-width: 80%;
         padding: 0;
     }
 
@@ -321,7 +318,7 @@ body.modal-active .photo-call-to-action button {
 
     /* Image en haut */
     .photo-main {
-        order: -1; /* Change l’ordre pour mettre la photo en premier */
+        order: -1; /*  mettre la photo en premier */
         max-width: 265px;
         height: 397px;
         display: flex;
@@ -360,13 +357,13 @@ body.modal-active .photo-call-to-action button {
     .photo-interaction-section {
         display: flex;
         flex-direction: column;
-        align-items: left; /* Centre les éléments horizontalement */
+        align-items: left;
     }
 
     .photo-call-to-action {
         display: flex;
         flex-direction: column;
-        align-items: left; /* Centre horizontalement la phrase et le bouton */
+        align-items: left;
         gap: 10px;
         width: 100%;
     }

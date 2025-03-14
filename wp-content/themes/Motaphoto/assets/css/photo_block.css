@@ -144,11 +144,18 @@
     color: white;
 }
 
+#load-more{
+    position: relative;
+    width: 50vw;
+    height: 6vh;
+    z-index: 10001; /* Doit être supérieur à celui de .modal */
+}
 
 
 
 
-@media (max-width: 850px) {
+
+@media (max-width: 1024px) {
 
     /* Conteneur principal de la galerie */
     .photo-gallery {
@@ -156,14 +163,15 @@
         max-width: 100%;
         margin: 0 auto;
         margin-bottom: 30px;
-        padding: 0 15px; /* Ajoute un padding pour éviter que le contenu touche les bords */
-        box-sizing: border-box; /* S'assure que padding ne casse pas la mise en page */
+        padding: 0 15px;
+        box-sizing: border-box;
     }
 
     /* Titre de la galerie */
     .photo-gallery h3 {
         font-size: 1.1rem;
         margin-top: 15px;
+        margin-left: 10px;
     }
 
     /* Grille des images */
@@ -189,35 +197,36 @@
     }
 
     /* Overlay */
+    /* Ajustement de l’overlay */
     .photo-overlay {
-        padding: 5px;
+        opacity: 0;
+        border-radius: 0;
     }
 
-    /* Titre de la photo */
+    /* Ajustement du titre */
     .photo-title {
-        font-size: 16px;
-        bottom: 8px;
-        left: 15px;
+        display:none;
     }
 
-    /* Catégorie de la photo */
+    /* Ajustement de la catégorie */
     .photo-category {
-        font-size: 12px;
-        bottom: 10px;
-        right: 15px;
+        display:none;
     }
 
-    /* Icône œil au centre */
-    .photo-icons .icon.eye-icon {
-        font-size: 26px;
-        padding: 8px;
+    .photo-details {
+        display: none;
     }
 
-    /* Icône agrandir l'écran */
-    .photo-icons .icon.fullscreen-icon {
-        font-size: 22px;
-        top: 5px;
-        right: 10px;
+    /* Ajustement des icônes */
+    .icon.eye-icon {
+        width: 100%;
+        height: 100%;
+        border-radius: 0 !important;
+        opacity: 0;
+    }
+
+    .icon.fullscreen-icon{
+        display: none;
     }
 }
 

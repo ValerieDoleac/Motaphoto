@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 return; 
             }
 
-            // Vérifier si le clic vient de l'icône plein écran (⛶)
+            // Vérifier si le clic vient de l'icône plein écran
             if (event.target.closest(".fullscreen-icon")) {
                 event.preventDefault(); 
                 openLightbox(index);
