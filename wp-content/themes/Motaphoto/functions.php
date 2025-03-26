@@ -119,16 +119,17 @@ add_action('wp_enqueue_scripts', 'motaphoto_enqueue_single_photo_styles');
 
 // Fonction AJAX pour charger plus de photos (pagination infinie)
 function motaphoto_load_more_photos() {
+    // recupere les parametres de la requete AJAX
     $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
     $per_page = isset($_POST['per_page']) ? intval($_POST['per_page']) : 16;
-
+    // construction de la requête WP Query
     $args = array(
         'post_type'      => 'photo',
         'posts_per_page' => $per_page,
         'paged'          => $page,
     );
 
-    $query = new WP_Query($args);
+    $query = new WP_Query($args); // Exécute la requête wordpress avec les paramètres
 
     if ($query->have_posts()) :
         while ($query->have_posts()) : $query->the_post();
@@ -172,7 +173,7 @@ function motaphoto_filter_photos() {
             'terms'    => $format,
         );
     }
-
+// parametre de la requete wordpress wp query
     $args = array(
         'post_type'      => 'photo',
         'posts_per_page' => 8,
@@ -180,7 +181,7 @@ function motaphoto_filter_photos() {
         'order'          => $sort,
         'tax_query'      => count($tax_query) > 1 ? $tax_query : '',
     );
-
+// execute la requete wordpress
     $query = new WP_Query($args);
 
     if ($query->have_posts()) :

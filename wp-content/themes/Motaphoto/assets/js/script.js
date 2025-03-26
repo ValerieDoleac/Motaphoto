@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Ouverture des listes
 
-jQuery(document).ready(function ($) {
+jQuery(document).ready(function ($) {// attend que la page soit charger
 
     // Fonction pour ouvrir et fermer les menus déroulants des filtres
     $(".filter-toggle").on("click", function (e) {
@@ -101,7 +101,7 @@ jQuery(document).ready(function ($) {
         let selectedFormat = $("#filter-formats").data("value") || "";
         let selectedSort = $("#filter-sort").data("value") || "DESC";
 
-        // Mise à jour du texte des boutons
+        // Mise à jour du texte des boutons filtres
         if ($(this).data("categorie")) {
             selectedCategory = $(this).data("categorie");
             $("#filter-categories").text($(this).text()).data("value", selectedCategory);
@@ -135,11 +135,11 @@ jQuery(document).ready(function ($) {
                 sort: selectedSort,
             },
             beforeSend: function () {
-                $(".photo-grid").html("<p>Chargement des photos...</p>");
+                $(".photo-grid").html("<p>Chargement des photos...</p>");// affiche message pendant chargement
             },
             success: function (response) {
                 $(".photo-grid").html(response);
-                attachLightboxEvents();
+                attachLightboxEvents();// réactive la lightbox
             },
             error: function () {
                 console.error("Erreur lors du chargement des photos.");
@@ -182,7 +182,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
+// gestion du bouton charger plus
 
 jQuery(document).ready(function ($) {
     let categorieVide;
@@ -196,7 +196,7 @@ jQuery(document).ready(function ($) {
         loadImage(8);
         let chargerPlus = document.getElementById("load-more");
 
-        chargerPlus.addEventListener('click', function () {
+        chargerPlus.addEventListener('click', function () { // Ecoute le clic sur le bouton charger plus
             loadImage(16);
         });
     } catch (error) {
@@ -211,7 +211,9 @@ jQuery(document).ready(function ($) {
         let sort = document.getElementById('filter-sort').textContent;
         let photoGrid = document.querySelector(".photo-grid");
         let perPage = num;
+        // Vérifie si filtre est actif
         if (categorie != categorieVide || format != formatVide || sort != sortVide) {
+            // si filtre vide, il le remplace par une chaine vide
             if (categorie == categorieVide) {
                 categorie = "";
             }
@@ -221,7 +223,6 @@ jQuery(document).ready(function ($) {
             if (sort == sortVide) {
                 sort = "";
             }
-            console.log(categorie);
             filterPhotos(categorie, format, sort) // Filtre les photos par catégorie
                 .then(response => {
                     photoGrid.innerHTML = response; // Ajoute les nouvelles photos
@@ -232,7 +233,7 @@ jQuery(document).ready(function ($) {
                     console.error("Erreur lors du chargement des photos :", error);
                 });
         } else {
-            // nouvelle requete ajax
+            // charge les images avec la requete ajax
             let xhr = new XMLHttpRequest();
             xhr.open("POST", motaphoto_ajax.ajax_url, true);
             // Envoi de la requete au serveur
@@ -269,7 +270,7 @@ jQuery(document).ready(function ($) {
     }
 
 
-
+// Carousel
     function loadPhotosForCarousel() {
         const thumbnailsContainer = document.querySelector(".carousel-images");
         const prevButton = document.querySelector(".prev-button");
@@ -277,8 +278,8 @@ jQuery(document).ready(function ($) {
         const categorie = document.getElementById('categorie');
         let currentIndex = 0;
         let photosArray = [];
-        if (thumbnailsContainer != null) {
-            filterPhotos(categorie.textContent)
+        if (thumbnailsContainer != null) {// Vérification pour éviter les erreurs
+            filterPhotos(categorie.textContent)//fonction ajax pour charger les photos
                 .then(response => {
                     let tempDiv = document.createElement("div");
                     tempDiv.innerHTML = response;
@@ -322,7 +323,7 @@ jQuery(document).ready(function ($) {
                             showThumbnail(currentIndex);
                         });
                     }
-
+                    //ajoute les miniatures dans le carousel
                     if (photosArray.length > 0) {
                         thumbnailsContainer.innerHTML = ""; // Efface le contenu actuel
                         photosArray.forEach(photo => {
@@ -332,16 +333,13 @@ jQuery(document).ready(function ($) {
                         showThumbnail(0); // Affiche la première image
                         attachCarouselEvents(); // Active les boutons
                     } else {
-                        console.warn("⚠️ Aucune photo trouvée pour le carrousel !");
+                        console.warn("Aucune photo trouvée pour le carrousel !");
                     }
                 })
                 .catch(error => console.error("Erreur chargement carrousel :", error));
         }
     }
-
-
-    loadPhotosForCarousel();
-
+    loadPhotosForCarousel();//execute la fonction au chargement de la page
 });
 
 

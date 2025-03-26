@@ -54,7 +54,7 @@ if (have_posts()) :
         <div class="photo-main">
             <?php
             if (has_post_thumbnail()) {
-            $feat_url = get_the_post_thumbnail_url(get_the_ID(), 'photo-large');
+            $feat_url = get_the_post_thumbnail_url(get_the_ID(), 'large');
             ?>
             <img id="main-photo" src="<?php echo esc_url($feat_url); ?>" alt="">
             <?php

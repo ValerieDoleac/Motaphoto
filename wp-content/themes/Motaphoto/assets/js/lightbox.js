@@ -80,8 +80,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 }
 
-
-
     // Fonction de gestion du clic sur les images
     function handleImageClick(event, index) {
         event.preventDefault();

@@ -32,11 +32,6 @@
                 <span class="lightbox-title"></span>
                 <span class="lightbox-category"></span>
             </div>
-            <!-- Boutons de navigation sous le texte -->
-            <div class="lightbox-nav-mobile">
-                <button class="lightbox-prev" >←</button> 
-                <button class="lightbox-next">→</button>
-            </div>
         </div>
     </div>
 </div>

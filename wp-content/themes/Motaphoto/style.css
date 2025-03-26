@@ -560,7 +560,7 @@ body {
 
 
 
-@media (max-width: 850px) {
+@media (max-width: 1024px) {
     /* Header ajustements */
     .header {
         width: 100%;
@@ -712,7 +712,7 @@ body {
 
     .menu.active {
         opacity: 1; /* Visible */
-        transform: translateY(5%); /* Descend dans la vue */
+        transform: translateY(0%); /* Descend dans la vue */
     }
 
     /* Liens dans le menu mobile */
@@ -720,7 +720,7 @@ body {
         flex-direction: column;
         list-style: none;
         padding: 0;
-        margin-top: 50%;
+        margin-top: 30%;
         text-align: center;
     }
 
@@ -775,105 +775,6 @@ body {
         padding: 10px 15px;
     }
 
-    /* lightbox mobile */
-    .lightbox-container {
-        max-width: 95%;
-        max-height: 85%;
-        flex-direction: column; /* Pour mieux organiser le contenu */
-    }
-
-    .lightbox-container img {
-        max-width: 90%;
-        max-height: 70vh; /* Pour éviter que l'image ne prenne tout l'écran */
-    }
-
-    /* Ajustements pour les images portrait et paysage */
-    .lightbox-container img.portrait {
-        max-width: 60vw;
-        max-height: 70vh;
-    }
-
-    .lightbox-container img.landscape {
-        max-width: 85vw;
-        max-height: 50vh;
-    }
-
-    /* Réduction des marges des boutons de navigation */
-    .lightbox-prev, 
-    .lightbox-next {
-        font-size: 10px;
-        padding: 10px;
-    }
-
-    .lightbox-prev { 
-        left: 10px;
-        margin-left: 30px;
-    }
-
-    .lightbox-next { 
-        right: 10px;
-        margin-right: 30px;
-    }
-
-    /* Ajustement du bouton de fermeture */
-    .lightbox-close {
-        top: 20px;
-        right: 20px;
-        font-size: 35px;
-    }
-
-    /* Ajustement du texte */
-    .lightbox-text {
-        order:1;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        font-size: 14px;
-        box-sizing: border-box;
-    }
-
-    .lightbox-title {
-        text-align: left;
-        flex: 1;
-    }
-
-    .lightbox-category {
-        text-align: right;
-        flex: 1;
-    }
-
-    .lightbox-prev, 
-    .lightbox-next {
-        background: none;
-        color: white;
-        padding: 8px 12px;
-        font-size: 12px;
-        cursor: pointer;
-    }
-
-    /* Ajustement des images */
-    .lightbox-image-wrapper img {
-        max-width: 90vw;
-        max-height: 70vh;
-        object-fit: contain;
-    }
-
-    /* Affichage des flèches de navigation mobiles */
-    .lightbox-nav-mobile {
-        order:2;
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        margin-top: 10px;
-    }
-
-    /* Masquer les boutons de navigation principaux en mobile */
-    .lightbox-main > .lightbox-prev,
-    .lightbox-main > .lightbox-next {
-        display: none;
-    }
-
     /* page accueil mobile */
 
     .hero-section {
@@ -915,7 +816,7 @@ body {
     }
 
     
-    /* Footer - Mobile */
+    /* Footer - Mobile 375px */
     .footer {
         height: 208px;
         background-color: white;
