@@ -321,7 +321,7 @@ function wp_cache_serve_cache_file() {
 				if ( $remote_mod_time !== null && $remote_mod_time == $local_mod_time ) {
 					wp_cache_debug( 'wp_cache_serve_cache_file: Send 304 Not Modified header.' );
 					header( $_SERVER['SERVER_PROTOCOL'] . ' 304 Not Modified' );
-					exit();
+					exit( 0 );
 				} else {
 					wp_cache_debug( 'wp_cache_serve_cache_file: 304 browser caching not possible as timestamps differ.' );
 				}
@@ -329,7 +329,7 @@ function wp_cache_serve_cache_file() {
 			}
 
 			echo $cachefiledata;
-			exit();
+			exit( 0 );
 		} else {
 			wp_cache_debug( 'No wp-cache file exists. Must generate a new one.' );
 			return false;
@@ -404,7 +404,7 @@ function wp_cache_serve_cache_file() {
 	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- this is the cached version of the current page. It will have been escaped already.
 	echo $cache;
 	wp_cache_debug( 'exit request', 5 );
-	die();
+	die( 0 );
 }
 
 function wp_cache_get_legacy_cache( $cache_file ) {
@@ -1042,7 +1042,7 @@ function get_all_supercache_filenames( $dir = '' ) {
 
 	$filenames = array( 'index.html', 'index-https.html', 'index.html.php' );
 
-	if ( $dir != '' && isset( $wp_cache_mobile_enabled ) && $wp_cache_mobile_enabled ) {
+	if ( isset( $wp_cache_mobile_enabled ) && $wp_cache_mobile_enabled ) {
 		// open directory and look for index-*.html files
 		if ( is_dir( $dir ) && $dh = @opendir( $dir ) ) {
 			while ( ( $file = readdir( $dh ) ) !== false ) {
@@ -1180,7 +1180,6 @@ function wp_cache_confirm_delete( $dir ) {
 	}
 
 	if (
-		$dir == '' ||
 		$dir == $rp_cache_path ||
 		$dir == wpsc_get_realpath( $blog_cache_dir ) ||
 		$dir == wpsc_get_realpath( $blog_cache_dir . 'meta/' ) ||
@@ -1259,7 +1258,7 @@ if ( !isset( $_SERVER[ "PHP_AUTH_USER" ] ) || ( $_SERVER[ "PHP_AUTH_USER" ] != "
 	header( "WWW-Authenticate: Basic realm=\"WP-Super-Cache Debug Log\"" );
 	header( $_SERVER[ "SERVER_PROTOCOL" ] . " 401 Unauthorized" );
 	echo "You must login to view the debug log";
-	exit;
+	exit( 0 );
 }' . PHP_EOL;
 
 	$fp = fopen( $cache_path . 'view_' . $wp_cache_debug_log, 'w' );
@@ -2262,7 +2261,7 @@ function wp_cache_get_ob( &$buffer ) {
 	global $wp_cache_not_logged_in, $cache_max_time;
 	global $wp_cache_is_home, $wp_cache_front_page_checks, $wp_cache_mfunc_enabled;
 
-	if ( isset( $wp_cache_mfunc_enabled ) == false ) {
+	if ( ! isset( $wp_cache_mfunc_enabled ) ) {
 		$wp_cache_mfunc_enabled = 0;
 	}
 
@@ -2354,7 +2353,7 @@ function wp_cache_get_ob( &$buffer ) {
 		wp_cache_add_to_buffer( $buffer, "Page not cached by WP Super Cache. Check your settings page. $cache_error" );
 		if ( $wp_cache_mfunc_enabled == 1 ) {
 			global $wp_super_cache_late_init;
-			if ( false == isset( $wp_super_cache_late_init ) || ( isset( $wp_super_cache_late_init ) && $wp_super_cache_late_init == 0 ) ) {
+			if ( ! isset( $wp_super_cache_late_init ) || $wp_super_cache_late_init === 0 ) {
 				wp_cache_add_to_buffer( $buffer, 'Super Cache dynamic page detected but $wp_super_cache_late_init not set. See the readme.txt for further details.' );
 			}
 		}
@@ -2411,10 +2410,7 @@ function wp_cache_get_ob( &$buffer ) {
 				return wp_cache_maybe_dynamic( $buffer );
 			} elseif (
 				$cache_compression &&
-				(
-					! isset( $wp_cache_mfunc_enabled ) ||
-					$wp_cache_mfunc_enabled == 0
-				)
+				$wp_cache_mfunc_enabled === 0
 			) { // don't want to store compressed files if using dynamic content
 				$gz = @fopen( $tmp_cache_filename . '.gz', 'w' );
 				if ( ! $gz ) {
@@ -2446,7 +2442,7 @@ function wp_cache_get_ob( &$buffer ) {
 		}
 
 		global $wp_super_cache_late_init;
-		if ( false == isset( $wp_super_cache_late_init ) || ( isset( $wp_super_cache_late_init ) && $wp_super_cache_late_init == 0 ) ) {
+		if ( ! isset( $wp_super_cache_late_init ) || $wp_super_cache_late_init === 0 ) {
 			wp_cache_add_to_buffer( $buffer, 'Super Cache dynamic page detected but late init not set. See the readme.txt for further details.' );
 		}
 
@@ -2454,7 +2450,7 @@ function wp_cache_get_ob( &$buffer ) {
 			wp_cache_debug( 'Writing dynamic buffer to wpcache file.' );
 			wp_cache_add_to_buffer( $buffer, 'Dynamic WPCache Super Cache' );
 			fwrite( $fr, '<?php die(); ?>' . $buffer );
-		} elseif ( isset( $fr2 ) ) { // supercache active
+		} elseif ( $fr2 ) { // supercache active
 			wp_cache_debug( 'Writing dynamic buffer to supercache file.' );
 			wp_cache_add_to_buffer( $buffer, 'Dynamic Super Cache' );
 			fwrite( $fr2, $buffer );
@@ -2936,7 +2932,7 @@ function wp_cache_shutdown_callback() {
 		$wp_cache_meta['headers']['Content-Type'] = "Content-Type: $value";
 	}
 
-	if ( $cache_enabled && ! $supercacheonly && $new_cache ) {
+	if ( $cache_enabled && ! $supercacheonly ) {
 		if ( ! isset( $wp_cache_meta['dynamic'] ) && $wp_cache_gzip_encoding && ! in_array( 'Content-Encoding: ' . $wp_cache_gzip_encoding, $wp_cache_meta['headers'] ) ) {
 			wp_cache_debug( 'Sending gzip headers.', 2 );
 			$wp_cache_meta['headers']['Content-Encoding'] = 'Content-Encoding: ' . $wp_cache_gzip_encoding;
@@ -3491,10 +3487,6 @@ function wp_cache_gc_cron() {
 	}
 
 	wp_cache_debug( 'Cache garbage collection.', 5 );
-
-	if ( ! isset( $cache_max_time ) ) {
-		$cache_max_time = 600;
-	}
 
 	$start = time();
 	$num   = 0;

@@ -1457,10 +1457,7 @@ function ewww_image_optimizer_media_scan( $hook = '' ) {
 	$disabled_sizes = ewww_image_optimizer_get_option( 'ewww_image_optimizer_disable_resizes_opt', false, true );
 
 	$supported_types = ewwwio()->get_supported_types();
-	$webp_types      = array( 'image/jpeg', 'image/png' );
-	if ( ewwwio()->get_option( 'ewww_image_optimizer_cloud_key' ) ) {
-		$webp_types[] = 'image/gif';
-	}
+	$webp_types      = ewwwio()->get_webp_types();
 
 	ewww_image_optimizer_debug_log();
 	$starting_memory_usage = memory_get_usage( true );
@@ -1580,7 +1577,8 @@ function ewww_image_optimizer_media_scan( $hook = '' ) {
 					class_exists( 'WindowsAzureStorageUtil' ) ||
 					class_exists( 'Amazon_S3_And_CloudFront' ) ||
 					ewww_image_optimizer_s3_uploads_enabled() ||
-					class_exists( 'wpCloud\StatelessMedia\EWWW' )
+					class_exists( 'wpCloud\StatelessMedia\EWWW' ) ||
+					apply_filters( 'ewww_image_optimizer_is_remote_file', false, $file_path, $selected_id )
 				)
 			) {
 				// Construct a $file_path and proceed IF a supported CDN plugin is installed.
@@ -1726,7 +1724,7 @@ function ewww_image_optimizer_media_scan( $hook = '' ) {
 					} else {
 						$retina_path = false;
 					}
-					if ( $retina_path && ewwwio_is_file( $retina_path ) ) {
+					if ( $retina_path && ( $remote_file || ewwwio_is_file( $retina_path ) ) ) {
 						ewwwio_debug_message( "found retina via wr2x_get_retina $retina_path" );
 						$attachment_images[ $size . '-retina' ] = $retina_path;
 					} else {
@@ -1765,7 +1763,7 @@ function ewww_image_optimizer_media_scan( $hook = '' ) {
 					if ( ewwwio()->webp_only && ! in_array( $thumb_mime, $webp_types, true ) ) {
 						continue;
 					}
-					if ( ewwwio_is_file( $imagemeta_resize_path ) ) {
+					if ( $remote_file || ewwwio_is_file( $imagemeta_resize_path ) ) {
 						$attachment_images[ 'resized-images-' . $index ] = $imagemeta_resize_path;
 					}
 				}
@@ -1781,7 +1779,7 @@ function ewww_image_optimizer_media_scan( $hook = '' ) {
 					if ( ewwwio()->webp_only && ! in_array( $thumb_mime, $webp_types, true ) ) {
 						continue;
 					}
-					if ( ewwwio_is_file( $custom_size_path ) ) {
+					if ( $remote_file || ewwwio_is_file( $custom_size_path ) ) {
 						$attachment_images[ 'custom-size-' . $dimensions ] = $custom_size_path;
 					}
 				}
