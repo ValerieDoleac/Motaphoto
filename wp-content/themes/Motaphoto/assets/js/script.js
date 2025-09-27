@@ -270,7 +270,7 @@ jQuery(document).ready(function ($) {
     }
 
 
-// Carousel
+    // Carousel
     function loadPhotosForCarousel() {
         const thumbnailsContainer = document.querySelector(".carousel-images");
         const prevButton = document.querySelector(".prev-button");
@@ -304,13 +304,22 @@ jQuery(document).ready(function ($) {
                     function attachCarouselEvents() {
                         if (photosArray.length === 0) return; // Vérification pour éviter les erreurs
 
-                        prevButton.addEventListener("click", () => {
+                        prevButton.addEventListener("mouseenter", () => {
                             currentIndex = (currentIndex - 1 + photosArray.length) % photosArray.length;
                             showThumbnail(currentIndex);
                         });
+                        prevButton.addEventListener("mouseleave", () => {
+                            currentIndex = (currentIndex + 1 + photosArray.length) % photosArray.length;
+                            showThumbnail(currentIndex);
+                        });
 
-                        nextButton.addEventListener("click", () => {
+                        nextButton.addEventListener("mouseenter", () => {
                             currentIndex = (currentIndex + 1) % photosArray.length;
+                            showThumbnail(currentIndex);
+                        });
+
+                        nextButton.addEventListener("mouseleave", () => {
+                            currentIndex = (currentIndex - 1 + photosArray.length) % photosArray.length;
                             showThumbnail(currentIndex);
                         });
 
