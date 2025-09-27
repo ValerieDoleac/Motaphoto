@@ -8,7 +8,7 @@ if (!isset($photo_id)) {
 $image_url = wp_get_attachment_url(get_post_thumbnail_id($photo_id));
 $large_url = wp_get_attachment_image_url($photo_id, 'full');
 $photo_title = get_the_title($photo_id);
-$categories = get_the_terms($photo_id, 'category');
+$categories = get_the_terms($photo_id, 'categorie');
 $category_name = ($categories && !is_wp_error($categories)) ? $categories[0]->name : 'Non spécifié';
 
 // Récupérer la taille de l'image

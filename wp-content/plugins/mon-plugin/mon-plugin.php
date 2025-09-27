@@ -60,3 +60,19 @@ function associate_format_with_photos() {
 }
 add_action('init', 'associate_format_with_photos');
 
+// Associe les catégories
+add_action('init', function () {
+    register_taxonomy_for_object_type('category', 'photo');
+}, 20);
+
+// 2) Si le CPT "photo" n'a pas 'taxonomies', on l'ajoute par filtre
+add_filter('register_post_type_args', function ($args, $post_type) {
+    if ($post_type === 'photo') {
+        $current = isset($args['taxonomies']) ? (array) $args['taxonomies'] : [];
+        $args['taxonomies'] = array_unique(array_merge($current, ['category', 'format']));
+        $args['show_in_rest'] = true; // pour l’éditeur blocs
+    }
+    return $args;
+}, 20, 2);
+
+

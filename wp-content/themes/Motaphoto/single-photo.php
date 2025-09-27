@@ -23,7 +23,7 @@ if (have_posts()) :
             <p>RÉFÉRENCE : <span class="reference"><?php echo get_post_meta(get_the_ID(), 'reference', true) ?: 'Non spécifiée'; ?></span></p>
             <p>CATÉGORIE :
             <?php 
-                $categories = get_the_terms(get_the_ID(), 'category');
+                $categories = get_the_terms(get_the_ID(), 'categorie');
                 if ($categories && !is_wp_error($categories)) {
                     foreach ($categories as $category) {
                     echo '<span id="categorie">' . $category->name . '</span> ';
@@ -110,7 +110,7 @@ if (have_posts()) :
             <div class="photo-grid">
             <?php
             //recupere la catégorie actuelle
-            $current_categories = get_the_terms(get_the_ID(), 'category');
+            $current_categories = get_the_terms(get_the_ID(), 'categorie');
             $current_category_ids = $current_categories ? wp_list_pluck($current_categories, 'term_id') : array();
             // requete pour récupérer 2 photos de la mme categorie
             $suggested_photos = new WP_Query(array(
@@ -119,7 +119,7 @@ if (have_posts()) :
                 'post__not_in' => array(get_the_ID()),
                 'tax_query' => array(
                     array(
-                    'taxonomy' => 'category',
+                    'taxonomy' => 'categorie',
                     'field'    => 'term_id',
                     'terms'    => $current_category_ids,
                 ),

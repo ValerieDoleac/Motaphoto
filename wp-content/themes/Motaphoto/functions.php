@@ -59,9 +59,9 @@ function motaphoto_enqueue_assets() {
     // Charger le style de la lightbox
     wp_enqueue_style(
         'lightbox-style',
-        get_template_directory_uri() . '/assets/css/style.css',
+        get_template_directory_uri() . '/style.css',
         array(),
-        filemtime(get_template_directory() . '/assets/css/style.css')
+        filemtime(get_template_directory() . '/style.css')
     );
 
     // Passer l'URL AJAX à JavaScript
@@ -160,7 +160,7 @@ function motaphoto_filter_photos() {
 
     if (!empty($categorie)) {
         $tax_query[] = array(
-            'taxonomy' => 'category',
+            'taxonomy' => 'categorie',
             'field'    => 'slug',
             'terms'    => $categorie,
         );
