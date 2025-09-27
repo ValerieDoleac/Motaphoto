@@ -18,25 +18,27 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!image) return;
 
         lightboxImage.src = image.dataset.src;
-        lightboxTitle.textContent = image.dataset.title || "Titre";
+        console.log(image.dataset);
+        lightboxTitle.textContent = image.dataset.reference || "Référence";
         lightboxCategory.textContent = image.dataset.category || "Catégorie";
         lightboxOverlay.classList.add("active");
         currentIndex = index;
 
         // Charger l'image et détecter son orientation
-    lightboxImage.onload = function () {
-        // Supprimer les classes existantes
-        lightboxImage.classList.remove("portrait", "landscape");
+        lightboxImage.onload = function () {
+            // Supprimer les classes existantes
+            lightboxImage.classList.remove("portrait", "landscape");
 
-        // Vérifier l'orientation et ajouter la classe correspondante
-        if (lightboxImage.naturalWidth > lightboxImage.naturalHeight) {
-            lightboxImage.classList.add("landscape"); // Image paysage
-        } else {
-            lightboxImage.classList.add("portrait"); // Image portrait
+            // Vérifier l'orientation et ajouter la classe correspondante
+            if (lightboxImage.naturalWidth > lightboxImage.naturalHeight) {
+                lightboxImage.classList.add("landscape"); // Image paysage
+            } else {
+                lightboxImage.classList.add("portrait"); // Image portrait
+            }
+
+            console.log("📸 Orientation détectée :", lightboxImage.classList);
         }
-
-        console.log("📸 Orientation détectée :", lightboxImage.classList);
-    }};
+    };
 
     // Fonction pour fermer la lightbox
     function closeLightbox() {
@@ -45,40 +47,40 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Image suivante
     function showNextImage() {
-    currentIndex = (currentIndex + 1) % images.length;
-    openLightbox(currentIndex);
+        currentIndex = (currentIndex + 1) % images.length;
+        openLightbox(currentIndex);
     }
 
     // Image précédente
     function showPrevImage() {
-    currentIndex = (currentIndex - 1 + images.length) % images.length;
-    openLightbox(currentIndex);
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        openLightbox(currentIndex);
     }
 
     // Fonction pour attacher les événements de la lightbox aux images
     function attachLightboxEvents() {
-    images = document.querySelectorAll(".photo-item");
+        images = document.querySelectorAll(".photo-item");
 
-    images.forEach((image, index) => {
-        image.removeEventListener("click", handleImageClick);
-        image.addEventListener("click", (event) => {
-            // Vérifier si le clic vient de l'icône de l'œil (Infos)
-            if (event.target.closest(".eye-icon")) {
-                return; 
-            }
+        images.forEach((image, index) => {
+            image.removeEventListener("click", handleImageClick);
+            image.addEventListener("click", (event) => {
+                // Vérifier si le clic vient de l'icône de l'œil (Infos)
+                if (event.target.closest(".eye-icon")) {
+                    return;
+                }
 
-            // Vérifier si le clic vient de l'icône plein écran
-            if (event.target.closest(".fullscreen-icon")) {
-                event.preventDefault(); 
+                // Vérifier si le clic vient de l'icône plein écran
+                if (event.target.closest(".fullscreen-icon")) {
+                    event.preventDefault();
+                    openLightbox(index);
+                    return;
+                }
+
+                event.preventDefault()
                 openLightbox(index);
-                return; 
-            }
-
-            event.preventDefault()
-            openLightbox(index);
+            });
         });
-    });
-}
+    }
 
     // Fonction de gestion du clic sur les images
     function handleImageClick(event, index) {

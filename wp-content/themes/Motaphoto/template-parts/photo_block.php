@@ -10,6 +10,7 @@ $large_url = wp_get_attachment_image_url($photo_id, 'full');
 $photo_title = get_the_title($photo_id);
 $categories = get_the_terms($photo_id, 'categorie');
 $category_name = ($categories && !is_wp_error($categories)) ? $categories[0]->name : 'Non spécifié';
+$reference = get_post_meta($photo_id, 'reference', true);
 
 // Récupérer la taille de l'image
 $image_data = wp_get_attachment_metadata(get_post_thumbnail_id($photo_id));
@@ -25,7 +26,8 @@ $orientation_class = ($image_width > $image_height) ? 'landscape' : 'portrait';
     data-id="<?php echo esc_attr($photo_id); ?>" 
     data-title="<?php echo esc_attr($photo_title); ?>" 
     data-src="<?php echo esc_url($image_url); ?>" 
-    data-category="<?php echo esc_attr($category_name); ?>">
+    data-category="<?php echo esc_attr($category_name); ?>"
+    data-reference="<?php echo esc_attr($reference); ?>">
 
     <div class="photo-image">
         <a href="<?php echo get_permalink($photo_id); ?>" class="open-lightbox">
